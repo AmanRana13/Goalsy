@@ -33,9 +33,9 @@ const CategoryContainer = ({navigation, title}): any => {
         text={title}
         size={18}
         styles={{
-          fontFamily: fonts.medium,
           marginBottom: 8,
         }}
+        fontFamily={fonts.medium}
       />
 
       <FlatList
@@ -58,7 +58,12 @@ const CategoryContainer = ({navigation, title}): any => {
         showsVerticalScrollIndicator={false}
       />
       <View
-        style={{flexDirection: 'row', justifyContent: 'center', marginTop: 12}}>
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginTop: 12,
+          alignItems: 'center',
+        }}>
         {data.map((item, index) => {
           return (
             <View
@@ -73,8 +78,8 @@ const CategoryContainer = ({navigation, title}): any => {
                       marginEnd: 4,
                     }
                   : {
-                      width: 10,
-                      height: 10,
+                      width: 9,
+                      height: 9,
                       borderRadius: 5,
                       backgroundColor: colors.greyDot,
                       marginEnd: 4,

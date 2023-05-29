@@ -8,6 +8,7 @@ import constants, {routesConstants} from 'theme/constants';
 import {Width} from 'hook/DevicePixel';
 import Spacer from 'components/spacer';
 import {navigationRef} from 'routes/navigationServices';
+import { onShare } from 'utils/globalFunctions';
 
 const GoalCard = ({
   item,
@@ -51,6 +52,7 @@ const GoalCard = ({
                 source={appImages.shareIcon}
                 size={20}
                 styles={{alignSelf: 'flex-end'}}
+                onPress={()=>onShare()}
               />
             </View>
           </View>

@@ -1,5 +1,5 @@
 import {ScrollView, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   BackButton,
   CTAButton,
@@ -21,6 +21,9 @@ import {fonts} from 'theme/fonts';
 import {Width} from 'hook/DevicePixel';
 import {goBack} from 'routes/navigationServices';
 import ColorDropdown from 'components/colorDropdown';
+import DateInputField from 'components/dateInputField';
+import {DatePickerModal} from 'components/DatePickerModal';
+import moment from 'moment';
 
 const categoryList = [
   {id: 1, value: 'Goal 1'},
@@ -36,6 +39,10 @@ const colorList = [
 const EditActivity = () => {
   const {colors}: colors | any = useTheme();
   const style = styles(colors);
+  const [dob, setDob] = useState<string>('May 05, 2023');
+  const [name, setName] = useState<string>('Hello');
+  const [note, setNote] = useState<string>('Hello');
+  const [datePicker, setDatePicker] = React.useState(false);
   const onCategorySelect = e => {
     console.log(':::::', e);
   };
@@ -60,7 +67,8 @@ const EditActivity = () => {
           TextInputProps={{
             placeholder: constants.ActivityName,
             returnKeyType: 'done',
-            value: 'Hello',
+            value: name,
+            onChange: setName,
           }}
           label={constants.ActivityName}
         />
@@ -161,21 +169,33 @@ const EditActivity = () => {
             styles={{alignSelf: 'flex-end', paddingTop: 15}}
           />
         </View>
-        <InputField
-          label={constants.deadline}
+        <DateInputField
           colors={colors}
           TextInputProps={{
             placeholder: constants.deadline,
-            editable: false,
+            value: dob,
           }}
-          RightCompo={<Icons source={appImages.calendar} size={30} />}
+          label={constants.deadline}
+          onPress={() => {
+            setDatePicker(true);
+          }}
+          RightCompo={
+            <Icons
+              source={appImages.calendar}
+              size={30}
+              onPress={() => {
+                setDatePicker(true);
+              }}
+            />
+          }
         />
         <InputField
           colors={colors}
           TextInputProps={{
             placeholder: constants.note,
             returnKeyType: 'done',
-            value: 'Hello',
+            value: note,
+            onChange: setNote,
           }}
           label={constants.note}
         />
@@ -191,6 +211,19 @@ const EditActivity = () => {
           />
         </View>
         <Spacer height={constants.height50} />
+
+        <DatePickerModal
+          minimumDate={new Date(1920, 0, 1)}
+          maximumDate={new Date()}
+          onCancel={() => {
+            setDatePicker(false);
+          }}
+          isDropdownVisible={datePicker}
+          onClose={date => {
+            setDatePicker(false);
+            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+          }}
+        />
       </ScrollView>
     </View>
   );

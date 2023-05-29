@@ -123,8 +123,9 @@ const OtherUserProfile = ({navigation}: any) => {
         <FriendCounts count={'12'} title={'Followers'} />
         <Spacer
           styles={{
-            borderLeftWidth: 2,
-            borderColor: '#ffffff21',
+            borderLeftWidth: 3,
+            borderColor: '#ffffff31',
+            borderRadius: 2,
             height: '100%',
           }}
         />

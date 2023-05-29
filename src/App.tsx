@@ -15,7 +15,9 @@ const App = (): JSX.Element => {
 
   React.useEffect(() => {
     setDispatch(dispatch);
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1500);
     if (Platform.OS === 'ios') {
       KeyboardManager.setEnable(true);
       KeyboardManager.setKeyboardDistanceFromTextField(20);

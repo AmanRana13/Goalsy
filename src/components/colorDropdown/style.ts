@@ -21,7 +21,7 @@ const styles = (color: colors) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingHorizontal: 20,
+      paddingHorizontal: 15,
     },
   });
 export default styles;

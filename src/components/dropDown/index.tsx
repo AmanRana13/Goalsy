@@ -28,7 +28,7 @@ const DropDown = ({list, label, onPress, color}: dropdown) => {
             <TextBox
               text={item.value ?? label}
               size={17}
-              color={item.value ? color.black : color.placeholder}
+              color={item.value ? color.commonBlack : color.placeholder}
             />
             <Icons
               size={16}

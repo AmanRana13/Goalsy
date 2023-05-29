@@ -12,6 +12,7 @@ const styles = (color: colors) =>
     },
     buttonStyle:{
       alignSelf:"center",
+       width:Width*0.45
     }
   });
 export default styles;

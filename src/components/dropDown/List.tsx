@@ -21,7 +21,7 @@ const List = ({item, setItem, color, setShowList, index, lastIndex}: list) => {
           paddingBottom: lastIndex === index ? 0 : 15,
         },
       ]}>
-      <TextBox text={item?.value} />
+      <TextBox text={item?.value} color={item.value ? color.commonBlack : color.placeholder}/>
     </TouchableOpacity>
   );
 };

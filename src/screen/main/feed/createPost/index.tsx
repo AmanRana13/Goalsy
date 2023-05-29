@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {View} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 // components
@@ -22,45 +22,49 @@ const CreatePost = ({navigation}): any => {
     <View style={style.container}>
       <StatusHeader />
       <Header title={constants.createPost} LeftIcon={<BackButton />} />
-      <Spacer height={constants.height30} />
-      <View
-        style={{
-          width: sizes,
-          height: sizes / 2,
-          backgroundColor: colors.commonWhite,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 23,
-        }}>
-        <Icons disabled={false} size={50} source={appImages.plus} />
-      </View>
-      <Spacer />
-      <InputField
-        colors={colors}
-        showWordCount
-        TextInputProps={{
-          placeholder: constants.writeYourThoughts,
-          returnKeyType: 'default',
-          multiline: true,
-          maxLength: 500,
-          onChangeText: setDesc,
-          value: desc,
-          inputStyle: {
-            borderRadius: 23,
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        showsVerticalScrollIndicator={false}>
+        <Spacer height={constants.height30} />
+        <View
+          style={{
+            width: sizes,
             height: sizes / 2,
-            paddingVertical: 12,
-          },
-        }}
-      />
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <CTAButton
-          text={constants.submit}
-          buttonStyle={style.buttonStyle}
-          color={colors.themeColor}
-          type={'large'}
-          onPress={() => navigation.goBack()}
+            backgroundColor: colors.commonWhite,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 23,
+          }}>
+          <Icons disabled={false} size={50} source={appImages.plus} />
+        </View>
+        <Spacer />
+        <InputField
+          colors={colors}
+          showWordCount
+          TextInputProps={{
+            placeholder: constants.writeYourThoughts,
+            returnKeyType: 'default',
+            multiline: true,
+            maxLength: 500,
+            onChangeText: setDesc,
+            value: desc,
+            inputStyle: {
+              borderRadius: 23,
+              height: sizes / 2,
+              paddingVertical: 12,
+            },
+          }}
         />
-      </View>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <CTAButton
+            text={constants.submit}
+            buttonStyle={style.buttonStyle}
+            color={colors.themeColor}
+            type={'large'}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };

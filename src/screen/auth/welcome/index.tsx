@@ -18,14 +18,13 @@ const Welcome = ({navigation}: any) => {
   const style = styles(colors);
   return (
     <View style={style.container}>
-
-<StatusHeader/>
+      <StatusHeader />
       <View style={style.innerContainer}>
-        <Icons source={appImages.welcomeMsg} styles={style.image} />
+        <Icons source={appImages.welcomeMsg} styles={style.image} disabled />
       </View>
       <Spacer height={constants.height50} />
       <View style={style.text}>
-        <Icons source={appImages.welcomeGroup} styles={style.image} />
+        <Icons source={appImages.welcomeGroup} styles={style.image} disabled />
       </View>
       <TouchableOpacity
         style={style.group}
@@ -39,7 +38,7 @@ const Welcome = ({navigation}: any) => {
             />
           </View>
           <View style={style.buttonImage}>
-            <Icons source={appImages.forwardArrow} disabled={true}/>
+            <Icons source={appImages.forwardArrow} disabled={true} />
           </View>
         </View>
       </TouchableOpacity>

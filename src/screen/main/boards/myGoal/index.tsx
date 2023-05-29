@@ -45,7 +45,7 @@ const Board = ({navigation}): any => {
           styles={{alignSelf: 'center'}}
           fontFamily={fonts.regular}
         />
-        <Spacer height={constants.height30}/>
+        <Spacer height={constants.height20}/>
         <CTAButton
           text={constants.addGoal}
           buttonStyle={style.buttonStyle}

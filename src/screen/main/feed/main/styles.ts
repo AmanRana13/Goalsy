@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import constants from 'theme/constants';
 import { fonts } from 'theme/fonts';
+import { width } from 'utils/globalFunctions';
 
 const styles = (color: colors, sizes: number) =>
   StyleSheet.create({
@@ -15,8 +16,8 @@ const styles = (color: colors, sizes: number) =>
       borderRadius: 14,
       borderWidth: 2,
       borderColor: color.themeColor,
-      width: sizes,
-      height: sizes / 2,
+      width: width-40,
+      height: (width-40) / 2,
     },
     postText: {
       fontFamily: fonts.regular, 

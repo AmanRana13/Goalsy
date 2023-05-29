@@ -12,6 +12,7 @@ export interface button {
   color?: colors;
   fontFamily?: string;
   isShadow?: boolean;
+  isModal?: boolean;
 }
 
 export interface buttonSize {

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
-import { fonts } from 'theme/fonts';
+import {fonts} from 'theme/fonts';
 
 const styles = (colors: colors) =>
   StyleSheet.create({
@@ -14,9 +14,10 @@ const styles = (colors: colors) =>
     innerContainer: {
       paddingHorizontal: 10,
       borderRadius: 16,
-      flexDirection: 'row',
       width: '100%',
-      backgroundColor: colors.commonWhite,
+    },
+    innerInput: {
+      flexDirection: 'row',
     },
     LeftCompo: {
       flex: 1,
@@ -36,7 +37,7 @@ const styles = (colors: colors) =>
       paddingHorizontal: 6,
       height: '100%',
       color: colors.commonBlack,
-      fontFamily:fonts.medium
+      fontFamily: fonts.medium,
     },
     label: {
       paddingVertical: 8,

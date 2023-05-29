@@ -6,10 +6,9 @@ import {commentCardProps} from './type';
 import style from './styles';
 import appImages from 'theme/images';
 
-const EditUserCard = memo(({item, color}: commentCardProps) => {
+const EditUserCard = memo(({item, color, setOpenModal}: commentCardProps) => {
   const height = usePixel(16);
   const styles = style(color);
-  const [modalShow, setShowModal] = useState(false);
   return (
     <>
       <View style={[styles.container, {paddingVertical: height}]}>
@@ -26,7 +25,7 @@ const EditUserCard = memo(({item, color}: commentCardProps) => {
         <Icons
           source={appImages.edit}
           styles={{paddingBottom: 10}}
-          onPress={() => setShowModal(true)}
+          onPress={() => setOpenModal(true)}
         />
       </View>
     </>

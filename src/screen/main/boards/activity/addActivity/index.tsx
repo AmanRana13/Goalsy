@@ -1,5 +1,5 @@
 import {ScrollView, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   BackButton,
   CTAButton,
@@ -19,8 +19,11 @@ import {colors} from 'theme/colors';
 import styles from './styles';
 import {fonts} from 'theme/fonts';
 import {Width} from 'hook/DevicePixel';
-import { goBack } from 'routes/navigationServices';
+import {goBack} from 'routes/navigationServices';
 import ColorDropdown from 'components/colorDropdown';
+import {DatePickerModal} from 'components/DatePickerModal';
+import moment from 'moment';
+import DateInputField from 'components/dateInputField';
 
 const categoryList = [
   {id: 1, value: 'Goal 1'},
@@ -35,6 +38,8 @@ const colorList = [
 const AddActivity = () => {
   const {colors}: colors | any = useTheme();
   const style = styles(colors);
+  const [dob, setDob] = useState<string>('May 05, 2023');
+  const [datePicker, setDatePicker] = React.useState(false);
   const onCategorySelect = e => {
     console.log(':::::', e);
   };
@@ -58,7 +63,7 @@ const AddActivity = () => {
           colors={colors}
           TextInputProps={{
             placeholder: constants.ActivityName,
-            returnKeyType:'done'
+            returnKeyType: 'done',
           }}
           label={constants.ActivityName}
         />
@@ -69,7 +74,7 @@ const AddActivity = () => {
           color={colors}
           label={'Select Color'}
         />
-         <Spacer height={constants.height20}/>
+        <Spacer height={constants.height20} />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <TextBox text={'Reminder'} size={16} fontFamily={fonts.regular} />
           <RoundCheckBox color={colors} value={CheckBoxValue} />
@@ -80,9 +85,8 @@ const AddActivity = () => {
             backgroundColor: colors.white,
             paddingHorizontal: 15,
             paddingVertical: 20,
-            borderRadius:20
+            borderRadius: 20,
           }}>
-           
           <View style={{flexDirection: 'row', gap: 15}}>
             <View
               style={{
@@ -155,23 +159,36 @@ const AddActivity = () => {
               <TextBox text={'S'} size={22} fontFamily={fonts.regular} />
             </View>
           </View>
-          <TextBox text={"12:00 PM"} styles={{alignSelf:"flex-end",
-        paddingTop:15}}/>
+          <TextBox
+            text={'12:00 PM'}
+            styles={{alignSelf: 'flex-end', paddingTop: 15}}
+          />
         </View>
-        <InputField
-          label={constants.deadline}
+        <DateInputField
           colors={colors}
           TextInputProps={{
-            editable:false,
             placeholder: constants.deadline,
+            value: dob,
           }}
-          RightCompo={<Icons source={appImages.calendar} size={30} />}
+          label={constants.deadline}
+          onPress={() => {
+            setDatePicker(true);
+          }}
+          RightCompo={
+            <Icons
+              source={appImages.calendar}
+              size={30}
+              onPress={() => {
+                setDatePicker(true);
+              }}
+            />
+          }
         />
-          <InputField
+        <InputField
           colors={colors}
           TextInputProps={{
             placeholder: constants.note,
-            returnKeyType:'done'
+            returnKeyType: 'done',
           }}
           label={constants.note}
         />
@@ -182,18 +199,32 @@ const AddActivity = () => {
             buttonStyle={style.buttonStyle}
             color={colors.themeColor}
             type={constants.large}
-            onPress={()=>goBack()}
+            onPress={() => goBack()}
           />
           <Spacer height={constants.height30} />
           <CTAButton
             text={constants.SampleActivity}
-            buttonStyle={[style.buttonStyle,{width:Width*0.53}]}
+            buttonStyle={[style.buttonStyle, {width: Width * 0.53}]}
             color={colors.gray}
+            isShadow={false}
             type={constants.large}
-            onPress={()=>goBack()}
+            onPress={() => goBack()}
           />
         </View>
         <Spacer height={constants.height50} />
+
+        <DatePickerModal
+          minimumDate={new Date(1920, 0, 1)}
+          maximumDate={new Date()}
+          onCancel={() => {
+            setDatePicker(false);
+          }}
+          isDropdownVisible={datePicker}
+          onClose={date => {
+            setDatePicker(false);
+            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+          }}
+        />
       </ScrollView>
     </View>
   );

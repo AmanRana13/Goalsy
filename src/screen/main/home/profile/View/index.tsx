@@ -104,8 +104,9 @@ const Profile = ({navigation}: any) => {
           />
           <Spacer
             styles={{
-              borderLeftWidth: 2,
-              borderColor: '#ffffff21',
+              borderLeftWidth: 3,
+              borderColor: '#ffffff31',
+              borderRadius: 2,
               height: '100%',
             }}
           />
@@ -129,6 +130,7 @@ const Profile = ({navigation}: any) => {
             nextField: () => inputRef[1].focus(),
           }}
           label={constants.name}
+          disableColor
         />
         <InputField
           ref={ref => (inputRef[1] = ref)}
@@ -140,6 +142,7 @@ const Profile = ({navigation}: any) => {
             nextField: () => inputRef[2].focus(),
           }}
           label={constants.email}
+          disableColor
         />
         <InputField
           colors={colors}
@@ -150,6 +153,7 @@ const Profile = ({navigation}: any) => {
           }}
           label={constants.DOB}
           RightCompo={<Icons source={appImages.calendar} size={30} />}
+          disableColor
         />
         <InputField
           colors={colors}
@@ -160,6 +164,7 @@ const Profile = ({navigation}: any) => {
             value: 'New York',
           }}
           label={constants.location}
+          disableColor
         />
         <InputField
           colors={colors}
@@ -170,6 +175,7 @@ const Profile = ({navigation}: any) => {
           }}
           RightCompo={<Icons source={appImages.downArrow} size={20} />}
           label={constants.gender}
+          disableColor
         />
         <Spacer height={constants.height30} />
         <View style={style.buttonContainer}>

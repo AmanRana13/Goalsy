@@ -39,7 +39,7 @@ const styles = (color: colors) =>
     },
     exc: {alignSelf: 'center', marginTop: -15},
     toolTip: {
-      height: Width * 0.45,
+      height: Width * 0.47,
       width: Width * 0.8,
       marginTop: 10,
     },

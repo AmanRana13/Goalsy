@@ -53,7 +53,11 @@ const Home = ({navigation}): any => {
       <StatusHeader />
       <Spacer />
       <TextBox text={constants.hello} size={16} />
-      <TextBox text={name} size={34} />
+      <TextBox text={name} size={34} textProps={
+        {
+          numberOfLines:1
+        }
+      }/>
       <Spacer />
       <Icons
         size={constants.progressIconSize + (hasNotch() ? 0 : -25)}

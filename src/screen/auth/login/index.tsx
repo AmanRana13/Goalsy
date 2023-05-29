@@ -1,9 +1,9 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {Platform, ScrollView, Text, View} from 'react-native';
 
 // navigation
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 
 // components
 import {
@@ -37,6 +37,12 @@ const Login = ({navigation}: any): JSX.Element => {
   const [password, setPassword] = useState<string>('');
   const [isChecked, setChecked] = useState<boolean>(false);
   const style = styles(colors);
+  const scrollRef = useRef(null);
+
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    isFocused && scrollRef.current.scrollTo({y: 0, animation: true});
+  }, [isFocused]);
 
   const onSubmit = () => {
     const isValidationFailed = loginCheck(email, password, isChecked);
@@ -57,6 +63,7 @@ const Login = ({navigation}: any): JSX.Element => {
     <View style={style.container}>
       <StatusHeader />
       <ScrollView
+        ref={scrollRef}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height50} />
@@ -144,7 +151,11 @@ const Login = ({navigation}: any): JSX.Element => {
           <Text style={style.notRegisText}>
             {constants.notRegister}
             <TextBox
-              onPress={() => navigation.navigate(routesConstants.signUp)}
+              onPress={() => {
+                setEmail('');
+                setPassword('');
+                navigation.navigate(routesConstants.signUp);
+              }}
               text={constants.signUp}
               size={18}
               fontFamily={fonts.bold}

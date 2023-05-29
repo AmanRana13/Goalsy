@@ -99,7 +99,9 @@ const MyBoard = ({navigation, route}) => {
             buttonStyle={style.buttonStyle1}
             color={colors.themeColor}
             type={constants.large}
-            onPress={()=>{navigation.navigate(routesConstants.myTextBoard)}}
+            onPress={() => {
+              navigation.navigate(routesConstants.myTextBoard);
+            }}
           />
           <Spacer height={constants.height30} />
           <CTAButton
@@ -116,7 +118,7 @@ const MyBoard = ({navigation, route}) => {
         source={[appImages.warring, appImages.warringDark]}
         visible={showModal}
         Colors={colors}
-        description={constants.removeFriend}
+        description={constants.deleteBoard}
         leftButton={{
           text: 'Yes',
           onPress: () => {

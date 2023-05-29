@@ -68,6 +68,7 @@ enum appImages {
   createTicket = require('../assets/Images/Icons/createTicket.png'),
   checkImage = require('../assets/Images/Icons/checkImage.png'),
   chart = require('../assets/Images/Icons/chart.png'),
+  closeTicket = require('../assets/Images/Icons/closeTicket.png'),
 
   // DUMMY
   progressWheel = require('../assets/Images/Icons/progressWheel.png'),

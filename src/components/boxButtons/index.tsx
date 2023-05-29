@@ -42,7 +42,7 @@ const BoxButtons = ({
         text={item}
         size={size}
         color={
-          iconPress === index ? color.learnAbout531text : color.commonBlack
+          iconPress === index ? color.learnAbout531text : color.black
         }
       />
     </TouchableOpacity>

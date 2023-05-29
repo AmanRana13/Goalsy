@@ -16,11 +16,17 @@ import {colors} from 'theme/colors';
 import styles from './styles';
 import {fonts} from 'theme/fonts';
 import usePixel from 'hook/DevicePixel';
+import ColorDropdown from 'components/colorDropdown';
 
 const categoryList = [
   {id: 1, value: 'category 1'},
   {id: 2, value: 'category 2'},
   {id: 3, value: 'category 3'},
+];
+const colorList = [
+  {id: 1, colorCode: 'Red', color: 'red'},
+  {id: 2, colorCode: 'Green', color: 'green'},
+  {id: 3, colorCode: 'Yellow', color: 'yellow'},
 ];
 
 const CreateBoard = ({navigation}) => {
@@ -57,13 +63,13 @@ const CreateBoard = ({navigation}) => {
           source={appImages.selectShape}
         />
         <Spacer height={12} />
-        <TextBox text={constants.selectBoardColor} size={16} />
-        <Spacer height={12} />
-        <Image
-          style={{width: '100%', height: 60}}
-          source={appImages.selectBoardColor}
+        <ColorDropdown
+          list={colorList}
+          onPress={()=>{}}
+          color={colors}
+          label={constants.selectBoardColor}
         />
-        <Spacer height={12} />
+        <Spacer height={constants.height20} />
         <TextBox text={constants.selectImage} size={16} />
         <Spacer height={12} />
         <Image

@@ -26,7 +26,7 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
           <View
             style={[
               style.innerContainer,
-              {paddingVertical: item.colorCode ? 0 : 4},
+              {paddingVertical: item.colorCode ? 0 : 8},
             ]}>
             {item.colorCode ? (
               <View
@@ -39,15 +39,15 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
                 <View
                   style={{
                     backgroundColor: item.color,
-                    height: 30,
-                    width: 30,
+                    height: 40,
+                    width: 40,
                     borderRadius: 8,
                   }}
                 />
-                <TextBox text={item.colorCode}  />
+                <TextBox text={item.colorCode} />
               </View>
             ) : (
-              <TextBox text={label} color={color.placeholder} size={16}/>
+              <TextBox text={label} color={color.placeholder} size={17} />
             )}
             <Icons
               size={16}
@@ -74,7 +74,7 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
                 })
               : null}
           </ScrollView>
-          <View style={{height: 5}} />
+          <View style={{height: 2}} />
         </View>
       </View>
     </View>

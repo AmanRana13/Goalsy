@@ -84,7 +84,7 @@ const ForgotPassword = ({navigation}: any): JSX.Element => {
       <Spacer flex={1} />
       {/* Modal */}
       <ConfirmModal
-        source={appImages.success}
+        source={[appImages.success,appImages.successDark]}
         visible={openForgotPasswordModal}
         Colors={colors}
         description={constants.FGPassSuccess}

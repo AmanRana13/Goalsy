@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 
 import {View} from 'react-native';
 
@@ -27,6 +27,9 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
   const {colors}: any = useTheme();
   const inputRef: any = useRef([]);
   const style = styles(colors);
+  const [oldShowPassword, setOldShowPassword] = useState(true);
+  const [newShowPassword, setNewShowPassword] = useState(true);
+  const [confirmNewShowPassword, setConfirmNewShowPassword] = useState(true);
   return (
     <View style={style.container}>
       <StatusHeader />
@@ -39,9 +42,17 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
         TextInputProps={{
           placeholder: constants.oldPassword,
           nextField: () => inputRef[1].focus(),
+          secureTextEntry: oldShowPassword,
+          textContentType: 'oneTimeCode',
         }}
         label={constants.oldPassword}
-        RightCompo={<Icons source={appImages.eyeHide} size={30} />}
+        RightCompo={
+          <Icons
+            size={30}
+            source={oldShowPassword ? appImages.eyeHide : appImages.eye}
+            onPress={() => setOldShowPassword(data => !data)}
+          />
+        }
       />
       <InputField
         ref={ref => (inputRef[1] = ref)}
@@ -49,9 +60,17 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
         TextInputProps={{
           placeholder: constants.newPassword,
           nextField: () => inputRef[2].focus(),
+          secureTextEntry: newShowPassword,
+          textContentType: 'oneTimeCode',
         }}
         label={constants.newPassword}
-        RightCompo={<Icons source={appImages.eyeHide} size={30} />}
+        RightCompo={
+          <Icons
+            source={newShowPassword ? appImages.eyeHide : appImages.eye}
+            onPress={() => setNewShowPassword(data => !data)}
+            size={30}
+          />
+        }
       />
       <InputField
         ref={ref => (inputRef[2] = ref)}
@@ -59,9 +78,17 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
         TextInputProps={{
           placeholder: constants.confirmNewPassword,
           returnKeyType: constants.done,
+          secureTextEntry: confirmNewShowPassword,
+          textContentType: 'oneTimeCode',
         }}
         label={constants.confirmNewPassword}
-        RightCompo={<Icons source={appImages.eyeHide} size={30} />}
+        RightCompo={
+          <Icons
+            source={confirmNewShowPassword ? appImages.eyeHide : appImages.eye}
+            onPress={() => setConfirmNewShowPassword(data => !data)}
+            size={30}
+          />
+        }
       />
       <Spacer flex={1} />
       <CTAButton
@@ -69,7 +96,6 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
         buttonStyle={style.buttonStyle}
         color={colors.themeColor}
         type={constants.medium}
-        
       />
       <Spacer flex={1} />
     </View>

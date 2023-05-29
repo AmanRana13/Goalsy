@@ -101,7 +101,7 @@ const BottomBar = ({navigation}: any) => {
                 size={10}
                 styles={{
                   ...style.text,
-                  color: selectedIndex === index ? 'black' : 'transparent',
+                  color: selectedIndex === index ? colors.black : 'transparent',
                 }}
               />
             </TouchableOpacity>
@@ -113,6 +113,7 @@ const BottomBar = ({navigation}: any) => {
         contentContainerStyle={style.innerContainer}
       />
       <Icons
+        activeOpacity={0.9}
         size={70}
         disabled={false}
         styles={style.centerImage}

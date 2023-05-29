@@ -114,7 +114,7 @@ const Comments = ({navigation}: any) => {
           TextInputProps={{
             placeholder: constants.writeYourComment,
             returnKeyType: 'done',
-            inputStyle: {
+            inputContainerStyle: {
               borderRadius: 16,
               borderColor: colors.black,
               borderWidth: 3,

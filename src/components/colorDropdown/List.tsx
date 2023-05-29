@@ -34,8 +34,8 @@ const List = ({item, setItem, color, setShowList, index, lastIndex}: list) => {
         <View
           style={{
             backgroundColor: item.color,
-            height: 30,
-            width: 30,
+            height: 35,
+            width: 35,
             borderRadius: 8,
           }}
         />

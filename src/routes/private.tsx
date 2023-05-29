@@ -36,6 +36,7 @@ import MyBoard from 'screen/main/boards/myGoal/MyBoard';
 import ViewSample from 'screen/main/boards/myGoal/ViewSample';
 import CreateBoard from 'screen/main/boards/myGoal/CreateBoard';
 import MyTextBoard from 'screen/main/boards/myGoal/MyTextBoard';
+import Chat from 'screen/main/home/needHelp/chat';
 
 // stack
 const Stack = createNativeStackNavigator();
@@ -115,6 +116,7 @@ const Private = () => {
         name={routesConstants.myTextBoard}
         component={MyTextBoard}
       />
+      <Stack.Screen name={routesConstants.chat} component={Chat} />
     </Stack.Navigator>
   );
 };

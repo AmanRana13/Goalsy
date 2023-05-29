@@ -22,6 +22,9 @@ import {fonts} from 'theme/fonts';
 
 // style
 import styles from './styles';
+import DateInputField from 'components/dateInputField';
+import {DatePickerModal} from 'components/DatePickerModal';
+import moment from 'moment';
 
 const genderList = [
   {id: 'Male', value: 'Male'},
@@ -35,6 +38,10 @@ const ProfileEdit = ({navigation}: any) => {
   const inputRef: any = useRef([]);
   const style = styles(colors);
   const [gender, setGender] = useState<any>(null);
+  const [name, setName] = useState<string>('Winni');
+
+  const [dob, setDob] = useState<string>('May 05, 1995');
+  const [datePicker, setDatePicker] = React.useState(false);
   const onGenderSelect = (item: any) => {
     setGender(item);
   };
@@ -56,6 +63,8 @@ const ProfileEdit = ({navigation}: any) => {
             required: true,
             placeholder: constants.name,
             nextField: () => inputRef[1].focus(),
+            value: name,
+            onChange: setName,
           }}
           label={constants.name}
         />
@@ -66,17 +75,30 @@ const ProfileEdit = ({navigation}: any) => {
             required: true,
             placeholder: constants.email,
             returnKeyType: 'done',
+            value: 'winni@example.com',
+            editable: false,
           }}
           label={constants.email}
         />
-        <InputField
+        <DateInputField
           colors={colors}
           TextInputProps={{
             placeholder: constants.DOB,
-            editable: false,
+            value: dob,
           }}
           label={constants.DOB}
-          RightCompo={<Icons source={appImages.calendar} size={30} />}
+          onPress={() => {
+            setDatePicker(true);
+          }}
+          RightCompo={
+            <Icons
+              source={appImages.calendar}
+              size={30}
+              onPress={() => {
+                setDatePicker(true);
+              }}
+            />
+          }
         />
         <InputField
           colors={colors}
@@ -101,6 +123,19 @@ const ProfileEdit = ({navigation}: any) => {
           onPress={() => navigation.navigate(routesConstants.Profile)}
         />
         <Spacer height={constants.height50} />
+
+        <DatePickerModal
+          minimumDate={new Date(1920, 0, 1)}
+          maximumDate={new Date()}
+          onCancel={() => {
+            setDatePicker(false);
+          }}
+          isDropdownVisible={datePicker}
+          onClose={date => {
+            setDatePicker(false);
+            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+          }}
+        />
       </ScrollView>
     </View>
   );

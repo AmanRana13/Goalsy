@@ -1,5 +1,5 @@
 import {ScrollView, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   BackButton,
   CTAButton,
@@ -19,6 +19,10 @@ import styles from './styles';
 import {fonts} from 'theme/fonts';
 import {goBack} from 'routes/navigationServices';
 import ColorDropdown from 'components/colorDropdown';
+import {Width} from 'hook/DevicePixel';
+import {DatePickerModal} from 'components/DatePickerModal';
+import moment from 'moment';
+import DateInputField from 'components/dateInputField';
 
 const categoryList = [
   {id: 1, value: 'category 1'},
@@ -34,6 +38,8 @@ const colorList = [
 const AddGoal = () => {
   const {colors}: colors | any = useTheme();
   const style = styles(colors);
+  const [dob, setDob] = useState<string>('May 05, 2023');
+  const [datePicker, setDatePicker] = React.useState(false);
   const onCategorySelect = e => {
     console.log(':::::', e);
   };
@@ -54,13 +60,13 @@ const AddGoal = () => {
         <InputField
           colors={colors}
           TextInputProps={{
-            placeholder: constants.ActivityName,
+            placeholder: constants.goalName,
             returnKeyType: 'done',
           }}
-          label={constants.ActivityName}
+          label={constants.goalName}
         />
         <TextBox
-          text={constants.VisionIcon}
+          text={constants.GoalIcon}
           styles={{paddingVertical: 10}}
           fontFamily={fonts.regular}
           size={16}
@@ -70,14 +76,25 @@ const AddGoal = () => {
           size={60}
           styles={{paddingVertical: 5}}
         />
-        <InputField
-          label={constants.deadline}
+        <DateInputField
           colors={colors}
           TextInputProps={{
             placeholder: constants.deadline,
-            editable: false,
+            value: dob,
           }}
-          RightCompo={<Icons source={appImages.calendar} size={30} />}
+          label={constants.deadline}
+          onPress={() => {
+            setDatePicker(true);
+          }}
+          RightCompo={
+            <Icons
+              source={appImages.calendar}
+              size={30}
+              onPress={() => {
+                setDatePicker(true);
+              }}
+            />
+          }
         />
         <Spacer />
         <ColorDropdown
@@ -90,7 +107,7 @@ const AddGoal = () => {
         <View style={{alignSelf: 'center'}}>
           <CTAButton
             text={constants.addGoal}
-            buttonStyle={style.buttonStyle}
+            buttonStyle={[style.buttonStyle]}
             color={colors.themeColor}
             type={constants.large}
             onPress={() => goBack()}
@@ -100,11 +117,25 @@ const AddGoal = () => {
             text={constants.SampleGoal}
             buttonStyle={style.buttonStyle}
             color={colors.gray}
+            isShadow={false}
             type={constants.large}
             onPress={() => goBack()}
           />
         </View>
         <Spacer height={constants.height50} />
+
+        <DatePickerModal
+          minimumDate={new Date(1920, 0, 1)}
+          maximumDate={new Date()}
+          onCancel={() => {
+            setDatePicker(false);
+          }}
+          isDropdownVisible={datePicker}
+          onClose={date => {
+            setDatePicker(false);
+            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+          }}
+        />
       </ScrollView>
     </View>
   );

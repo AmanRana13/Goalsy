@@ -2,6 +2,7 @@ import {Width} from 'hook/DevicePixel';
 import {StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import constants from 'theme/constants';
+import { width } from 'utils/globalFunctions';
 
 const styles = (color: colors, sizes: number) =>
   StyleSheet.create({
@@ -12,8 +13,8 @@ const styles = (color: colors, sizes: number) =>
     },
     postImage: {
       borderRadius: 14,
-      width: sizes ,
-      height: sizes / 1.58,
+      width: width-40 ,
+      height: (width-40) / 1.58,
     },
   });
 export default styles;

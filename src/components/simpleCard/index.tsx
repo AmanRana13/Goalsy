@@ -3,6 +3,7 @@ import React from 'react';
 import {Icons, TextBox} from 'components';
 import style from './styles';
 import {simpleCardProps} from './type';
+import { routesConstants } from 'theme/constants';
 
 const SimpleCard = ({
   item,
@@ -11,11 +12,12 @@ const SimpleCard = ({
   onPress,
   isRed,
   disabled = true,
+  navigation
 }: simpleCardProps) => {
   const styles = style(color);
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={()=>navigation.navigate(routesConstants.chat)}
       disabled={disabled}
       style={styles.container}>
       <View style={styles.header}>

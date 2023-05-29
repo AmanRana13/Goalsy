@@ -1,5 +1,5 @@
 import {KeyboardAvoidingView, ScrollView, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   BackButton,
   CTAButton,
@@ -16,7 +16,10 @@ import TextBox from 'components/textBox';
 import appImages from 'theme/images';
 import styles from './styles';
 import {fonts} from 'theme/fonts';
-import { goBack } from 'routes/navigationServices';
+import {goBack} from 'routes/navigationServices';
+import {DatePickerModal} from 'components/DatePickerModal';
+import moment from 'moment';
+import DateInputField from 'components/dateInputField';
 
 const categoryList = [
   {id: 1, value: 'category 1'},
@@ -27,6 +30,8 @@ const categoryList = [
 const CreateVision = ({navigation}) => {
   const {colors} = useTheme();
   const style = styles(colors);
+  const [dob, setDob] = useState<string>('May 05, 1995');
+  const [datePicker, setDatePicker] = useState(false);
   const onCategorySelect = e => {
     console.log(':::::', e);
   };
@@ -48,7 +53,7 @@ const CreateVision = ({navigation}) => {
           colors={colors}
           TextInputProps={{
             placeholder: constants.visionName,
-            returnKeyType:'done'
+            returnKeyType: 'done',
           }}
           label={constants.visionName}
         />
@@ -63,14 +68,25 @@ const CreateVision = ({navigation}) => {
           size={60}
           styles={{paddingVertical: 5}}
         />
-        <InputField
-          label={constants.deadline}
+        <DateInputField
           colors={colors}
           TextInputProps={{
             placeholder: constants.deadline,
-            editable:false
+            value: dob,
           }}
-          RightCompo={<Icons source={appImages.calendar} size={30} />}
+          label={constants.deadline}
+          onPress={() => {
+            setDatePicker(true);
+          }}
+          RightCompo={
+            <Icons
+              source={appImages.calendar}
+              size={30}
+              onPress={() => {
+                setDatePicker(true);
+              }}
+            />
+          }
         />
         <Spacer height={constants.height50} />
         <View style={{alignSelf: 'center'}}>
@@ -86,11 +102,24 @@ const CreateVision = ({navigation}) => {
             text={constants.SampleVision}
             buttonStyle={style.buttonStyle}
             color={colors.gray}
+            isShadow={false}
             type={constants.large}
-            onPress={()=>goBack()}
+            onPress={() => goBack()}
           />
         </View>
         <Spacer height={constants.height50} />
+        <DatePickerModal
+          minimumDate={new Date(1920, 0, 1)}
+          maximumDate={new Date()}
+          onCancel={() => {
+            setDatePicker(false);
+          }}
+          isDropdownVisible={datePicker}
+          onClose={date => {
+            setDatePicker(false);
+            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+          }}
+        />
       </ScrollView>
     </View>
   );

@@ -9,7 +9,7 @@ import CheckBox from 'components/checkBox';
 import {Width} from 'hook/DevicePixel';
 import {goBack} from 'routes/navigationServices';
 
-const InviteUserCard = ({color, item}) => {
+const InviteUserCard = ({color, item, onPress = () => {}, isModal = false}) => {
   const style = styles(color);
   const CheckBoxContainer = ({type}) => {
     return (
@@ -46,13 +46,20 @@ const InviteUserCard = ({color, item}) => {
       </View>
 
       <CTAButton
-        isShadow={false}
         text={item.buttonName}
         type={constants.medium}
         color={color.themeColor}
         textColor={color.commonBlack}
-        buttonStyle={{alignSelf: 'center', width: Width * 0.44}}
-        onPress={() => goBack()}
+        buttonStyle={{
+          alignSelf: 'center',
+          width:
+            item.buttonName ===constants.updateInviteAccess
+              ? Width * 0.63
+              : Width * 0.44,
+        }}
+        onPress={() => {
+          isModal ? onPress() :goBack()
+        }}
       />
     </View>
   );

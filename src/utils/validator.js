@@ -35,8 +35,10 @@ export const trimText1 = txt => {
 
 //PASSWORD VALIDATION CHAECK FUNCTION
 export const validatePassword = password => {
+  // var pw =
+  //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   var pw =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#~^()_+=\/|{}:;"'<>`,@$!%*?&.\[\]\\-])[A-Za-z\d#~^()_+=\/|{}:;"'<>`,@$!%*?&.\[\]\\-]{8,}$/;
   return pw.test(password);
 };
 
@@ -113,12 +115,6 @@ export const userSignUpCheck = (
     showErrorMessage = constants.emptyConfirm;
   } else if (password !== confirmPassword) {
     showErrorMessage = constants.invalidConfirmPassword;
-  } else if (dob == '') {
-    showErrorMessage = constants.emptyDob;
-  } else if (location.trim() === '') {
-    showErrorMessage = constants.emptyLoc;
-  } else if (!gender?.id) {
-    showErrorMessage = constants.emptyGender;
   } else if (!isChecked) {
     showErrorMessage = constants.acceptTermCondition;
   }

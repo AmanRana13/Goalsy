@@ -14,6 +14,7 @@ const Icons = ({
   disabled = false,
   imageStyle,
   onPress,
+  activeOpacity=0.6
 }: props) => {
   const sizes = usePixel(size);
   const {dark}: any = useTheme();
@@ -22,7 +23,7 @@ const Icons = ({
       <TouchableOpacity
         onPress={onPress}
         disabled={disabled}
-        activeOpacity={disabled ? 1 : 0.6}
+        activeOpacity={disabled ? 1 : activeOpacity}
         style={[{width: sizes, height: sizes}, styles]}>
         <Image
           style={{width: '100%', height: '100%', ...imageStyle}}

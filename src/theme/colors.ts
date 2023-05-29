@@ -25,6 +25,8 @@ export interface colors {
   learnAbout531Background: string;
   questionHeaderText: string;
   greyDot: string;
+  modalButtonShadow: string;
+  
 }
 
 export const commonColor: any = {
@@ -57,7 +59,7 @@ const light: Theme = {
     checkBoxHead: '#D4F369',
     checkBoxBackground: '#000000',
     questionHeaderText: 'rgba(109, 109, 109, 1)',
-
+    modalButtonShadow:"#fff",
     ...commonColor.colors,
   },
 };
@@ -74,6 +76,7 @@ const dark: Theme = {
     checkBoxBackground: '#CCFF00',
     background: 'rgba(0, 0, 0, 1)',
     questionHeaderText: '#000',
+    modalButtonShadow:"#222222",
     ...commonColor.colors,
   },
 };

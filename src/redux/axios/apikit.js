@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {DataManager} from 'utils/dataManager';
 
-export const url = 'http://192.168.3.175:4000/'; //local
+// export const url = 'http://192.168.3.175:4000/'; //local
+export const url = 'http://1.6.98.141:9007/'; //dell
 
 const APIKit = axios.create({
   baseURL: `${url}api/v1/`,

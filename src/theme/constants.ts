@@ -46,6 +46,7 @@ export enum routesConstants {
   editActivity = 'editActivity',
   editVision = 'editVision',
   myTextBoard = 'myTextBoard',
+  chat = 'chat',
 }
 
 export const buttonSize: any = {
@@ -54,7 +55,7 @@ export const buttonSize: any = {
     width: 200,
     fontSize: 23,
     radius: 15,
-    distance: 10,
+    distance: 6,
     fontFamily: fonts.medium,
   },
   medium: {
@@ -62,7 +63,7 @@ export const buttonSize: any = {
     width: 160,
     fontSize: 20,
     radius: 15,
-    distance: 8,
+    distance: 5,
     fontFamily: fonts.medium,
   },
   small: {
@@ -132,6 +133,7 @@ enum constants {
   edit = 'Edit',
   invite = 'Invite',
   ViewBoard = 'View your board',
+  updateInviteAccess = 'Update Invite Access',
 
   // button Size
   large = 'large',
@@ -160,7 +162,7 @@ enum constants {
   vision = 'My Vision',
   myGoal = 'My Goal',
   myActivity = 'My Activity',
-  deadline = 'Set deadline',
+  deadline = 'Set Deadline',
   createVision = 'Create Vision',
   AddGoal = 'Add Goal',
   InviteUser = 'Invite User',
@@ -188,6 +190,7 @@ enum constants {
   note = 'Note',
   selectColor = 'Select Color',
   InvitedUser = 'Invited Users',
+  goalName = 'Goal Name',
 
   // Text
   selectShape = 'Select Shape',
@@ -200,6 +203,7 @@ enum constants {
   done = 'done',
   welcome = 'Welcome',
   VisionIcon = 'Select Vision Icon',
+  GoalIcon = 'Select Goal Icon',
   FP = 'Forgot Password?',
   addFriend = 'Add Friend',
   notRegister = 'Don’t have an account? ',
@@ -216,8 +220,11 @@ enum constants {
   
   Are you sure, you want to delete your account?`, //Note* this space reflect in the model view text
   logout = 'Are you sure, you want to logout?',
+  deleteBoard = 'Are you sure, you want to delete this board?',
   writeYourThoughts = 'Write your thoughts...',
   writeYourComment = 'Write your comment here...',
+  writeYourMsg = 'Write a message...',
+  closeTicket = 'Are you sure, you want to close this ticket?',
   dummyText = `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
 
   //Validation
@@ -232,7 +239,7 @@ enum constants {
   shortPassword = 'Password should be at least 8 characters long.',
   emptyConfirm = 'Please enter confirm password.',
   invalidConfirmPassword = 'Password and confirm password should be same.',
-  acceptTermCondition = 'Please agree with terms and condition and privacy policy.',
+  acceptTermCondition = 'Please agree with terms & condition and privacy policy.',
   invalidPasswordNew = 'Password must include 1 upper case letter, 1 lower case letter, 1 numeric value, 1 special character and no spaces.',
   emptyLoc = 'Please enter location.',
   emptyDob = 'Please select date of birth.',

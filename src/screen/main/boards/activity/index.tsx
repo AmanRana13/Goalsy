@@ -39,8 +39,8 @@ const Activity = ({navigation}): any => {
           <ActivityCard color={colors} navigation={navigation} />
         </>
       )}
-      <View style={{}}>
-      <Spacer height={constants.height30}/>
+      <View>
+      {/* <Spacer height={constants.height30}/> */}
         <TextBox
           text={'Note: Maximum 10 activities can be created'}
           size={16}

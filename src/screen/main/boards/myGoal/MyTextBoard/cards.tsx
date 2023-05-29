@@ -48,7 +48,7 @@ export const ActivityCards = ({color}) => {
             <TextBox text={'Reminder: M,T 12:00 PM'} size={14} />
             <TextBox text={'Due Date: May 05, 2023'} size={14} />
           </View>
-          <Icons source={appImages.shareIcon} size={30} />
+          <Icons source={appImages.shareIcon} size={30} onPress={()=>onShare()}/>
           {/* <CTAButton
             text={constants.complete}
             buttonStyle={style.buttonStyle}

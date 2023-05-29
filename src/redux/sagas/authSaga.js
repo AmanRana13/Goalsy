@@ -61,6 +61,7 @@ export function* loginApiSaga(action) {
         ShowAlertMessage(result.message, popupType.info);
         DataManager.setAccessToken(result?.data?.token);
         DataManager.setUserData(JSON.stringify(result?.data?.user));
+        DataManager.setFirstTime();
         yield put({
           type: ApiConstants.API_LOGIN_SUCCESS,
           payload: result?.data,

@@ -5,4 +5,5 @@ export interface props {
   styles?: Object;
   fontFamily?: string;
   onPress?: () => {};
+  textProps?:any;
 }

@@ -56,7 +56,7 @@ const Progress = ({navigation}): any => {
           text={constants.activity}
           styles={{alignSelf: 'center'}}
           fontFamily={fonts.semiBold}
-          size={17}
+          size={19}
         />
         <View
           style={{
@@ -66,9 +66,9 @@ const Progress = ({navigation}): any => {
             gap: 10,
             justifyContent: 'space-evenly',
           }}>
-          <Icons source={appImages.chart} size={20} />
+          <Icons source={appImages.chart} size={30} />
           <Icons source={appImages.progressWheel} size={250} disabled={true} />
-          <Icons source={appImages.edit} size={20} />
+          <Icons source={appImages.edit} size={34} />
         </View>
         <View style={style.quote}>
           <TextBox

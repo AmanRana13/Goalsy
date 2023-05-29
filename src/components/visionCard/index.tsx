@@ -6,6 +6,8 @@ import {GoalCardProps} from './type';
 import constants, {routesConstants} from 'theme/constants';
 import appImages from 'theme/images';
 import {Width} from 'hook/DevicePixel';
+import {fonts} from 'theme/fonts';
+import {onShare} from 'utils/globalFunctions';
 
 const VisionCard = ({
   item,
@@ -19,10 +21,22 @@ const VisionCard = ({
   return (
     <View style={styles.container}>
       <View style={{flex: 1, gap: 5}}>
-        <TextBox text={'My Vision Name WWWW'} size={16} />
-        <TextBox text={'Vision Name'} size={16} />
-        <TextBox text={'Vision Category'} size={16} />
-        <TextBox text={'Due Date: May 05, 2023'} size={16} />
+        <TextBox
+          text={'My Vision Name WWWW'}
+          size={16}
+          fontFamily={fonts.semiBold}
+        />
+        <TextBox text={'Vision Name'} size={16} fontFamily={fonts.semiBold} />
+        <TextBox
+          text={'Vision Category'}
+          size={16}
+          fontFamily={fonts.semiBold}
+        />
+        <TextBox
+          text={'Due Date: May 05, 2023'}
+          size={16}
+          fontFamily={fonts.semiBold}
+        />
       </View>
       <View
         style={{
@@ -64,8 +78,9 @@ const VisionCard = ({
         </View>
         <Icons
           source={appImages.shareIcon}
+          onPress={() => onShare()}
           size={20}
-          styles={{alignSelf: 'flex-end', marginBottom:8}}
+          styles={{alignSelf: 'flex-end', marginBottom: 8}}
         />
       </View>
     </View>

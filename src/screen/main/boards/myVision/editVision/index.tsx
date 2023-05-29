@@ -1,5 +1,5 @@
 import {ScrollView, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   BackButton,
   CTAButton,
@@ -17,6 +17,8 @@ import appImages from 'theme/images';
 import styles from './styles';
 import {fonts} from 'theme/fonts';
 import EditUserCard from 'components/EditUserCard';
+import InviteUserModal from 'components/inviteUserModal';
+import { goBack } from 'routes/navigationServices';
 
 const categoryList = [
   {id: 1, value: 'category 1'},
@@ -24,10 +26,17 @@ const categoryList = [
   {id: 3, value: 'category 3'},
 ];
 
+const data = {
+  id: 1,
+  userName: 'Evelyn',
+  buttonName: constants.updateInviteAccess,
+};
+
 const EditVision = ({navigation}) => {
   const {colors} = useTheme();
   const style = styles(colors);
   const onCategorySelect = e => {};
+  const [openModal, setOpenModal] = useState(false);
   return (
     <View style={style.container}>
       <StatusHeader />
@@ -62,15 +71,7 @@ const EditVision = ({navigation}) => {
           size={60}
           styles={{paddingVertical: 5}}
         />
-        <InputField
-          label={constants.deadline}
-          colors={colors}
-          TextInputProps={{
-            placeholder: constants.deadline,
-            editable: false,
-          }}
-          RightCompo={<Icons source={appImages.calendar} size={30} />}
-        />
+        <Spacer />
         <TextBox
           text={constants.InvitedUser}
           styles={{paddingTop: 10}}
@@ -84,19 +85,26 @@ const EditVision = ({navigation}) => {
             userName: 'Hello',
             description: 'Access Type:  View, Edit and Invite',
           }}
+          setOpenModal={setOpenModal}
         />
         <Spacer height={constants.height50} />
         <View style={{alignSelf: 'center'}}>
           <CTAButton
-            text={constants.create}
+            text={constants.update}
             buttonStyle={style.buttonStyle}
             color={colors.themeColor}
             type={constants.large}
-            onPress={() => navigation.navigate(routesConstants.inviteUser)}
+            onPress={() => goBack()}
           />
         </View>
         <Spacer height={constants.height50} />
       </ScrollView>
+      <InviteUserModal
+        visible={openModal}
+        onUpdatePress={() => setOpenModal(false)}
+        color={colors}
+        item={data}
+      />
     </View>
   );
 };

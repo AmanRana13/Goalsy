@@ -16,7 +16,7 @@ const Card = ({color, navigation}) => {
   const style = styles(color);
   const InnerRow = ({header, description, size, fontFamily}: props) => {
     return (
-      <View style={{flexDirection: 'row', gap: 10, flexWrap: 'wrap'}}>
+      <View style={{flexDirection: 'row', gap: 6, flexWrap: 'wrap'}}>
         <TextBox text={header} size={size} fontFamily={fontFamily} />
         <TextBox text={description} size={size} fontFamily={fontFamily} />
       </View>
@@ -39,13 +39,13 @@ const Card = ({color, navigation}) => {
         />
         <InnerRow
           fontFamily={fonts.medium}
-          header={'Reminder'}
+          header={'Reminder:'}
           description={'M,T,W: 12:00 PM'}
           size={13}
         />
         <InnerRow
           fontFamily={fonts.medium}
-          header={'Due Date'}
+          header={'Due Date:'}
           description={'May 05, 1923'}
           size={13}
         />

@@ -4,6 +4,7 @@ import usePixel from 'hook/DevicePixel';
 import {useTheme} from '@react-navigation/native';
 import {fonts} from 'theme/fonts';
 import {props} from './type';
+import { colors } from 'theme/colors';
 
 const TextBox = ({
   text = '',
@@ -12,8 +13,9 @@ const TextBox = ({
   styles,
   fontFamily,
   onPress,
+  textProps
 }: props) => {
-  const {colors} = useTheme();
+  const {colors}:colors = useTheme();
   const fontSize = usePixel(size);
   const renderView = useCallback(() => {
     return (
@@ -21,12 +23,14 @@ const TextBox = ({
       <Text
         onPress={onPress}
         allowFontScaling={false}
+        suppressHighlighting={true}
         style={{
           color: color ?? colors?.black,
           fontSize: fontSize,
           fontFamily: fontFamily ?? fonts.medium,
           ...styles,
-        }}>
+        }}
+        {...textProps}>
         {text}
       </Text>
     );

@@ -3,6 +3,7 @@ import { colors } from 'theme/colors';
 export interface commentCardProps {
   item: item;
   color:colors;
+  setOpenModal: (data:boolean)=>{};
 }
 
 type item = {

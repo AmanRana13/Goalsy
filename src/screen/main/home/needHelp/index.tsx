@@ -61,6 +61,8 @@ const NeedHelp = ({navigation}: any) => {
             color={colors}
             isRed={true}
             source={appImages.forwardArrow}
+            disabled={false}
+            navigation={navigation}
           />
         )}
       />
