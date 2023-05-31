@@ -38,6 +38,7 @@ const styles = (colors: colors) =>
       height: '100%',
       color: colors.commonBlack,
       fontFamily: fonts.medium,
+      
     },
     label: {
       paddingVertical: 8,

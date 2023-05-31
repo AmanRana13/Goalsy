@@ -13,7 +13,7 @@ const styles = (color: colors) => {
       justifyContent: 'space-around',
     },
     innerButton: {
-      borderColor: color.black,
+      borderColor: color.boxButtonBorder,
       borderWidth: 2,
       height: Width * 0.12,
       borderRadius: 12,

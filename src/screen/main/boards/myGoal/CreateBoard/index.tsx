@@ -27,6 +27,8 @@ const colorList = [
   {id: 1, colorCode: 'Red', color: 'red'},
   {id: 2, colorCode: 'Green', color: 'green'},
   {id: 3, colorCode: 'Yellow', color: 'yellow'},
+  {id: 4, colorCode: 'Yellow', color: 'orange'},
+  {id: 5, colorCode: 'Yellow', color: 'pink'},
 ];
 
 const CreateBoard = ({navigation}) => {
@@ -65,16 +67,16 @@ const CreateBoard = ({navigation}) => {
         <Spacer height={12} />
         <ColorDropdown
           list={colorList}
-          onPress={()=>{}}
+          onPress={() => {}}
           color={colors}
           label={constants.selectBoardColor}
         />
         <Spacer height={constants.height20} />
         <TextBox text={constants.selectImage} size={16} />
         <Spacer height={12} />
-        <Image
-          style={{width: 60, height: 60}}
-          source={appImages.addBoardIcon}
+        <Icons
+          size={60}
+          source={[appImages.plus, appImages.plusDark]}
         />
         <Spacer height={constants.height50} />
         <View style={{alignSelf: 'center'}}>

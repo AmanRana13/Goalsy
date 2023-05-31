@@ -51,7 +51,7 @@ const ConfirmModal = memo(
                   buttonStyle={leftButton?.style}
                   onPress={leftButton.onPress}
                   isShadow={false}
-                  isModal
+                  hideShadow
                 />
               )}
               {rightButton && (
@@ -62,7 +62,7 @@ const ConfirmModal = memo(
                   buttonStyle={rightButton?.style}
                   onPress={rightButton.onPress}
                   isShadow={false}
-                  isModal
+                  hideShadow
                 />
               )}
             </View>

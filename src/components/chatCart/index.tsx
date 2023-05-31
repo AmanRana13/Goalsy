@@ -24,10 +24,20 @@ const ChatCard = ({
         alignSelf: ownChat ? 'flex-end' : 'flex-start',
         width: '70%',
         marginVertical: 15,
-        borderRadius:15
+        borderRadius: 15,
       }}>
-      <TextBox text={text} fontFamily={fonts.regular} />
-      <TextBox text={time} fontFamily={fonts.regular} size={10} styles={{alignSelf:"flex-end",paddingVertical:5}}/>
+      <TextBox
+        text={text}
+        fontFamily={fonts.regular}
+        color={color.commonBlack}
+      />
+      <TextBox
+        text={time}
+        fontFamily={fonts.regular}
+        size={10}
+        styles={{alignSelf: 'flex-end', paddingVertical: 5}}
+        color={color.commonBlack}
+      />
     </View>
   );
 };

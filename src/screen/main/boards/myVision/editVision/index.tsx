@@ -67,7 +67,7 @@ const EditVision = ({navigation}) => {
           size={16}
         />
         <Icons
-          source={appImages.plus}
+          source={[appImages.plus, appImages.plusDark]}
           size={60}
           styles={{paddingVertical: 5}}
         />

@@ -82,6 +82,7 @@ enum appImages {
   DummyGoal = require('../assets/Images/Dummy/goal.png'),
 
   // Dark theme
+  logoDark = require('../assets/Images/Dark/logo.png'),
   aboutDark = require('../assets/Images/Dark/about.png'),
   learnAboutDark = require('../assets/Images/Dark/learnAbout.png'),
   additionalDark = require('../assets/Images/Dark/additional.png'),
@@ -107,6 +108,7 @@ enum appImages {
   deleteAccountDark = require('../assets/Images/Dark/deleteAccount.png'),
   logoutDark = require('../assets/Images/Dark/logout.png'),
   editDark = require('../assets/Images/Dark/edit.png'),
+  edit2Dark = require('../assets/Images/Dark/edit2.png'),
   backArrowDark = require('../assets/Images/Dark/backArrow.png'),
   aboutYourSelfDark = require('../assets/Images/Dark/aboutYourSelf.png'),
   tooltipDark = require('../assets/Images/Dark/tooltip.png'),
@@ -119,5 +121,12 @@ enum appImages {
   sendDark = require('../assets/Images/Dark/Send.png'),
   goal2Dark = require('../assets/Images/Dark/goal2.png'),
   createTicketDark = require('../assets/Images/Dark/createTicket.png'),
+  shareIconDark = require('../assets/Images/Dark/shareIcon.png'),
+  forwardArrowDark = require('../assets/Images/Dark/forwardArrow.png'),
+  closeTicketDark = require('../assets/Images/Dark/closeTicket.png'),
+  forgotPasswordDark = require('../assets/Images/Dark/forgotPassword.png'),
+  goal3Dark = require('../assets/Images/Dark/goal3.png'),
+  exclamationDark = require('../assets/Images/Dark/exclamation.png'),
+  deleteDark = require('../assets/Images/Dark/delete.png'),
 }
 export default appImages;

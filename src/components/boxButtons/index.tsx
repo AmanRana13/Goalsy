@@ -27,12 +27,14 @@ const BoxButtons = ({
   const style = styles(color);
   return arr.map((item: any, index: number) => (
     <TouchableOpacity
+    activeOpacity={1}
       key={item}
       style={[
         iconPress === index
           ? {
               ...style.innerButton,
               backgroundColor: color.learnAbout531Background,
+              borderColor: color.boxButtonSelectBorder,
             }
           : style.innerButton,
         {width: width},

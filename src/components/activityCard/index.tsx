@@ -1,6 +1,6 @@
 import {TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {CTAButton, Icons, TextBox} from 'components';
+import {CTAButton, TextBox} from 'components';
 import style from './styles';
 import {GoalCardProps} from './type';
 import constants, {routesConstants} from 'theme/constants';
@@ -8,8 +8,6 @@ import {Width} from 'hook/DevicePixel';
 import Spacer from 'components/spacer';
 
 const ActivityCard = ({
-  item,
-  source,
   color,
   onPress,
   disabled,
@@ -41,7 +39,7 @@ const ActivityCard = ({
             gap: 10,
           }}>
           <View>
-            <TextBox text={'Reminder: M,T 12:00 PM'} size={14} />
+            <TextBox text={constants.ActivityName} size={14} />
             <TextBox text={'Due Date: May 05, 2023'} size={14} />
           </View>
           <CTAButton
@@ -53,6 +51,7 @@ const ActivityCard = ({
             buttonStyle={{
               width: Width * 0.25,
             }}
+            hideShadow
           />
         </View>
       </View>

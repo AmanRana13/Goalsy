@@ -185,7 +185,7 @@ const Profile = ({navigation}: any) => {
             onPress={() => navigation.navigate(routesConstants.quiz)}
           />
           <Icons
-            source={appImages.exclamation}
+            source={[appImages.exclamation,appImages.exclamationDark]}
             styles={style.exc}
             onPress={() => {
               showToolTip(!toolTip);

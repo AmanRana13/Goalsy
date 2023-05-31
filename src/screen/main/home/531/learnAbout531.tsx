@@ -80,10 +80,24 @@ const LearnAbout531 = ({navigation}): any => {
     }
   };
 
+  const Title = (value: number) => {
+    switch (value) {
+      case 4:
+        return constants.LearnAboutGoalsy ;
+      case 0:
+        return constants.LearnAbout5 ;
+      case 1:
+        return constants.LearnAbout3 ;
+      case 2:
+        return constants.LearnAbout1 ;
+      default:
+        return constants.LearnAboutGoalsy ;
+    }
+  };
   return (
     <View style={style.container}>
       <StatusHeader />
-      <Header title={'Learn About 5-3-1'} LeftIcon={<BackButton />} />
+      <Header title={Title(selectedIcon)} LeftIcon={<BackButton />} />
       <Spacer />
       <View style={{justifyContent:"space-between"}}>
         <LearnAboutHeader

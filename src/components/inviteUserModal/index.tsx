@@ -25,7 +25,7 @@ const InviteUserModal = memo(
               item={item}
               onPress={onUpdatePress}
               item={item}
-              isModal
+              hideShadow
             />
           </View>
         </View>

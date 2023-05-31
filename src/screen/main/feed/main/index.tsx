@@ -69,7 +69,7 @@ const Feed = ({navigation}): any => {
             }}
           />
         }
-        title={constants.feed}
+        title={constants.social}
       />
       <Spacer />
 

@@ -25,7 +25,7 @@ const InviteUserCard = ({color, item, onPress = () => {}, isModal = false}) => {
         <Icons
           source={appImages.dummyUser}
           styles={{
-            borderWidth: 5,
+            borderWidth: 3,
             borderColor: color?.themeColor,
             borderRadius: 150,
           }}
@@ -70,7 +70,7 @@ export default InviteUserCard;
 const styles = (color: colors) =>
   StyleSheet.create({
     container: {
-      backgroundColor: color?.white,
+      backgroundColor: color?.darkGray,
       paddingHorizontal: 30,
       paddingVertical: 20,
       marginVertical: 12,

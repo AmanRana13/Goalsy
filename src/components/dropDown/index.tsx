@@ -5,23 +5,29 @@ import {Icons, TextBox} from 'components';
 import styles from './style';
 import appImages from 'theme/images';
 import {dropdown} from './type';
-import Spacer from 'components/spacer';
-import {Width} from 'hook/DevicePixel';
+import usePixel, {Width} from 'hook/DevicePixel';
 import {fonts} from 'theme/fonts';
+import constants from 'theme/constants';
 
 const DropDown = ({list, label, onPress, color}: dropdown) => {
+  const inputHeight = usePixel(constants.inputHeight + 3);
   const style = styles(color);
   const [showList, setShowList] = React.useState(false);
   const [item, setItem] = React.useState({});
   useEffect(() => {
     onPress(item);
   }, [item]);
-  
+
   return (
     <View style={style.outerContainer}>
       <TextBox text={label} size={16} fontFamily={fonts.regular} />
-      <View style={[style.container, !showList && {paddingBottom: 11}]}>
+      <View style={[style.container]}>
         <TouchableOpacity
+          style={{
+            height: inputHeight,
+            borderRadius: 15,
+            justifyContent: 'center',
+          }}
           onPress={() => setShowList(!showList)}
           activeOpacity={1}>
           <View style={style.innerContainer}>
@@ -54,7 +60,6 @@ const DropDown = ({list, label, onPress, color}: dropdown) => {
                   );
                 })
               : null}
-            <Spacer />
           </ScrollView>
         </View>
       </View>

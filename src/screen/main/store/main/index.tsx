@@ -22,7 +22,7 @@ const Store = (props): any => {
     <View style={style.container}>
       <StatusHeader />
       <Spacer />
-      <Header title={constants.store} />
+      <Header title={constants.shop} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Spacer />
         <CategoryContainer title="Category 1" {...props} />

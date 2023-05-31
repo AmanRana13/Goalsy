@@ -23,7 +23,7 @@ const EditUserCard = memo(({item, color, setOpenModal}: commentCardProps) => {
           {item?.description && <TextBox text={item?.description} size={13} />}
         </View>
         <Icons
-          source={appImages.edit}
+          source={[appImages.edit, appImages.edit2Dark]}
           styles={{paddingBottom: 10}}
           onPress={() => setOpenModal(true)}
         />

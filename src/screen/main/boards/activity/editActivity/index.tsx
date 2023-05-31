@@ -34,6 +34,8 @@ const colorList = [
   {id: 1, colorCode: 'Red', color: 'red'},
   {id: 2, colorCode: 'Green', color: 'green'},
   {id: 3, colorCode: 'Yellow', color: 'yellow'},
+  {id: 4, colorCode: 'orange', color: 'orange'},
+  {id: 5, colorCode: 'pink', color: 'pink'},
 ];
 
 const EditActivity = () => {
@@ -44,7 +46,6 @@ const EditActivity = () => {
   const [note, setNote] = useState<string>('Hello');
   const [datePicker, setDatePicker] = React.useState(false);
   const onCategorySelect = e => {
-    console.log(':::::', e);
   };
   const CheckBoxValue = () => {};
   const width = (Width - 200) / 7;

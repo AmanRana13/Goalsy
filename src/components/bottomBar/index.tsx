@@ -16,6 +16,7 @@ import appImages from 'theme/images';
 import styles from './style';
 import {BottomBarItem} from './type';
 import {useTheme} from '@react-navigation/native';
+import {Width} from 'hook/DevicePixel';
 const data: Array<BottomBarItem> = [
   {
     id: 1,
@@ -43,7 +44,7 @@ const data: Array<BottomBarItem> = [
   },
   {
     id: 4,
-    name: constants.feed,
+    name: constants.social,
     default: appImages.feed,
     darkMode: appImages.feedDark,
     selected: appImages.feedSelect,
@@ -51,7 +52,7 @@ const data: Array<BottomBarItem> = [
   },
   {
     id: 5,
-    name: constants.store,
+    name: constants.shop,
     default: appImages.store,
     darkMode: appImages.storeDark,
     selected: appImages.storeSelect,
@@ -82,7 +83,13 @@ const BottomBar = ({navigation}: any) => {
                 setSelectedIndex(index);
                 navigation.navigate(item.route);
               }}
-              style={[style.icons, {marginLeft: item.id === 5 ? 10 : 0}]}>
+              style={[
+                style.icons,
+                {
+                  marginLeft: item.id === 5 ? 10 : 0,
+                  width: Width * 0.15,
+                },
+              ]}>
               <Icons
                 disabled={false}
                 size={item?.id === 3 ? 60 : 30}
@@ -98,10 +105,10 @@ const BottomBar = ({navigation}: any) => {
               />
               <TextBox
                 text={item.name}
-                size={10}
+                size={9}
                 styles={{
                   ...style.text,
-                  color: selectedIndex === index ? colors.black : 'transparent',
+                  color: colors.black,
                 }}
               />
             </TouchableOpacity>

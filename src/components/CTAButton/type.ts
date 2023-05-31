@@ -5,30 +5,25 @@ export interface button {
   onPress?: () => void;
   opacity?: number;
   disabled?: boolean;
-  type?: string;
+  type?: React.ReactNode;
   text: any;
   textColor?: string;
   fontSize?: number;
   color?: colors;
   fontFamily?: string;
   isShadow?: boolean;
-  isModal?: boolean;
+  hideShadow?: boolean;
 }
-
-export interface buttonSize {
-  large: {
-    height: number;
-    width: number;
-    fontSize: number;
-  };
-  medium: {
-    height: number;
-    width: number;
-    fontSize: number;
-  };
-  small: {
-    height: number;
-    width: number;
-    fontSize: number;
-  };
+type buttonSizTypeProps = {
+  height: number;
+  width: number;
+  fontSize: number;
+  radius: number;
+  distance: number;
+  fontFamily: string;
+};
+export interface buttonSizeProps {
+  large: buttonSizTypeProps;
+  medium: buttonSizTypeProps;
+  small: buttonSizTypeProps;
 }

@@ -6,8 +6,13 @@ export interface dropdown {
   colorCode: colors;
   label?: string;
 }
+export type item = {
+  colorCode: string;
+  color: string | undefined;
+  id: number | string;
+  value: string;
+};
 export interface list {
-  item: {id: number | string; value: string};
   setItem: any;
   setShowList: any;
   color: colors;

@@ -46,7 +46,11 @@ const MyVision = ({navigation}): any => {
               onPress={() => navigation.navigate(routesConstants.createVision)}
               styles={{marginTop: 5}}
             />
-            <TextBox text={constants.createVision} size={20} />
+            <TextBox
+              text={constants.createVision}
+              size={20}
+              color={colors.commonBlack}
+            />
           </View>
           <TextBox
             text={constants.welcome}
@@ -56,7 +60,7 @@ const MyVision = ({navigation}): any => {
           />
           <TextBox
             text={constants.dummyText}
-            size={16}
+            size={15}
             fontFamily={fonts.regular}
             styles={{alignSelf: 'center'}}
           />

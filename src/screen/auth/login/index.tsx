@@ -67,7 +67,7 @@ const Login = ({navigation}: any): JSX.Element => {
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height50} />
-        <Icons size={140} source={appImages.logo} styles={style.logo} />
+        <Icons size={140} source={[appImages.logo,appImages.logoDark]} styles={style.logo} />
         <InputField
           ref={ref => (inputRef[0] = ref)}
           colors={colors}

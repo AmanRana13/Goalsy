@@ -19,7 +19,6 @@ import styles from './styles';
 import {fonts} from 'theme/fonts';
 import {goBack} from 'routes/navigationServices';
 import ColorDropdown from 'components/colorDropdown';
-import {Width} from 'hook/DevicePixel';
 import {DatePickerModal} from 'components/DatePickerModal';
 import moment from 'moment';
 import DateInputField from 'components/dateInputField';
@@ -33,6 +32,8 @@ const colorList = [
   {id: 1, colorCode: 'Red', color: 'red'},
   {id: 2, colorCode: 'Green', color: 'green'},
   {id: 3, colorCode: 'Yellow', color: 'yellow'},
+  {id: 4, colorCode: 'orange', color: 'orange'},
+  {id: 5, colorCode: 'pink', color: 'pink'},
 ];
 
 const AddGoal = () => {
@@ -41,7 +42,6 @@ const AddGoal = () => {
   const [dob, setDob] = useState<string>('May 05, 2023');
   const [datePicker, setDatePicker] = React.useState(false);
   const onCategorySelect = e => {
-    console.log(':::::', e);
   };
   return (
     <View style={style.container}>
@@ -72,7 +72,7 @@ const AddGoal = () => {
           size={16}
         />
         <Icons
-          source={appImages.plus}
+          source={[appImages.plus, appImages.plusDark]}
           size={60}
           styles={{paddingVertical: 5}}
         />

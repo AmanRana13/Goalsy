@@ -1,5 +1,6 @@
 import {Width} from 'hook/DevicePixel';
 import {StyleSheet} from 'react-native';
+import { colors } from 'theme/colors';
 const styles = (color: colors) =>
   StyleSheet.create({
     listItem: {
@@ -14,7 +15,6 @@ const styles = (color: colors) =>
     container: {
       borderRadius: 15,
       backgroundColor: color.commonWhite,
-      paddingVertical: 20,
       marginTop: 10,
     },
     innerContainer: {

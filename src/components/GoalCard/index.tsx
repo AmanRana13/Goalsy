@@ -49,7 +49,7 @@ const GoalCard = ({
               <TextBox text={'Due Date: May 05, 2023'} size={14} />
 
               <Icons
-                source={appImages.shareIcon}
+                source={[appImages.shareIcon,appImages.shareIconDark]}
                 size={20}
                 styles={{alignSelf: 'flex-end'}}
                 onPress={()=>onShare()}
@@ -86,6 +86,7 @@ const GoalCard = ({
               buttonStyle={{
                 width: Width * 0.25,
               }}
+              hideShadow
             />
           ) : null}
         </View>

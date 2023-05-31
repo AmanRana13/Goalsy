@@ -6,5 +6,5 @@ export interface props {
   resize?: any;
   disabled?: boolean;
   onPress?: () => void | {};
-  activeOpacity:number
+  activeOpacity?:number
 }

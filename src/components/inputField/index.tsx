@@ -99,7 +99,7 @@ const InputField = forwardRef(
               ref={ref}
               numberOfLines={1}
               maxFontSizeMultiplier={1}
-              multiline={false}
+              autoCorrect={false}
               blurOnSubmit={false}
               allowFontScaling={false}
               maxLength={maxLength ?? 100}
@@ -115,6 +115,7 @@ const InputField = forwardRef(
                 style.input,
                 {
                   fontSize: inputFont,
+                  textAlignVertical: TextInputProps?.multiline && 'top',
                   ...disabledColorText,
                 },
                 textInput,

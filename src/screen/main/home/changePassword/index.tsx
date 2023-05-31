@@ -35,7 +35,7 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
       <StatusHeader />
       <Header title={constants.changePassword} LeftIcon={<BackButton />} />
       <Spacer height={constants.height30} />
-      <Icons size={140} source={appImages.forgotPassword} styles={style.logo} />
+      <Icons size={140} source={[appImages.forgotPassword,appImages.forgotPasswordDark]} styles={style.logo} />
       <InputField
         ref={ref => (inputRef[0] = ref)}
         colors={colors}

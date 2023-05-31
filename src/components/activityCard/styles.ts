@@ -4,13 +4,12 @@ import {colors} from 'theme/colors';
 const style = (color: colors) =>
   StyleSheet.create({
     container: {
-      backgroundColor: color.white,
-      paddingLeft: 10,
+      backgroundColor: color.darkGray,
       marginVertical: 10,
       borderRadius: 15,
       gap: 10,
       paddingVertical: 15,
-      paddingHorizontal: 10,
+      paddingHorizontal: 15,
     },
     header: {
       columnGap: 10,

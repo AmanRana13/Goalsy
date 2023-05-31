@@ -23,7 +23,6 @@ const data = [
 const InviteUser = () => {
   const {colors} = useTheme();
   const style = styles(colors);
-  console.log(Width);
 
   return (
     <View style={style.container}>

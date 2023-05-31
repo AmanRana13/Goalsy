@@ -13,7 +13,7 @@ const styles = (color: colors) => {
       justifyContent: 'space-between',
     },
     innerButton: {
-      borderColor: color.black,
+      borderColor: color.boxButtonBorder,
       borderWidth: 2,
       width: width,
       height: Width * 0.12,

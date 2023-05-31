@@ -60,7 +60,7 @@ const NeedHelp = ({navigation}: any) => {
             item={item}
             color={colors}
             isRed={true}
-            source={appImages.forwardArrow}
+            source={[appImages.forwardArrow,appImages.forwardArrowDark]}
             disabled={false}
             navigation={navigation}
           />

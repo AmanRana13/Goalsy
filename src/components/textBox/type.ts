@@ -1,5 +1,7 @@
+import { TextProps } from "react-native";
+
 export interface props {
-  text: string | any;
+  text: React.ReactNode;
   color?: string;
   size?: number;
   styles?: Object;

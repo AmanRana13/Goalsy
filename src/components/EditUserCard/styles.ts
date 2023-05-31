@@ -4,7 +4,7 @@ import { colors } from 'theme/colors';
 const style = (color: colors) => StyleSheet.create({
     container: {
         flexDirection: "row",
-        backgroundColor: color.white,
+        backgroundColor: color.darkGray,
         paddingLeft: 10,
         paddingRight: 10,
         marginVertical: 10,

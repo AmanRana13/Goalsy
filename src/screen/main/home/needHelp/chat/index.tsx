@@ -43,7 +43,7 @@ const Chat = ({navigation}: any) => {
         LeftIcon={<BackButton />}
         RightIcon={
           <Icons
-            source={appImages.closeTicket}
+            source={[appImages.closeTicket,appImages.closeTicketDark]}
             onPress={() => showModal(true)}
           />
         }

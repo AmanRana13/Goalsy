@@ -34,6 +34,8 @@ const colorList = [
   {id: 1, colorCode: 'Red', color: 'red'},
   {id: 2, colorCode: 'Green', color: 'green'},
   {id: 3, colorCode: 'Yellow', color: 'yellow'},
+  {id: 4, colorCode: 'orange', color: 'orange'},
+  {id: 5, colorCode: 'pink', color: 'pink'},
 ];
 const AddActivity = () => {
   const {colors}: colors | any = useTheme();
@@ -41,7 +43,6 @@ const AddActivity = () => {
   const [dob, setDob] = useState<string>('May 05, 2023');
   const [datePicker, setDatePicker] = React.useState(false);
   const onCategorySelect = e => {
-    console.log(':::::', e);
   };
   const CheckBoxValue = () => {};
   const width = (Width - 200) / 7;
@@ -200,6 +201,7 @@ const AddActivity = () => {
             color={colors.themeColor}
             type={constants.large}
             onPress={() => goBack()}
+            hideShadow
           />
           <Spacer height={constants.height30} />
           <CTAButton
@@ -209,6 +211,7 @@ const AddActivity = () => {
             isShadow={false}
             type={constants.large}
             onPress={() => goBack()}
+            hideShadow
           />
         </View>
         <Spacer height={constants.height50} />

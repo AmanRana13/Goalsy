@@ -14,8 +14,6 @@ const MyTextBoard = () => {
   const [iconsPress, setIconPress] = useState(0);
   // TODO you need to separate the data at the time of development.
 
-  console.log('::::::iconsPress', iconsPress);
-
   const data:any= [
     {
       id: 1,

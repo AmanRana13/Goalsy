@@ -27,12 +27,17 @@ const LearnAboutHeader = ({color, valueCallback, value}: header) => {
             ? {
                 ...style.innerButton,
                 backgroundColor: color.learnAbout531Background,
+                borderColor: color.boxButtonSelectBorder,
               }
             : style.innerButton,
         ]}
         onPress={() => setIconPress(4)}>
         <Icons
-          source={iconPress === 4 ? appImages.goal2Dark : appImages.goal2}
+          source={
+            iconPress === 4
+              ?  appImages.goal2Dark
+              : [appImages.goal2,appImages.goal3Dark,]
+          }
           disabled={true}
         />
       </TouchableOpacity>

@@ -1,8 +1,10 @@
-interface Theme {
-  dark: boolean;
-  colors: colors;
-}
-export interface colors {
+export type colors = {
+  primary?: string;
+  card?: string;
+  text?: string;
+  border?: string;
+  notification?: string;
+
   themeColor: string;
   white: string;
   black: string;
@@ -13,7 +15,6 @@ export interface colors {
   placeholder: string;
   background: string;
   fadedTextColor: string;
-  modal: string;
   modalBackground: string;
   checkBoxBackground: string;
   checkBoxHead: string;
@@ -26,7 +27,12 @@ export interface colors {
   questionHeaderText: string;
   greyDot: string;
   modalButtonShadow: string;
-  
+  boxButtonBorder: string;
+  boxButtonSelectBorder: string;
+};
+interface Theme {
+  dark: boolean;
+  colors: colors;
 }
 
 export const commonColor: any = {
@@ -51,15 +57,16 @@ const light: Theme = {
     gray: '#949494',
     white: '#FFFFFF',
     black: '#000000',
-
+    boxButtonBorder: '#000',
+    boxButtonSelectBorder: '#222222',
     darkGray: '#ffffff',
-
+    textColor: '#000',
     background: '#F5F6F0',
     themeColor: '#D4F369',
     checkBoxHead: '#D4F369',
     checkBoxBackground: '#000000',
     questionHeaderText: 'rgba(109, 109, 109, 1)',
-    modalButtonShadow:"#fff",
+    modalButtonShadow: '#fff',
     ...commonColor.colors,
   },
 };
@@ -68,6 +75,7 @@ const dark: Theme = {
   dark: true,
   colors: {
     gray: '#D9D9D9',
+    textColor: '#D9D9D9',
     white: '#000000',
     black: '#FFFFFF',
     darkGray: '#222222',
@@ -76,7 +84,9 @@ const dark: Theme = {
     checkBoxBackground: '#CCFF00',
     background: 'rgba(0, 0, 0, 1)',
     questionHeaderText: '#000',
-    modalButtonShadow:"#222222",
+    modalButtonShadow: '#222222',
+    boxButtonBorder: '#fff',
+    boxButtonSelectBorder: '#222222',
     ...commonColor.colors,
   },
 };

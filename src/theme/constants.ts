@@ -1,5 +1,6 @@
 import {Height} from 'hook/DevicePixel';
 import {fonts} from './fonts';
+import {buttonSize, buttonSizeProps} from 'components/CTAButton/type';
 
 export enum routesConstants {
   login = 'login',
@@ -49,32 +50,6 @@ export enum routesConstants {
   chat = 'chat',
 }
 
-export const buttonSize: any = {
-  large: {
-    height: 55,
-    width: 200,
-    fontSize: 23,
-    radius: 15,
-    distance: 6,
-    fontFamily: fonts.medium,
-  },
-  medium: {
-    height: 50,
-    width: 160,
-    fontSize: 20,
-    radius: 15,
-    distance: 5,
-    fontFamily: fonts.medium,
-  },
-  small: {
-    height: 40,
-    width: 80,
-    fontSize: 16,
-    radius: 10,
-    distance: 5,
-    fontFamily: fonts.semiBold,
-  },
-};
 
 export const popupType: any = {
   error: 'error',
@@ -100,10 +75,10 @@ enum constants {
 
   // Bottom Bar
 
-  progress = 'Progress',
-  feed = 'Feeds',
-  store = 'Store',
-  boards = 'Boards',
+  progress = 'My Progress',
+  social = 'Social',
+  shop = 'Shop',
+  boards = 'My Boards',
   goal = 'goal',
   home = 'Home',
 
@@ -147,10 +122,10 @@ enum constants {
   TC = 'Terms & Conditions',
   ForgotPassword = 'Forgot Password',
   changePassword = 'Change Password',
-  AccountSetting = 'Account Settings',
+  AccountSetting = 'Preferences',
   notification = 'Notifications',
   needHelp = 'Need Help',
-  aboutUs = 'About Us',
+  aboutUs = 'Our Story',
   search = 'Search',
   searchUser = 'Search User...',
   createPost = 'Create Post',
@@ -191,6 +166,10 @@ enum constants {
   selectColor = 'Select Color',
   InvitedUser = 'Invited Users',
   goalName = 'Goal Name',
+  LearnAboutGoalsy = 'Learn About Goalsy ',
+  LearnAbout5 = 'Learn About 5 ',
+  LearnAbout3 = 'Learn About 3 ',
+  LearnAbout1 = 'Learn About 1 ',
 
   // Text
   selectShape = 'Select Shape',

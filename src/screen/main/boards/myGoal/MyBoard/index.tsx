@@ -15,7 +15,6 @@ import {useTheme} from '@react-navigation/native';
 import appImages from 'theme/images';
 import {colors} from 'theme/colors';
 import styles from './styles';
-import {fonts} from 'theme/fonts';
 import usePixel from 'hook/DevicePixel';
 
 const categoryList = [
@@ -29,7 +28,6 @@ const MyBoard = ({navigation, route}) => {
   const style = styles(colors);
   const sizes = usePixel(360);
   const [showModal, setShowModal] = useState(false);
-  console.log('rrrr', route?.params);
 
   return (
     <View style={style.container}>
@@ -39,7 +37,7 @@ const MyBoard = ({navigation, route}) => {
           route.params ? (
             <Icons
               size={32}
-              source={appImages.delete}
+              source={[appImages.delete, appImages.deleteDark]}
               onPress={() => setShowModal(true)}
             />
           ) : null
@@ -78,7 +76,11 @@ const MyBoard = ({navigation, route}) => {
                 source={appImages.plus}
                 onPress={() => navigation.navigate(routesConstants.createBoard)}
               />
-              <TextBox text={constants.createBoards} size={20} />
+              <TextBox
+                text={constants.createBoards}
+                size={20}
+                color={colors.commonBlack}
+              />
             </>
           )}
         </View>

@@ -7,7 +7,6 @@ import {fonts} from 'theme/fonts';
 
 const TermAndPolicy = ({route}: any) => {
   const {screen} = route.params;
-  console.log(screen);
 
   return (
     <View style={style.container}>

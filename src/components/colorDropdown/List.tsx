@@ -6,9 +6,6 @@ import {colors} from 'theme/colors';
 
 const List = ({item, setItem, color, setShowList, index, lastIndex}: list) => {
   const styles = style(color);
-  console.log('====================================');
-  console.log(item);
-  console.log('====================================');
   return (
     <TouchableOpacity
       onPress={() => {
@@ -21,7 +18,7 @@ const List = ({item, setItem, color, setShowList, index, lastIndex}: list) => {
           paddingTop: index === 0 ? 25 : 15,
           borderBottomColor:
             lastIndex === index ? 'transparent' : color.dividerColor,
-          paddingBottom: lastIndex === index ? 0 : 15,
+          paddingBottom: 15,
         },
       ]}>
       <View
@@ -39,7 +36,7 @@ const List = ({item, setItem, color, setShowList, index, lastIndex}: list) => {
             borderRadius: 8,
           }}
         />
-        <TextBox text={item.colorCode} />
+        <TextBox text={item.colorCode} color={color.commonBlack} />
       </View>
     </TouchableOpacity>
   );

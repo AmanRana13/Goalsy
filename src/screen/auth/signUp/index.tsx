@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   ActionSheetIOS,
+  Dimensions,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -74,9 +75,9 @@ const SignUp = ({navigation}) => {
   );
 
   useEffect(() => {
-    KeyboardManager.setEnable(false);
+    Platform.OS === 'ios' && KeyboardManager.setEnable(false);
     return () => {
-      KeyboardManager.setEnable(true);
+      Platform.OS === 'ios' && KeyboardManager.setEnable(true);
     };
   }, []);
 
@@ -144,13 +145,21 @@ const SignUp = ({navigation}) => {
   };
 
   return (
-    <KeyboardAvoidingView style={style.container} behavior="height">
+    <KeyboardAvoidingView
+      style={style.container}
+      behavior="height"
+      keyboardVerticalOffset={80}
+      contentContainerStyle={{
+        height: Dimensions.get('window').height * 2.25,
+        width: '100%',
+      }}>
       <StatusHeader />
       <Header LeftIcon={<BackButton />} />
       <ScrollView
         style={style.innerContainer}
         contentContainerStyle={{flexGrow: 1}}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+        automaticallyAdjustKeyboardInsets={true}>
         <Icons
           size={140}
           source={image ? {uri: image.path} : appImages.user}
@@ -354,7 +363,7 @@ const SignUp = ({navigation}) => {
 
       {/* Modal */}
       <ConfirmModal
-       source={[appImages.success,appImages.successDark]}
+        source={[appImages.success, appImages.successDark]}
         visible={openSignUpModal}
         Colors={colors}
         description={constants.signUpSuccess}

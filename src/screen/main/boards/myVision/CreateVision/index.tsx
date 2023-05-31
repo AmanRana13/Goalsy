@@ -33,7 +33,6 @@ const CreateVision = ({navigation}) => {
   const [dob, setDob] = useState<string>('May 05, 1995');
   const [datePicker, setDatePicker] = useState(false);
   const onCategorySelect = e => {
-    console.log(':::::', e);
   };
   return (
     <View style={style.container}>
@@ -64,7 +63,7 @@ const CreateVision = ({navigation}) => {
           size={16}
         />
         <Icons
-          source={appImages.plus}
+          source={[appImages.plus, appImages.plusDark]}
           size={60}
           styles={{paddingVertical: 5}}
         />

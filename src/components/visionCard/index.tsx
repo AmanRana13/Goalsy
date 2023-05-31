@@ -23,18 +23,18 @@ const VisionCard = ({
       <View style={{flex: 1, gap: 5}}>
         <TextBox
           text={'My Vision Name WWWW'}
-          size={16}
+          size={15}
           fontFamily={fonts.semiBold}
         />
-        <TextBox text={'Vision Name'} size={16} fontFamily={fonts.semiBold} />
+        <TextBox text={'Vision Name'} size={15} fontFamily={fonts.semiBold} />
         <TextBox
           text={'Vision Category'}
-          size={16}
+          size={15}
           fontFamily={fonts.semiBold}
         />
         <TextBox
           text={'Due Date: May 05, 2023'}
-          size={16}
+          size={15}
           fontFamily={fonts.semiBold}
         />
       </View>
@@ -63,6 +63,7 @@ const VisionCard = ({
             buttonStyle={{
               width: Width * 0.22,
             }}
+            hideShadow
           />
           <CTAButton
             isShadow={false}
@@ -73,11 +74,12 @@ const VisionCard = ({
             buttonStyle={{
               width: Width * 0.22,
             }}
+            hideShadow
             onPress={() => navigation.navigate(routesConstants.inviteUser)}
           />
         </View>
         <Icons
-          source={appImages.shareIcon}
+          source={[appImages.shareIcon, appImages.shareIconDark]}
           onPress={() => onShare()}
           size={20}
           styles={{alignSelf: 'flex-end', marginBottom: 8}}

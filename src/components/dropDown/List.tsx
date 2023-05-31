@@ -15,13 +15,15 @@ const List = ({item, setItem, color, setShowList, index, lastIndex}: list) => {
       style={[
         styles.container,
         {
-          paddingTop: index === 0 ? 25 : 15,
+          paddingTop: 10,
           borderBottomColor:
             lastIndex === index ? 'transparent' : color.dividerColor,
-          paddingBottom: lastIndex === index ? 0 : 15,
         },
       ]}>
-      <TextBox text={item?.value} color={item.value ? color.commonBlack : color.placeholder}/>
+      <TextBox
+        text={item?.value}
+        color={item.value ? color.commonBlack : color.placeholder}
+      />
     </TouchableOpacity>
   );
 };

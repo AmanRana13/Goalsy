@@ -5,6 +5,9 @@ import {Platform, View} from 'react-native';
 // navigation
 import {useTheme} from '@react-navigation/native';
 
+// redux
+import {useDispatch, useSelector} from 'react-redux';
+
 // components
 import {
   CTAButton,
@@ -17,19 +20,19 @@ import {
   BackButton,
 } from 'components';
 
-// themes
-import appImages from 'theme/images';
-import constants, {popupType, routesConstants} from 'theme/constants';
-
-// styles
-import styles from './style';
 import {forgotPasswordCheck} from 'utils/validator';
 import {ShowAlertMessage} from 'utils/showAlertMessage';
 import {
   forgotModalAction,
   forgotPasswordAction,
 } from 'redux/actions/authActions';
-import {useDispatch, useSelector} from 'react-redux';
+
+// themes
+import appImages from 'theme/images';
+import constants, {popupType} from 'theme/constants';
+
+// styles
+import styles from './style';
 
 const ForgotPassword = ({navigation}: any): JSX.Element => {
   const dispatch = useDispatch();
@@ -58,7 +61,11 @@ const ForgotPassword = ({navigation}: any): JSX.Element => {
       <StatusHeader />
       <Header title={constants.ForgotPassword} LeftIcon={<BackButton />} />
       <Spacer height={constants.height30} />
-      <Icons size={140} source={appImages.forgotPassword} styles={style.logo} />
+      <Icons
+        size={140}
+        source={[appImages.forgotPassword, appImages.forgotPasswordDark]}
+        styles={style.logo}
+      />
       <InputField
         ref={ref => (inputRef[0] = ref)}
         colors={colors}
@@ -84,7 +91,7 @@ const ForgotPassword = ({navigation}: any): JSX.Element => {
       <Spacer flex={1} />
       {/* Modal */}
       <ConfirmModal
-        source={[appImages.success,appImages.successDark]}
+        source={[appImages.success, appImages.successDark]}
         visible={openForgotPasswordModal}
         Colors={colors}
         description={constants.FGPassSuccess}

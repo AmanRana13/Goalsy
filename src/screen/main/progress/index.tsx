@@ -42,7 +42,6 @@ const Progress = ({navigation}): any => {
   const sizes = usePixel(constants.progressIconSize);
   const style = styles(colors);
   const onDropDownPress = item => {
-    console.log(item);
   };
   return (
     <View style={style.container}>

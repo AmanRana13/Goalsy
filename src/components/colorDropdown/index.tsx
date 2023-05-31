@@ -4,25 +4,32 @@ import List from './List';
 import {Icons, TextBox} from 'components';
 import styles from './style';
 import appImages from 'theme/images';
-import {dropdown} from './type';
-import Spacer from 'components/spacer';
-import {Width} from 'hook/DevicePixel';
+import {dropdown, item} from './type';
+import usePixel, {Width} from 'hook/DevicePixel';
 import {fonts} from 'theme/fonts';
+import constants from 'theme/constants';
 
 const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
+  const inputHeight = usePixel(constants.inputHeight + 3);
   const style = styles(color);
   const [showList, setShowList] = React.useState(false);
-  const [item, setItem] = React.useState({});
+  const [item, setItem] = React.useState<{item: item}>({});
+
   useEffect(() => {
     onPress(item);
   }, [item]);
   return (
-    <View style={style.outerContainer}>
+    <View>
       <TextBox text={label} size={16} fontFamily={fonts.regular} />
-      <View style={[style.container, !showList && {paddingBottom: 11}]}>
+      <View style={[style.container]}>
         <TouchableOpacity
           onPress={() => setShowList(!showList)}
-          activeOpacity={1}>
+          activeOpacity={1}
+          style={{
+            height: inputHeight,
+            borderRadius: 15,
+            justifyContent: 'center',
+          }}>
           <View
             style={[
               style.innerContainer,
@@ -44,7 +51,7 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
                     borderRadius: 8,
                   }}
                 />
-                <TextBox text={item.colorCode} />
+                <TextBox text={item.colorCode} color={color.commonBlack} />
               </View>
             ) : (
               <TextBox text={label} color={color.placeholder} size={17} />
@@ -59,7 +66,7 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
         <View style={{maxHeight: Width * 0.5}}>
           <ScrollView contentContainerStyle={{flexGrow: 1}}>
             {showList
-              ? list?.map((item, index) => {
+              ? list?.map((item: any, index: number) => {
                   return (
                     <List
                       key={item.id}
@@ -74,7 +81,6 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
                 })
               : null}
           </ScrollView>
-          <View style={{height: 2}} />
         </View>
       </View>
     </View>
