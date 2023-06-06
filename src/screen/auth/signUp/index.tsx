@@ -40,7 +40,7 @@ import constants, {
 import KeyboardManager from 'react-native-keyboard-manager';
 
 import styles from './style';
-import {pickSingleImage, pickSingleImageWithCamera} from 'utils/imagePicker';
+import {openPicker} from 'utils/imagePicker';
 import {userSignUpCheck} from 'utils/validator';
 import {ShowAlertMessage} from 'utils/showAlertMessage';
 import moment from 'moment';
@@ -82,7 +82,7 @@ const SignUp = ({navigation}: any) => {
     setGender(item);
   };
 
-  const openImagePicker = (cropIt: boolean, circular = false, setPic: any) => {
+  const openImagePicker = (cropIt: boolean, circular = false, setFile: any) => {
     return Platform.OS == 'ios'
       ? ActionSheetIOS.showActionSheetWithOptions(
           {
@@ -92,9 +92,9 @@ const SignUp = ({navigation}: any) => {
           buttonIndex => {
             if (buttonIndex === 0) {
             } else if (buttonIndex === 1) {
-              return pickSingleImage(cropIt, circular, setPic);
+              return openPicker({setFile, cropIt, circular, isGallery: true});
             } else if (buttonIndex === 2) {
-              return pickSingleImageWithCamera(cropIt, circular, setPic);
+              return openPicker({setFile, cropIt, circular, isGallery: false});
             }
           },
         )
@@ -331,12 +331,22 @@ const SignUp = ({navigation}: any) => {
         title={'Select Image'}
         options={[constants.cancel, constants.gallery, constants.camera]}
         cancelButtonIndex={0}
-        onPress={index => {
-          if (index === 0) {
-          } else if (index === 1) {
-            return pickSingleImage(true, false, setImage);
-          } else if (index === 2) {
-            return pickSingleImageWithCamera(true, false, setImage);
+        onPress={buttonIndex => {
+          if (buttonIndex === 0) {
+          } else if (buttonIndex === 1) {
+            return openPicker({
+              setFile: setImage,
+              cropIt: false,
+              circular: false,
+              isGallery: true,
+            });
+          } else if (buttonIndex === 2) {
+            return openPicker({
+              setFile: setImage,
+              cropIt: false,
+              circular: false,
+              isGallery: false,
+            });
           }
         }}
       />

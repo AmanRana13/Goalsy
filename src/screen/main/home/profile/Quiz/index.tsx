@@ -40,8 +40,10 @@ const Quiz = ({navigation}: any) => {
         questionId: quizData[currentQuestionIndex]?._id,
         answer: index,
       };
-
-      const isChecked = newArray.findIndex(item => item.answer === index);
+      const isChecked = newArray.findIndex(
+        item =>
+          item.answer === index && item.questionId === currentQuestionIndex,
+      );
       if (isChecked === -1) {
         newArray.splice(currentQuestionIndex, 1, obj);
       } else {
