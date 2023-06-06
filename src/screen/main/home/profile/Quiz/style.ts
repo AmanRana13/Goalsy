@@ -11,7 +11,7 @@ const styles = (color: colors) =>StyleSheet.create({
     },
     options: {
       borderRadius: 10,
-      backgroundColor: color.white,
+      backgroundColor: color.darkGray,
       padding: 20,
       flexDirection: 'row',
       gap: 20,

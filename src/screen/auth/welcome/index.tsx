@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
@@ -12,13 +12,22 @@ import constants, {routesConstants} from 'theme/constants';
 // styles
 import styles from './style';
 import {colors} from 'theme/colors';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 const Welcome = ({navigation}: any) => {
   const {colors}: colors | any = useTheme();
   const style = styles(colors);
+  useEffect(()=>{
+    (async () => {
+      try {
+        const response = await changeNavigationBarColor("#D4F369");
+      } catch (e) {
+      }
+    })();
+  },[])
   return (
     <View style={style.container}>
-      <StatusHeader />
+      <StatusHeader color={'#D4F369'} />
       <View style={style.innerContainer}>
         <Icons source={appImages.welcomeMsg} styles={style.image} disabled />
       </View>

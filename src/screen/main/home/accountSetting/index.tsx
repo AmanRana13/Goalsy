@@ -1,6 +1,6 @@
-import React, {useCallback, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
-import {useTheme} from '@react-navigation/native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {ScrollView, View} from 'react-native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 
 import {
   Header,
@@ -17,11 +17,17 @@ import constants, {routesConstants} from 'theme/constants';
 import appImages from 'theme/images';
 import {colors} from 'theme/colors';
 import {Width} from 'hook/DevicePixel';
-import {logout} from 'utils/globalFunctions';
+import {dispatch, logout} from 'utils/globalFunctions';
+import {NotificationSoundAction, deleteAccount} from 'redux/actions/home';
+import {DataManager} from 'utils/dataManager';
+import {styles} from './style';
 
 const AccountSetting = ({navigation}: any): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
   const [buttonClick, setButtonClick] = useState('');
+  const [goal, setGoal] = useState<boolean>(false);
+  const [social, setSocial] = useState<boolean>(false);
+  const isFocused = useIsFocused;
   const data = [
     {
       id: 1,
@@ -60,14 +66,17 @@ const AccountSetting = ({navigation}: any): JSX.Element => {
       source: [appImages.logout, appImages.logoutDark],
     },
   ];
-
   const {colors}: colors | any = useTheme();
   const CheckBox = useCallback(
-    ({title, onPress}: any) => {
+    ({title, onPress, defaultValue}: any) => {
       return (
         <View style={styles.checkBox}>
           <TextBox text={title} size={17} />
-          <RoundCheckBox color={colors} value={onPress} />
+          <RoundCheckBox
+            color={colors}
+            value={onPress}
+            defaultValue={defaultValue}
+          />
         </View>
       );
     },
@@ -76,16 +85,17 @@ const AccountSetting = ({navigation}: any): JSX.Element => {
 
   const SettingIcon = () => {
     return data?.map(item => {
-      return (
-        <Icons
-          source={item.source}
-          size={170}
-          onPress={item.onPress}
-          color={colors}
-        />
-      );
+      return <Icons source={item.source} size={170} onPress={item.onPress} />;
     });
   };
+  useEffect(() => {
+    (async () => {
+      const goalSound = await DataManager.getGoalSound();
+      const socialSound = await DataManager.getSocialSound();
+      setSocial(JSON.parse(goalSound));
+      setGoal(JSON.parse(socialSound));
+    })();
+  }, [isFocused]);
 
   return (
     <View style={{flex: 1}}>
@@ -105,8 +115,18 @@ const AccountSetting = ({navigation}: any): JSX.Element => {
           />
           <Spacer height={constants.height30} />
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <CheckBox title={'Social Sounds'} onPress={() => {}} />
-            <CheckBox title={'Goal Sounds'} onPress={() => {}} />
+            <CheckBox
+              title={'Social Sounds'}
+              onPress={() =>
+                dispatch(NotificationSoundAction({type: 'social'}))
+              }
+              defaultValue={goal}
+            />
+            <CheckBox
+              title={'Goal Sounds'}
+              onPress={() => dispatch(NotificationSoundAction({type: 'goal'}))}
+              defaultValue={social}
+            />
           </View>
         </View>
         <Spacer height={constants.height30} />
@@ -143,6 +163,8 @@ const AccountSetting = ({navigation}: any): JSX.Element => {
             setShowModal(false);
             if (buttonClick !== constants.deleteButton) {
               logout('Logout successfully');
+            } else {
+              dispatch(deleteAccount());
             }
           },
         }}
@@ -158,11 +180,3 @@ const AccountSetting = ({navigation}: any): JSX.Element => {
 };
 
 export default AccountSetting;
-
-const styles = StyleSheet.create({
-  checkBox: {
-    flexDirection: 'row',
-    gap: 10,
-    justifyContent: 'space-evenly',
-  },
-});

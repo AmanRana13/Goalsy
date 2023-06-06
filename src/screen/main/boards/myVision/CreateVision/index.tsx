@@ -9,17 +9,17 @@ import {
   Spacer,
   StatusHeader,
   DropDown,
+  DatePickerModal,
+  TextBox,
+  DateInputField
 } from 'components';
 import constants, {routesConstants} from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
-import TextBox from 'components/textBox';
 import appImages from 'theme/images';
 import styles from './styles';
 import {fonts} from 'theme/fonts';
 import {goBack} from 'routes/navigationServices';
-import {DatePickerModal} from 'components/DatePickerModal';
 import moment from 'moment';
-import DateInputField from 'components/dateInputField';
 
 const categoryList = [
   {id: 1, value: 'category 1'},

@@ -1,11 +1,6 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {
-  ImageBackground,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {useTheme} from '@react-navigation/native';
+import React, {useEffect, useRef, useState} from 'react';
+import {ImageBackground, ScrollView, View} from 'react-native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 
 // components
 import {
@@ -16,53 +11,43 @@ import {
   InputField,
   BackButton,
   TextBox,
-  CTAButton,
+  CountsCard,
 } from 'components';
 
 // theme
 import appImages from 'theme/images';
 import constants, {routesConstants} from 'theme/constants';
-import {fonts} from 'theme/fonts';
 
 // style
 import styles from './styles';
-import {friendCount} from '../../type';
+import {userProfile} from 'redux/actions/home';
+import {useDispatch, useSelector} from 'react-redux';
+import moment from 'moment';
+import {url} from 'redux/axios/apikit';
+import FullScreenImage from 'components/FullScreenImage';
 
 const Profile = ({navigation}: any) => {
   const {colors, dark}: any = useTheme();
   const inputRef: any = useRef([]);
+  const scrollViewRef = useRef<any>();
   const style = styles(colors);
   const [toolTip, showToolTip] = useState(false);
-  const scrollViewRef = useRef();
+  const [showImage, setShowImage] = useState(false);
+  const dispatch = useDispatch();
+  const {userDetails} = useSelector((state: any) => state.homeReducer);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    isFocused && dispatch(userProfile());
+  }, [isFocused]);
 
   useEffect(() => {
     if (toolTip) {
       setTimeout(() => {
-        scrollViewRef && scrollViewRef.current.scrollToEnd({animated: true});
+        scrollViewRef && scrollViewRef?.current.scrollToEnd({animated: true});
       }, 10);
     }
   }, [toolTip]);
-
-  const FriendCounts = useCallback(({count, title, onPress}: friendCount) => {
-    return (
-      <TouchableOpacity onPress={onPress} style={{flex: 1}}>
-        <TextBox
-          text={count}
-          size={20}
-          color={colors.themeColor}
-          styles={{alignSelf: 'center'}}
-        />
-        <TextBox
-          text={title}
-          size={17}
-          fontFamily={fonts.medium}
-          styles={{alignSelf: 'center'}}
-          color={colors.commonWhite}
-        />
-      </TouchableOpacity>
-    );
-  }, []);
-
   return (
     <View style={style.container}>
       <StatusHeader />
@@ -79,54 +64,29 @@ const Profile = ({navigation}: any) => {
       <ScrollView
         ref={scrollViewRef}
         style={style.innerContainer}
-        // onContentSizeChange={() =>  scrollViewRef.current.scrollToEnd({animated: true})}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
-        <Icons size={120} source={appImages.dummyUser} styles={style.logo} />
-        <View
-          style={{
-            backgroundColor: '#000',
-            flexDirection: 'row',
-            flex: 1,
-            marginBottom: 10,
-            paddingVertical: 10,
-            borderRadius: 10,
-          }}>
-          <FriendCounts
-            count={'12'}
-            title={'Friends'}
-            onPress={() =>
-              navigation.navigate(routesConstants.Friend, {
-                screen: routesConstants.Friend,
-              })
-            }
-          />
-          <Spacer
-            styles={{
-              borderLeftWidth: 3,
-              borderColor: '#ffffff31',
-              borderRadius: 2,
-              height: '100%',
-            }}
-          />
-          <FriendCounts
-            count={'12'}
-            title={'Friend Requests '}
-            onPress={() =>
-              navigation.navigate(routesConstants.Friend, {
-                screen: routesConstants.friendRequest,
-              })
-            }
-          />
-        </View>
+        <Icons
+          size={120}
+          source={{uri: url + userDetails?.profileImage}}
+          styles={style.logo}
+          imageStyle={style.image}
+          onPress={() => setShowImage(true)}
+        />
+        <CountsCard
+          friendCount={userDetails?.friend}
+          friendRequestCount={userDetails?.friendRequests}
+          colors={colors}
+          navigation={navigation}
+        />
         <InputField
           ref={ref => (inputRef[0] = ref)}
           colors={colors}
           TextInputProps={{
             editable: false,
             placeholder: constants.name,
-            value: 'Winni',
+            value: userDetails?.name,
             nextField: () => inputRef[1].focus(),
           }}
           label={constants.name}
@@ -138,7 +98,7 @@ const Profile = ({navigation}: any) => {
           TextInputProps={{
             editable: false,
             placeholder: constants.email,
-            value: 'winni@example.com',
+            value: userDetails?.email,
             nextField: () => inputRef[2].focus(),
           }}
           label={constants.email}
@@ -149,7 +109,7 @@ const Profile = ({navigation}: any) => {
           TextInputProps={{
             editable: false,
             placeholder: constants.DOB,
-            value: 'May 05,1995',
+            value: moment(userDetails?.dob).format('MMM DD, YYYY'),
           }}
           label={constants.DOB}
           RightCompo={<Icons source={appImages.calendar} size={30} />}
@@ -161,7 +121,7 @@ const Profile = ({navigation}: any) => {
             editable: false,
             placeholder: constants.location,
             returnKeyType: constants.done,
-            value: 'New York',
+            value: userDetails?.location,
           }}
           label={constants.location}
           disableColor
@@ -171,9 +131,8 @@ const Profile = ({navigation}: any) => {
           TextInputProps={{
             editable: false,
             placeholder: constants.gender,
-            value: 'Female',
+            value: userDetails?.gender,
           }}
-          RightCompo={<Icons source={appImages.downArrow} size={20} />}
           label={constants.gender}
           disableColor
         />
@@ -185,7 +144,7 @@ const Profile = ({navigation}: any) => {
             onPress={() => navigation.navigate(routesConstants.quiz)}
           />
           <Icons
-            source={[appImages.exclamation,appImages.exclamationDark]}
+            source={[appImages.exclamation, appImages.exclamationDark]}
             styles={style.exc}
             onPress={() => {
               showToolTip(!toolTip);
@@ -202,6 +161,11 @@ const Profile = ({navigation}: any) => {
         </View>
         <Spacer height={constants.height50} />
       </ScrollView>
+      <FullScreenImage
+        visible={showImage}
+        closeImage={() => setShowImage(false)}
+        image={{uri: url + userDetails?.profileImage}}
+      />
     </View>
   );
 };

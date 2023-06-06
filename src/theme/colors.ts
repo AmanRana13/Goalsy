@@ -29,6 +29,12 @@ export type colors = {
   modalButtonShadow: string;
   boxButtonBorder: string;
   boxButtonSelectBorder: string;
+  navigationBarColor: string;
+  textLightGray: string;
+  textColor: string;
+  countCard: string;
+  
+  
 };
 interface Theme {
   dark: boolean;
@@ -44,11 +50,13 @@ export const commonColor: any = {
     modalBackground: 'rgba(0,0,0,0.7)',
     placeholder: 'rgba(200, 200, 200, 1)',
     fadedTextColor: 'rgba(148, 148, 148, 1)',
-    disable: 'rgba(0,0,0,0.2)',
+    
     red: 'rgba(222, 20, 20, 1)',
     learnAbout531text: '#CCFF00',
     learnAbout531Background: 'rgba(34, 34, 34, 1)',
     greyDot: '#565659',
+    textLightGray:"rgba(255, 255, 255, 1)"
+
   },
 };
 const light: Theme = {
@@ -67,6 +75,10 @@ const light: Theme = {
     checkBoxBackground: '#000000',
     questionHeaderText: 'rgba(109, 109, 109, 1)',
     modalButtonShadow: '#fff',
+    navigationBarColor:"#F5F6F0",
+    disable: 'rgba(0,0,0,0.2)',
+    countCard: '#000000',
+
     ...commonColor.colors,
   },
 };
@@ -87,6 +99,9 @@ const dark: Theme = {
     modalButtonShadow: '#222222',
     boxButtonBorder: '#fff',
     boxButtonSelectBorder: '#222222',
+    navigationBarColor:"#000",
+    disable: 'rgba(255,255,255,0.4)',
+    countCard: '#222222',
     ...commonColor.colors,
   },
 };

@@ -6,7 +6,7 @@ const initialState = {
 
 function globalReducer(state = initialState, action) {
     switch (action.type) {
-        case ApiConstants.UPDATE_LODING_STATE:
+        case ApiConstants.UPDATE_LOADING_STATE:
             return {
                 ...state,
                 isLoading: action.data,

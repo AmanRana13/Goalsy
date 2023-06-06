@@ -1,5 +1,5 @@
 export interface props {
-  source: Array<number> | number;
+  source: Array<number> | Object |number;
   styles?: object;
   imageStyle?: object;
   size?: number | any;

@@ -32,6 +32,7 @@ const LearnAbout531 = ({navigation}): any => {
       y: 0,
       animated: true,
     });
+    
   }, [selectedIcon]);
 
   const onHeaderClick = (value: number) => {
@@ -79,19 +80,33 @@ const LearnAbout531 = ({navigation}): any => {
         return setSelectedIcon(4);
     }
   };
+  const videoLink = (value: number) => {
+    switch (value) {
+      case 4:
+        return "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      case 0:
+        return "http://192.168.3.174:5000/public/1.mp4";
+      case 1:
+        return "http://192.168.3.174:5000/public/2.mp4";
+      case 2:
+        return "http://192.168.3.174:5000/public/1.mp4";
+      default:
+        return setSelectedIcon(4);
+    }
+  };
 
   const Title = (value: number) => {
     switch (value) {
       case 4:
-        return constants.LearnAboutGoalsy ;
+        return constants.LearnAboutGoalsy;
       case 0:
-        return constants.LearnAbout5 ;
+        return constants.LearnAbout5;
       case 1:
-        return constants.LearnAbout3 ;
+        return constants.LearnAbout3;
       case 2:
-        return constants.LearnAbout1 ;
+        return constants.LearnAbout1;
       default:
-        return constants.LearnAboutGoalsy ;
+        return constants.LearnAboutGoalsy;
     }
   };
   return (
@@ -99,7 +114,7 @@ const LearnAbout531 = ({navigation}): any => {
       <StatusHeader />
       <Header title={Title(selectedIcon)} LeftIcon={<BackButton />} />
       <Spacer />
-      <View style={{justifyContent:"space-between"}}>
+      <View style={{justifyContent: 'space-between'}}>
         <LearnAboutHeader
           color={colors}
           valueCallback={onHeaderClick}
@@ -118,7 +133,7 @@ const LearnAbout531 = ({navigation}): any => {
         />
         <TextBox text={constants.dummyText} />
         <Spacer />
-        <Video />
+        <Video videoLink={videoLink(selectedIcon)}/>
         <Spacer height={constants.height50} />
 
         <CTAButton

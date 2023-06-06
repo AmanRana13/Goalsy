@@ -1,5 +1,6 @@
 import {button} from 'components/CTAButton/type';
 import React from 'react';
+import {StyleProp, ViewStyle} from 'react-native';
 import {colors} from 'theme/colors';
 
 export interface modalProps {
@@ -7,7 +8,7 @@ export interface modalProps {
   description: React.ReactNode;
   textSize?: number;
   visible: boolean;
-  leftButton?: button;
-  rightButton?: button;
-  Colors?: colors | any;
+  leftButton?: button & {style?: ViewStyle};
+  rightButton?: button& {style?: ViewStyle};
+  Colors?: colors;
 }

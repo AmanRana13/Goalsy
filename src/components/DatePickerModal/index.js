@@ -13,7 +13,7 @@ import { fonts } from "theme/fonts";
 import { width } from "utils/globalFunctions";
 
 
-export const DatePickerModal = (props) => {
+const DatePickerModal = (props) => {
   const [selectedItem, setSeletcedItem] = useState(new Date());
   return (
     Platform.OS == "ios" ?
@@ -85,3 +85,5 @@ export const DatePickerModal = (props) => {
 
   );
 };
+
+export default DatePickerModal

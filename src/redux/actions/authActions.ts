@@ -1,34 +1,35 @@
+import {login} from 'redux/type';
 import ApiConstants from 'theme/apiConstants';
 
-export const signupAction = payload => {
+export const signUpAction = (payload: any) => {
   return {
     type: ApiConstants.API_SIGNUP_LOAD,
     payload,
   };
 };
 
-export const loginAction = payload => {
+export const loginAction = (payload: login) => {
   return {
     type: ApiConstants.API_LOGIN_LOAD,
     payload,
   };
 };
 
-export const forgotPasswordAction = payload => {
+export const forgotPasswordAction = (payload: any) => {
   return {
     type: ApiConstants.API_FORGOT_PASSWORD_LOAD,
     payload,
   };
 };
 
-export const signUpModalAction = payload => {
+export const signUpModalAction = (payload: any) => {
   return {
     type: ApiConstants.API_SIGNUP_SUCCESS,
     payload,
   };
 };
 
-export const forgotModalAction = payload => {
+export const forgotModalAction = (payload: any) => {
   return {
     type: ApiConstants.API_FORGOT_PASSWORD_SUCCESS,
     payload,

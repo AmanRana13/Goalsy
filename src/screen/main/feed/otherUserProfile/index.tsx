@@ -64,7 +64,7 @@ const OtherUserProfile = ({navigation}: any) => {
   const {colors}: any = useTheme();
   const style = styles(colors, sizes);
 
-  const FriendCounts = useCallback(({count, title, onPress}: friendCount) => {
+  const CountsCard = useCallback(({count, title, onPress}: friendCount) => {
     return (
       <View style={{flex: 1}}>
         <TextBox
@@ -120,7 +120,7 @@ const OtherUserProfile = ({navigation}: any) => {
           borderRadius: 10,
           height: blackBoxHeight,
         }}>
-        <FriendCounts count={'12'} title={'Followers'} />
+        <CountsCard count={'12'} title={'Followers'} />
         <Spacer
           styles={{
             borderLeftWidth: 3,
@@ -129,7 +129,7 @@ const OtherUserProfile = ({navigation}: any) => {
             height: '100%',
           }}
         />
-        <FriendCounts count={'12'} title={'Following '} />
+        <CountsCard count={'12'} title={'Following '} />
       </View>
       <Spacer />
       <FlatList

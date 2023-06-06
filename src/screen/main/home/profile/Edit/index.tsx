@@ -1,6 +1,12 @@
-import React, {useCallback, useRef, useState} from 'react';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+
+// lib
+import {ActionSheetIOS, Platform, ScrollView, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import moment from 'moment';
 import {useTheme} from '@react-navigation/native';
+import ActionSheet from 'react-native-actionsheet';
+import KeyboardManager from 'react-native-keyboard-manager';
 
 // components
 import {
@@ -10,51 +16,122 @@ import {
   Header,
   InputField,
   BackButton,
-  TextBox,
   CTAButton,
   DropDown,
+  DateInputField,
+  DatePickerModal,
 } from 'components';
+
+// redux
+import {editProfileAction} from 'redux/actions/home';
+import {url} from 'redux/axios/apikit';
 
 // theme
 import appImages from 'theme/images';
-import constants, {routesConstants} from 'theme/constants';
-import {fonts} from 'theme/fonts';
+import constants, {genderList, popupType} from 'theme/constants';
+
+// utils
+import {ShowAlertMessage} from 'utils/showAlertMessage';
+import {userEditProfileCheck} from 'utils/validator';
+import {pickSingleImage, pickSingleImageWithCamera} from 'utils/imagePicker';
 
 // style
 import styles from './styles';
-import DateInputField from 'components/dateInputField';
-import {DatePickerModal} from 'components/DatePickerModal';
-import moment from 'moment';
-
-const genderList = [
-  {id: 'Male', value: 'Male'},
-  {id: 'Female', value: 'Female'},
-  {id: 'Others', value: 'Others'},
-  {id: 'Wish not to disclose', value: 'Wish not to disclose'},
-];
 
 const ProfileEdit = ({navigation}: any) => {
+  const dispatch = useDispatch();
   const {colors}: any = useTheme();
   const inputRef: any = useRef([]);
-  const style = styles(colors);
-  const [gender, setGender] = useState<any>(null);
-  const [name, setName] = useState<string>('Winni');
-
-  const [dob, setDob] = useState<string>('May 05, 1995');
+  const actionSheet: any = useRef();
+  const [image, setImage] = useState<any>(null);
+  const [gender, setGender] = useState<Object>();
+  const [name, setName] = useState<string>('');
+  const [dob, setDob] = useState<string>('');
+  const [location, setLocation] = useState<string>('');
   const [datePicker, setDatePicker] = React.useState(false);
-  const onGenderSelect = (item: any) => {
-    setGender(item);
+  const style = styles(colors);
+  const {userDetails} = useSelector((state: any) => state.homeReducer);
+
+  useEffect(() => {
+    Platform.OS === 'ios' && KeyboardManager.setEnable(false);
+    return () => {
+      Platform.OS === 'ios' && KeyboardManager.setEnable(true);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (userDetails) {
+      let DOB = moment(userDetails?.dob).format('MMM DD, YYYY');
+      setDob(DOB);
+      setName(userDetails?.name);
+      setGender(userDetails?.gender);
+      setLocation(userDetails?.location);
+    }
+  }, [userDetails]);
+
+  const openImagePicker = (cropit: boolean, circular = false, setPic: any) => {
+    return Platform.OS == 'ios'
+      ? ActionSheetIOS.showActionSheetWithOptions(
+          {
+            options: [constants.cancel, constants.gallery, constants.camera],
+            cancelButtonIndex: 0,
+          },
+          buttonIndex => {
+            if (buttonIndex === 0) {
+            } else if (buttonIndex === 1) {
+              return pickSingleImage(cropit, circular, setPic);
+            } else if (buttonIndex === 2) {
+              return pickSingleImageWithCamera(cropit, circular, setPic);
+            }
+          },
+        )
+      : actionSheet.current.show();
+  };
+
+  const onSubmit = () => {
+    const isValidationFailed = userEditProfileCheck(name);
+    if (isValidationFailed) {
+      ShowAlertMessage(isValidationFailed, popupType.error);
+    } else {
+      const formData = new FormData();
+      gender && formData.append('gender', gender);
+      dob &&
+        formData.append(
+          'dob',
+          moment(dob, 'MMM DD, YYYY').format('YYYY-MM-DD'),
+        );
+      formData.append('name', name);
+      location && formData.append('location', location);
+      {
+        image &&
+          formData.append('profileImage', {
+            uri: image?.path,
+            type: image?.mime,
+            name: 'image.jpg',
+          });
+      }
+      dispatch(editProfileAction(formData));
+    }
   };
   return (
     <View style={style.container}>
       <StatusHeader />
+      <Header title={constants.EditProfile} LeftIcon={<BackButton />} />
       <ScrollView
         style={style.innerContainer}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
-        <Header title={'Edit Profile'} LeftIcon={<BackButton />} />
         <Spacer height={constants.height20} />
-        <Icons size={140} source={appImages.dummyUser} styles={style.logo} />
+        <Icons
+          size={120}
+          source={
+            image ? {uri: image?.path} : {uri: url + userDetails?.profileImage}
+          }
+          styles={style.logo}
+          imageStyle={{borderRadius: 150}}
+          resize="cover"
+          onPress={() => openImagePicker(true, false, setImage)}
+        />
 
         <InputField
           ref={ref => (inputRef[0] = ref)}
@@ -64,7 +141,9 @@ const ProfileEdit = ({navigation}: any) => {
             placeholder: constants.name,
             nextField: () => inputRef[1].focus(),
             value: name,
-            onChange: setName,
+            onChangeText: (data: string) => {
+              setName(data);
+            },
           }}
           label={constants.name}
         />
@@ -75,9 +154,10 @@ const ProfileEdit = ({navigation}: any) => {
             required: true,
             placeholder: constants.email,
             returnKeyType: 'done',
-            value: 'winni@example.com',
+            value: userDetails?.email,
             editable: false,
           }}
+          disableColor={false}
           label={constants.email}
         />
         <DateInputField
@@ -105,14 +185,19 @@ const ProfileEdit = ({navigation}: any) => {
           TextInputProps={{
             placeholder: constants.location,
             returnKeyType: constants.done,
+            value: location,
+            onChangeText: (data: string) => {
+              setLocation(data);
+            },
           }}
           label={constants.location}
         />
         <DropDown
           list={genderList}
-          onPress={onGenderSelect}
+          onPress={(item: any) => setGender(item.value)}
           color={colors}
           label={constants.gender}
+          defaultValue={gender}
         />
         <Spacer height={constants.height50} />
         <CTAButton
@@ -120,23 +205,37 @@ const ProfileEdit = ({navigation}: any) => {
           color={colors.themeColor}
           type={constants.medium}
           buttonStyle={{alignSelf: 'center'}}
-          onPress={() => navigation.navigate(routesConstants.Profile)}
+          onPress={onSubmit}
         />
         <Spacer height={constants.height50} />
-
-        <DatePickerModal
-          minimumDate={new Date(1920, 0, 1)}
-          maximumDate={new Date()}
-          onCancel={() => {
-            setDatePicker(false);
-          }}
-          isDropdownVisible={datePicker}
-          onClose={date => {
-            setDatePicker(false);
-            setDob(`${moment(date).format('MMM DD, YYYY')}`);
-          }}
-        />
       </ScrollView>
+      <ActionSheet
+        ref={actionSheet}
+        title={'Select Image'}
+        options={[constants.cancel, constants.gallery, constants.camera]}
+        cancelButtonIndex={0}
+        onPress={(index: number) => {
+          if (index === 0) {
+          } else if (index === 1) {
+            return pickSingleImage(true, false, setImage);
+          } else if (index === 2) {
+            return pickSingleImageWithCamera(true, false, setImage);
+          }
+        }}
+      />
+
+      <DatePickerModal
+        minimumDate={new Date(1920, 0, 1)}
+        maximumDate={new Date()}
+        onCancel={() => {
+          setDatePicker(false);
+        }}
+        isDropdownVisible={datePicker}
+        onClose={(date: any) => {
+          setDatePicker(false);
+          setDob(`${moment(date).format('MMM DD, YYYY')}`);
+        }}
+      />
     </View>
   );
 };

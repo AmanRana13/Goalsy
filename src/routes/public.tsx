@@ -1,5 +1,5 @@
 // react
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 
 // navigation
 import {createNativeStackNavigator} from '@react-navigation/native-stack';

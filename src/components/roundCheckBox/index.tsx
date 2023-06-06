@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 
 import {colors} from 'theme/colors';
@@ -8,11 +8,15 @@ import styles from './style';
 type props = {
   color: colors;
   value: (e: boolean) => {};
+  defaultValue: boolean;
 };
 
-const RoundCheckBox = ({color, value}: props) => {
-  const [check, setCheck] = useState(false);
+const RoundCheckBox = ({color, value, defaultValue = true}: props) => {
+  const [check, setCheck] = useState(defaultValue);
   const style: any = styles(color);
+  useEffect(()=>{
+    setCheck(defaultValue)
+  },[defaultValue])
   return (
     <TouchableOpacity
       onPress={() => {
@@ -23,7 +27,7 @@ const RoundCheckBox = ({color, value}: props) => {
         <View
           style={[
             style.innerContainer,
-            {alignSelf: check ? 'flex-end' : 'flex-start'},
+            {alignSelf: check  ? 'flex-end' : 'flex-start'},
           ]}
         />
       </View>

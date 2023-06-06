@@ -23,7 +23,7 @@ const ConfirmModal = memo(
     Colors,
     textSize = 18,
   }: modalProps) => {
-    const style = styles(Colors);
+    const style = styles(Colors!);
     return (
       <Modal
         statusBarTranslucent={true}
@@ -59,7 +59,7 @@ const ConfirmModal = memo(
                   type={constants.small}
                   text={rightButton?.text}
                   color={Colors?.themeColor}
-                  buttonStyle={rightButton?.style}
+                  buttonStyle={rightButton.style}
                   onPress={rightButton.onPress}
                   isShadow={false}
                   hideShadow

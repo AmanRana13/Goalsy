@@ -27,15 +27,16 @@ import {useDispatch} from 'react-redux';
 import {loginCheck} from 'utils/validator';
 import {ShowAlertMessage} from 'utils/showAlertMessage';
 import {loginAction} from 'redux/actions/authActions';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 const Login = ({navigation}: any): JSX.Element => {
   const dispatch = useDispatch();
-  const {colors}: any = useTheme();
+  const {colors, dark}: any = useTheme();
   const inputRef: any = useRef([]);
   const [showPassword, setShowPassword] = useState(true);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [isChecked, setChecked] = useState<boolean>(false);
+  const [isChecked, setChecked] = useState<boolean>(true);
   const style = styles(colors);
   const scrollRef = useRef(null);
 
@@ -43,6 +44,16 @@ const Login = ({navigation}: any): JSX.Element => {
   useEffect(() => {
     isFocused && scrollRef.current.scrollTo({y: 0, animation: true});
   }, [isFocused]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await changeNavigationBarColor(
+          dark ? '#000000' : '#F5F6F0',
+        );
+      } catch (e) {}
+    })();
+  }, []);
 
   const onSubmit = () => {
     const isValidationFailed = loginCheck(email, password, isChecked);
@@ -67,15 +78,21 @@ const Login = ({navigation}: any): JSX.Element => {
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height50} />
-        <Icons size={140} source={[appImages.logo,appImages.logoDark]} styles={style.logo} />
+        <Icons
+          size={140}
+          source={[appImages.logo, appImages.logoDark]}
+          styles={style.logo}
+        />
         <InputField
           ref={ref => (inputRef[0] = ref)}
           colors={colors}
           TextInputProps={{
             placeholder: constants.email,
+            autoCapitalize: 'none',
             nextField: () => inputRef[1].focus(),
             onChangeText: (data: string) => {
-              setEmail(data.trim().toLowerCase());
+              let value = data.trim().toLowerCase();
+              setEmail(value);
             },
             value: email,
             keyboardType: Platform.OS == 'ios' ? 'ascii-capable' : 'default',

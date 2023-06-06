@@ -1,10 +1,12 @@
+
 import {colors} from 'theme/colors';
 
 export interface dropdown {
   list: Array<object>;
-  onPress: () => void;
+  onPress: (item:Object) => void;
   color: colors;
-  label?: string;
+  label?: React.ReactNode;
+  defaultValue?: string;
 }
 export interface list {
   item: {id: number|string; value: string};

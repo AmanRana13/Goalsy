@@ -9,7 +9,7 @@ import usePixel, {Width} from 'hook/DevicePixel';
 import {fonts} from 'theme/fonts';
 import constants from 'theme/constants';
 
-const DropDown = ({list, label, onPress, color}: dropdown) => {
+const DropDown = ({list, label, onPress, color, defaultValue}: dropdown) => {
   const inputHeight = usePixel(constants.inputHeight + 3);
   const style = styles(color);
   const [showList, setShowList] = React.useState(false);
@@ -32,9 +32,13 @@ const DropDown = ({list, label, onPress, color}: dropdown) => {
           activeOpacity={1}>
           <View style={style.innerContainer}>
             <TextBox
-              text={item.value ?? label}
+              text={item.value ?? defaultValue ?? label}
               size={17}
-              color={item.value ? color.commonBlack : color.placeholder}
+              color={
+                item.value || defaultValue
+                  ? color.commonBlack
+                  : color.placeholder
+              }
             />
             <Icons
               size={16}
@@ -49,7 +53,7 @@ const DropDown = ({list, label, onPress, color}: dropdown) => {
               ? list?.map((item, index) => {
                   return (
                     <List
-                      key={item.id}
+                      key={item?.id}
                       color={color}
                       item={item}
                       setItem={(e: any) => setItem(e)}

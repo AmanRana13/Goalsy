@@ -11,6 +11,9 @@ import {
   TextBox,
   DropDown,
   RoundCheckBox,
+  DatePickerModal,
+  ColorDropdown,
+  DateInputField
 } from 'components';
 import constants from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
@@ -20,10 +23,7 @@ import styles from './styles';
 import {fonts} from 'theme/fonts';
 import {Width} from 'hook/DevicePixel';
 import {goBack} from 'routes/navigationServices';
-import ColorDropdown from 'components/colorDropdown';
-import {DatePickerModal} from 'components/DatePickerModal';
 import moment from 'moment';
-import DateInputField from 'components/dateInputField';
 
 const categoryList = [
   {id: 1, value: 'Goal 1'},

@@ -13,3 +13,8 @@ export {default as FriendsCard} from './friendsCard';
 export {default as CommentCard} from './commentCard';
 export {default as SimpleCard} from './simpleCard';
 export {default as DropDown} from './dropDown';
+export {default as CountsCard} from './countsCard';
+export {default as DateInputField} from './dateInputField';
+export {default as DatePickerModal} from './DatePickerModal';
+export {default as ColorDropdown} from './colorDropdown';
+

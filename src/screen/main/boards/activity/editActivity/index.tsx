@@ -11,6 +11,9 @@ import {
   TextBox,
   DropDown,
   RoundCheckBox,
+  DatePickerModal,
+  DateInputField,
+  ColorDropdown,
 } from 'components';
 import constants from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
@@ -20,9 +23,6 @@ import styles from './styles';
 import {fonts} from 'theme/fonts';
 import {Width} from 'hook/DevicePixel';
 import {goBack} from 'routes/navigationServices';
-import ColorDropdown from 'components/colorDropdown';
-import DateInputField from 'components/dateInputField';
-import {DatePickerModal} from 'components/DatePickerModal';
 import moment from 'moment';
 
 const categoryList = [
@@ -45,8 +45,7 @@ const EditActivity = () => {
   const [name, setName] = useState<string>('Hello');
   const [note, setNote] = useState<string>('Hello');
   const [datePicker, setDatePicker] = React.useState(false);
-  const onCategorySelect = e => {
-  };
+  const onCategorySelect = e => {};
   const CheckBoxValue = () => {};
   const width = (Width - 200) / 7;
   return (

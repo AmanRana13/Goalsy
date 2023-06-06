@@ -5,7 +5,7 @@ export const navigationRef: any = React.createRef();
 
 let navigator: any;
 
-export const navigate = (path: string, params: object) => {
+export const navigate = (path: string, params?: object) => {
   navigationRef.current.navigate(path, params);
 };
 

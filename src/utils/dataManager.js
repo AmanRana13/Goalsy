@@ -2,6 +2,18 @@ import {DataManagersKeys} from './dataManagersKeys';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const DataManager = {
+  async setGoalSound(data) {
+    return await AsyncStorage.setItem(DataManagersKeys.goalSound, data);
+  },
+  async setSocialSound(data) {
+    return await AsyncStorage.setItem(DataManagersKeys.socialSound, data);
+  },
+  async getGoalSound(data) {
+    return await AsyncStorage.getItem(DataManagersKeys.goalSound);
+  },
+  async getSocialSound(data) {
+    return await AsyncStorage.getItem(DataManagersKeys.socialSound);
+  },
   async setAccessToken(data) {
     return await AsyncStorage.setItem(DataManagersKeys.access_token, data);
   },

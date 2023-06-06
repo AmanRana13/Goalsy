@@ -25,7 +25,7 @@ const TextBox = ({
         allowFontScaling={false}
         suppressHighlighting={true}
         style={{
-          color: color ?? colors?.black,
+          color: color ?? colors?.textColor,
           fontSize: fontSize,
           fontFamily: fontFamily ?? fonts.medium,
           ...styles,

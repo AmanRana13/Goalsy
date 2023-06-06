@@ -4,17 +4,18 @@ import {useTheme} from '@react-navigation/native';
 
 import usePixel from 'hook/DevicePixel';
 
-import { props } from './type';
+import {props} from './type';
+import appImages from 'theme/images';
 
 const Icons = ({
-  source,
+  source = appImages.dummyUser,
   styles,
   size = 40,
   resize = 'contain',
   disabled = false,
   imageStyle,
   onPress,
-  activeOpacity=0.6
+  activeOpacity = 0.6,
 }: props) => {
   const sizes = usePixel(size);
   const {dark}: any = useTheme();

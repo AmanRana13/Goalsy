@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // react-native
 import {useColorScheme} from 'react-native';
@@ -15,10 +15,21 @@ import colors from 'theme/colors';
 import Private from './private';
 import Public from './public';
 import {useSelector} from 'react-redux';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 const Routes = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const token = useSelector((state: any) => state.authenticationReducer.token);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = changeNavigationBarColor(
+          isDarkMode ? '#000000' : '#F5F6F0',
+        );
+      } catch (e) {
+      }
+    })();
+  }, [isDarkMode]);
 
   return (
     <NavigationContainer

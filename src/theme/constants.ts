@@ -1,6 +1,5 @@
 import {Height} from 'hook/DevicePixel';
 import {fonts} from './fonts';
-import {buttonSize, buttonSizeProps} from 'components/CTAButton/type';
 
 export enum routesConstants {
   login = 'login',
@@ -49,7 +48,6 @@ export enum routesConstants {
   myTextBoard = 'myTextBoard',
   chat = 'chat',
 }
-
 
 export const popupType: any = {
   error: 'error',
@@ -109,6 +107,7 @@ enum constants {
   invite = 'Invite',
   ViewBoard = 'View your board',
   updateInviteAccess = 'Update Invite Access',
+  next="Next",
 
   // button Size
   large = 'large',
@@ -143,6 +142,7 @@ enum constants {
   InviteUser = 'Invite User',
   viewSample = 'View sample',
   myTextBoard = 'My Text Board',
+  EditProfile = 'EditProfile',
 
   // input label
   name = 'Name',
@@ -232,5 +232,14 @@ enum constants {
   emptyConfirmPassword = 'Please enter confirm new password.',
   notSamePassword = 'New password and confirm new password should be same.',
   internetCheck = 'Please check your internet connection.',
+  someThingWentWrong = 'Something went wrong. Please try again.',
 }
+
+export const genderList = [
+  {id: 1, value: 'Male'},
+  {id: 2, value: 'Female'},
+  {id: 3, value: 'Others'},
+  {id: 4, value: 'Wish not to disclose'},
+];
+
 export default constants;

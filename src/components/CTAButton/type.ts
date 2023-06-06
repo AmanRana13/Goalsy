@@ -9,7 +9,7 @@ export interface button {
   text: any;
   textColor?: string;
   fontSize?: number;
-  color?: colors;
+  color?: string;
   fontFamily?: string;
   isShadow?: boolean;
   hideShadow?: boolean;

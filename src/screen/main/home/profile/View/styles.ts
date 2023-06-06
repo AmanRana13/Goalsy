@@ -16,9 +16,12 @@ const styles = (color: colors) =>
     logo: {
       alignSelf: 'center',
       marginBottom: 30,
-      borderRadius: 70,
+      borderRadius: 100,
       borderColor: color.themeColor,
-      borderWidth: 4,
+      borderWidth: 4
+    },
+    image: {
+      borderRadius: 100,
     },
     FGPass: {fontWeight: '600', paddingVertical: 5, alignSelf: 'flex-end'},
     checkBoxContainer: {flexDirection: 'row'},

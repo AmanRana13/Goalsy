@@ -8,10 +8,9 @@ import constants from 'theme/constants';
 import {Shadow} from 'react-native-shadow-2';
 import {useTheme} from '@react-navigation/native';
 import {colors} from 'theme/colors';
-import { fonts } from 'theme/fonts';
+import {fonts} from 'theme/fonts';
 
-
-const buttonSize:buttonSizeProps = {
+const buttonSize: buttonSizeProps = {
   large: {
     height: 55,
     width: 200,
@@ -38,7 +37,6 @@ const buttonSize:buttonSizeProps = {
   },
 };
 
-
 const CTAButton = ({
   text,
   color,
@@ -54,7 +52,6 @@ const CTAButton = ({
 }: button) => {
   const {colors}: colors = useTheme();
   const styles = style(color);
-
   // button Size
   const width = usePixel(buttonSize[type].width);
   const height = usePixel(buttonSize[type].height);
