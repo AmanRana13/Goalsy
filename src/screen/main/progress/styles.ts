@@ -11,7 +11,7 @@ const styles = (color: colors) =>
       backgroundColor: color.background,
     },
     quote: {
-      backgroundColor: color.white,
+      backgroundColor: color.darkGray,
       paddingVertical: 33,
       borderRadius: 16,
       width: '80%',

@@ -12,6 +12,7 @@ import {fonts} from 'theme/fonts';
 //style
 import styles from './style';
 import constants from 'theme/constants';
+import {BlurView} from '@react-native-community/blur';
 
 const ConfirmModal = memo(
   ({
@@ -25,50 +26,62 @@ const ConfirmModal = memo(
   }: modalProps) => {
     const style = styles(Colors!);
     return (
-      <Modal
-        statusBarTranslucent={true}
-        animationType="slide"
-        transparent={true}
-        visible={visible}
-        onRequestClose={() => {}}>
-        <View style={style.container}>
-          <View style={style.modalView}>
-            <Icons source={source} size={40} />
-            <View style={style.textContainer}>
-              <TextBox
-                text={description}
-                styles={style.text}
-                size={textSize}
-                fontFamily={fonts.regular}
-              />
-            </View>
-            <View style={style.buttonContainer}>
-              {leftButton && (
-                <CTAButton
-                  type={constants.small}
-                  text={leftButton?.text}
-                  color={Colors?.themeColor}
-                  buttonStyle={leftButton?.style}
-                  onPress={leftButton.onPress}
-                  isShadow={false}
-                  hideShadow
+      <>
+        <Modal
+          statusBarTranslucent={true}
+          animated={true}
+          animationType="fade"
+          transparent={true}
+          visible={visible}
+          onRequestClose={() => {}}
+        >
+          <BlurView
+            style={{
+              flex:1
+            }}
+            blurType="dark"
+            blurAmount={2}
+            >
+          <View style={style.container}>
+            <View style={style.modalView}>
+              <Icons source={source} size={40} />
+              <View style={style.textContainer}>
+                <TextBox
+                  text={description}
+                  styles={style.text}
+                  size={textSize}
+                  fontFamily={fonts.regular}
                 />
-              )}
-              {rightButton && (
-                <CTAButton
-                  type={constants.small}
-                  text={rightButton?.text}
-                  color={Colors?.themeColor}
-                  buttonStyle={rightButton.style}
-                  onPress={rightButton.onPress}
-                  isShadow={false}
-                  hideShadow
-                />
-              )}
+              </View>
+              <View style={style.buttonContainer}>
+                {leftButton && (
+                  <CTAButton
+                    type={constants.small}
+                    text={leftButton?.text}
+                    color={Colors?.themeColor}
+                    buttonStyle={leftButton?.style}
+                    onPress={leftButton.onPress}
+                    showShadow={false}
+                    hideShadow
+                  />
+                )}
+                {rightButton && (
+                  <CTAButton
+                    type={constants.small}
+                    text={rightButton?.text}
+                    color={Colors?.themeColor}
+                    buttonStyle={rightButton.style}
+                    onPress={rightButton.onPress}
+                    showShadow={false}
+                    hideShadow
+                  />
+                )}
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
+          </BlurView>
+        </Modal>
+      </>
     );
   },
 );

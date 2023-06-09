@@ -88,26 +88,28 @@ const Quiz = ({navigation}: any) => {
       <StatusHeader />
       <Header title={constants.quiz} LeftIcon={<BackButton />} />
       <Spacer />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Text>
-          <TextBox
-            text={`Question ${quizData ? currentQuestionIndex + 1 : 0}`}
-            size={30}
-          />
-          <TextBox
-            text={quizData ? `/${quizData.length}` : 0}
-            size={20}
-            color={colors.questionHeaderText}
-          />
-        </Text>
+      <ScrollView contentContainerStyle={{flexGrow:1}}showsVerticalScrollIndicator={false}>
+        <View style={{flex:1}}>
+          <Text>
+            <TextBox
+              text={`Question ${quizData ? currentQuestionIndex + 1 : 0}`}
+              size={30}
+            />
+            <TextBox
+              text={quizData ? `/${quizData.length}` : 0}
+              size={20}
+              color={colors.questionHeaderText}
+            />
+          </Text>
 
-        <TextBox
-          text={quizData[currentQuestionIndex]?.question}
-          size={20}
-          styles={{marginTop: 35, marginBottom: 35}}
-        />
-        <Options item={quizData[currentQuestionIndex]?.answer} />
-        <Spacer height={constants.height40} />
+          <TextBox
+            text={quizData[currentQuestionIndex]?.question}
+            size={20}
+            styles={{marginTop: 35, marginBottom: 35}}
+          />
+          <Options item={quizData[currentQuestionIndex]?.answer} />
+        </View>
+        <Spacer flex={1} />
 
         <CTAButton
           color={colors.themeColor}

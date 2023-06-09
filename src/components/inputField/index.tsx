@@ -1,5 +1,5 @@
 import React, {ReactElement, forwardRef, memo} from 'react';
-import {Keyboard, TextInput, View} from 'react-native';
+import {Keyboard, Platform, TextInput, View} from 'react-native';
 
 //Component
 import TextBox from 'components/textBox';
@@ -20,8 +20,6 @@ import {fonts} from 'theme/fonts';
 
 const InputField = forwardRef(
   (props: InputFieldProps | any, ref): ReactElement => {
-    const inputFont = usePixel(17);
-    const inputHeight = usePixel(constants.inputHeight);
     const {
       label,
       LeftCompo,
@@ -48,7 +46,8 @@ const InputField = forwardRef(
       editable = true,
       inputContainerStyle,
     } = TextInputProps;
-
+    const inputFont = usePixel(17);
+    const inputHeight = usePixel(constants.inputHeight);
     const onSubmitEditing = () => {
       if (returnKeyType == 'next' || returnKeyType === 'done') {
         returnKeyType == 'next' ? nextField() : Keyboard.dismiss();
@@ -60,21 +59,23 @@ const InputField = forwardRef(
       ? colors.commonWhite
       : colors.disable;
     const disabledColorText =
-      !disableColor && !editable ? {color: colors.disable} : null;
+      !disableColor && !editable ? {color: colors.textDisable} : null;
     return (
       <View style={style.container}>
         {/* Input Label */}
-        <View style={style.labelStyle}>
-          {LabelCompo
-            ? LabelCompo
-            : label && (
-                <TextBox
-                  size={16}
-                  fontFamily={fonts.regular}
-                  text={`${label}${required ? '*' : ''}`}
-                />
-              )}
-        </View>
+        {(LabelCompo || label) && (
+          <View style={style.labelStyle}>
+            {LabelCompo
+              ? LabelCompo
+              : label && (
+                  <TextBox
+                    size={16}
+                    fontFamily={fonts.regular}
+                    text={`${label}${required ? '*' : ''}`}
+                  />
+                )}
+          </View>
+        )}
         <View
           style={[
             style.innerContainer,
@@ -108,9 +109,13 @@ const InputField = forwardRef(
               placeholder={placeholder ?? label}
               selectionColor={colors.TextSelection}
               returnKeyType={returnKeyType ?? 'next'}
-              keyboardType={keyboardType ?? 'default'}
+              keyboardType={
+                keyboardType ?? Platform.OS === 'ios'
+                  ? 'default'
+                  : 'visible-password'
+              }
               placeholderTextColor={colors.placeholder}
-              autoCapitalize={autoCapitalize ?? 'sentences'}
+              autoCapitalize={autoCapitalize ?? 'none'}
               style={[
                 style.input,
                 {
@@ -136,8 +141,13 @@ const InputField = forwardRef(
               <TextBox
                 text={TextInputProps?.value ? TextInputProps?.value.length : 0}
                 fontFamily={fonts.regular}
+                color={colors.commonBlack}
               />
-              <TextBox text={`/${maxLength}`} fontFamily={fonts.regular} />
+              <TextBox
+                text={`/${maxLength}`}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
           )}
         </View>

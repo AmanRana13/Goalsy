@@ -83,86 +83,87 @@ const AddActivity = () => {
         <Spacer />
         <View
           style={{
-            backgroundColor: colors.white,
+            backgroundColor: colors.commonWhite,
             paddingHorizontal: 15,
-            paddingVertical: 20,
+            paddingVertical: 15,
             borderRadius: 20,
           }}>
           <View style={{flexDirection: 'row', gap: 15}}>
             <View
               style={{
                 borderRadius: 8,
-                borderColor: colors.black,
+                borderColor: colors.commonBlack,
                 borderWidth: 2,
                 alignItems: 'center',
                 width: width,
               }}>
-              <TextBox text={'S'} size={22} fontFamily={fonts.regular} />
+              <TextBox text={'S'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
             </View>
             <View
               style={{
                 borderRadius: 8,
-                borderColor: colors.black,
+                borderColor: colors.commonBlack,
                 borderWidth: 2,
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'M'} size={22} fontFamily={fonts.regular} />
+              <TextBox text={'M'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
             </View>
             <View
               style={{
                 borderRadius: 8,
-                borderColor: colors.black,
+                borderColor: colors.commonBlack,
                 borderWidth: 2,
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'T'} size={22} fontFamily={fonts.regular} />
+              <TextBox text={'T'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
             </View>
             <View
               style={{
                 borderRadius: 8,
-                borderColor: colors.black,
+                borderColor: colors.commonBlack,
                 borderWidth: 2,
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'W'} size={22} fontFamily={fonts.regular} />
+              <TextBox text={'W'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
             </View>
             <View
               style={{
                 borderRadius: 8,
-                borderColor: colors.black,
+                borderColor: colors.commonBlack,
                 borderWidth: 2,
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'T'} size={22} fontFamily={fonts.regular} />
+              <TextBox text={'T'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
             </View>
             <View
               style={{
                 borderRadius: 8,
-                borderColor: colors.black,
+                borderColor: colors.commonBlack,
                 borderWidth: 2,
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'F'} size={22} fontFamily={fonts.regular} />
+              <TextBox text={'F'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
             </View>
             <View
               style={{
                 borderRadius: 8,
-                borderColor: colors.black,
+                borderColor: colors.commonBlack,
                 borderWidth: 2,
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'S'} size={22} fontFamily={fonts.regular} />
+              <TextBox text={'S'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
             </View>
           </View>
           <TextBox
             text={'12:00 PM'}
             styles={{alignSelf: 'flex-end', paddingTop: 15}}
+            color={colors.commonBlack}
           />
         </View>
         <DateInputField
@@ -208,7 +209,7 @@ const AddActivity = () => {
             text={constants.SampleActivity}
             buttonStyle={[style.buttonStyle, {width: Width * 0.53}]}
             color={colors.gray}
-            isShadow={false}
+            showShadow={false}
             type={constants.large}
             onPress={() => goBack()}
             hideShadow

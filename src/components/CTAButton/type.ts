@@ -9,10 +9,9 @@ export interface button {
   text: any;
   textColor?: string;
   fontSize?: number;
-  color?: string;
+  color?: string | undefined;
   fontFamily?: string;
-  isShadow?: boolean;
-  hideShadow?: boolean;
+  showShadow?: boolean;
 }
 type buttonSizTypeProps = {
   height: number;

@@ -17,7 +17,7 @@ import {reset} from 'routes/navigationServices';
 import {action} from 'redux/type';
 
 // loading function
-function* Loading(loading: boolean) {
+function* Loading(loading: boolean): any {
   yield put({
     type: ApiConstants.UPDATE_LOADING_STATE,
     data: loading,
@@ -25,23 +25,22 @@ function* Loading(loading: boolean) {
 }
 
 // sign up
-export function* signupApiSaga(action: action) {
+export function* signupApiSaga(action: action): any {
   try {
     // loading set true
     yield call(Loading, true);
     // api call
-    const {data, status, message} = yield call(api.signUpApi, action?.payload);
+    const response = yield call(api.signUpApi, action?.payload);
     // loading set false
     yield call(Loading, false);
 
-    if (status === 1) {
+    if (response?.status === 1) {
       yield put({
         type: ApiConstants.API_SIGNUP_SUCCESS,
         payload: true,
       });
     }
   } catch (e) {
-    console.log(e);
     // loading set false
     yield call(Loading, false);
     ShowAlertMessage(constants.someThingWentWrong, popupType.error);
@@ -49,25 +48,25 @@ export function* signupApiSaga(action: action) {
 }
 
 // log in
-export function* loginApiSaga(action: action) {
+export function* loginApiSaga(action: action): any {
   try {
     yield call(Loading, true);
-    const {data, status, message} = yield call(api.loginApi, action?.payload);
+    const response = yield call(api.loginApi, action?.payload);
     yield call(Loading, false);
-    if (status === 1) {
-      ShowAlertMessage(data?.message, popupType.info);
-      DataManager.setAccessToken(data?.data?.token);
+    if (response?.status === 1) {
+      ShowAlertMessage(response?.data?.message, popupType.info);
+      DataManager.setAccessToken(response?.data?.data?.token);
       DataManager.setGoalSound(
-        JSON.stringify(data?.data?.user?.preferences?.goalSound),
+        JSON.stringify(response?.data?.data?.user?.preferences?.goalSound),
       );
       DataManager.setSocialSound(
-        JSON.stringify(data?.data?.user?.preferences?.socialSound),
+        JSON.stringify(response?.data?.data?.user?.preferences?.socialSound),
       );
-      DataManager.setUserData(JSON.stringify(data?.data?.user));
+      DataManager.setUserData(JSON.stringify(response?.data?.data?.user));
       DataManager.setFirstTime();
       yield put({
         type: ApiConstants.API_LOGIN_SUCCESS,
-        payload: data?.data,
+        payload: response?.data?.data,
       });
       reset('BottomTab', 0);
     }
@@ -79,12 +78,12 @@ export function* loginApiSaga(action: action) {
 }
 
 // forgot password
-export function* forgotPasswordSaga(action: action) {
+export function* forgotPasswordSaga(action: action): any {
   try {
     yield call(Loading, true);
-    const {status, message} = yield call(api.forgotPasswordApi, action.payload);
+    const response = yield call(api.forgotPasswordApi, action.payload);
     yield call(Loading, false);
-    if (status === 1) {
+    if (response?.status === 1) {
       yield put({
         type: ApiConstants.API_FORGOT_PASSWORD_SUCCESS,
         payload: true,

@@ -49,7 +49,7 @@ const CreateBoard = ({navigation}) => {
           style={{
             width: sizes,
             height: sizes / 2,
-            backgroundColor: colors.commonWhite,
+            backgroundColor: colors.darkGray,
             justifyContent: 'space-evenly',
             alignItems: 'center',
             borderRadius: 23,

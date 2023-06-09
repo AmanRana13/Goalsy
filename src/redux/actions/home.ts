@@ -10,10 +10,11 @@ export const deleteAccount = () => {
     type: ApiConstants.ACCOUNT_DELETE_LOAD,
   };
 };
-export const editProfileAction = (payload: any) => {
+export const editProfileAction = (payload: any,name:string) => {
   return {
     type: ApiConstants.EDIT_PROFILE_LOAD,
     payload,
+    name
   };
 };
 export const changePasswordAction = (payload: any) => {

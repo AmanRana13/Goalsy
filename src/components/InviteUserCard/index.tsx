@@ -9,7 +9,13 @@ import CheckBox from 'components/checkBox';
 import {Width} from 'hook/DevicePixel';
 import {goBack} from 'routes/navigationServices';
 
-const InviteUserCard = ({color, item, onPress = () => {}, isModal = false}) => {
+const InviteUserCard = ({
+  color,
+  item,
+  onPress = () => {},
+  isModal = false,
+  showShadow = true,
+}) => {
   const style = styles(color);
   const CheckBoxContainer = ({type}) => {
     return (
@@ -53,13 +59,14 @@ const InviteUserCard = ({color, item, onPress = () => {}, isModal = false}) => {
         buttonStyle={{
           alignSelf: 'center',
           width:
-            item.buttonName ===constants.updateInviteAccess
+            item.buttonName === constants.updateInviteAccess
               ? Width * 0.63
               : Width * 0.44,
         }}
         onPress={() => {
-          isModal ? onPress() :goBack()
+          isModal ? onPress() : goBack();
         }}
+        showShadow={showShadow}
       />
     </View>
   );

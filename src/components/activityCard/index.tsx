@@ -43,7 +43,7 @@ const ActivityCard = ({
             <TextBox text={'Due Date: May 05, 2023'} size={14} />
           </View>
           <CTAButton
-            isShadow={false}
+            showShadow={false}
             text={constants.complete}
             buttonStyle={style.buttonStyle}
             color={color?.themeColor}
@@ -51,7 +51,6 @@ const ActivityCard = ({
             buttonStyle={{
               width: Width * 0.25,
             }}
-            hideShadow
           />
         </View>
       </View>

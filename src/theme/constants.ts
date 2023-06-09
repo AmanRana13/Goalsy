@@ -142,7 +142,7 @@ enum constants {
   InviteUser = 'Invite User',
   viewSample = 'View sample',
   myTextBoard = 'My Text Board',
-  EditProfile = 'EditProfile',
+  EditProfile = 'Edit Profile',
 
   // input label
   name = 'Name',

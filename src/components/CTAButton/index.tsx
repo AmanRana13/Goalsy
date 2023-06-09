@@ -6,8 +6,6 @@ import {button, buttonSizeProps} from './type';
 import style from './style';
 import constants from 'theme/constants';
 import {Shadow} from 'react-native-shadow-2';
-import {useTheme} from '@react-navigation/native';
-import {colors} from 'theme/colors';
 import {fonts} from 'theme/fonts';
 
 const buttonSize: buttonSizeProps = {
@@ -42,38 +40,25 @@ const CTAButton = ({
   color,
   buttonStyle,
   fontFamily,
-  isShadow = true,
+  showShadow = true,
   onPress = () => {},
   opacity = 0.5,
   disabled = false,
   type = constants.medium,
   textColor = '#000',
-  hideShadow = false, // to make the color change with mode remove the default value of color
 }: button) => {
-  const {colors}: colors = useTheme();
   const styles = style(color);
   // button Size
   const width = usePixel(buttonSize[type].width);
   const height = usePixel(buttonSize[type].height);
 
-  // button Shadow
-  const startColor = isShadow
-    ? 'rgba(14, 9, 43,0.08)'
-    : hideShadow
-    ? colors.modalButtonShadow
-    : colors.white;
-  const endColor = isShadow
-    ? 'rgba(14, 9, 43,0.005)'
-    : hideShadow
-    ? colors.modalButtonShadow
-    : colors.white;
-
   return (
     <View style={buttonStyle}>
       <Shadow
+        disabled={!showShadow}
         distance={buttonSize[type].distance}
-        startColor={startColor}
-        endColor={endColor}
+        startColor={'#0e092b14'}
+        endColor={'#0e092b01'}
         offset={[0, 2]}>
         <TouchableOpacity
           onPress={onPress}

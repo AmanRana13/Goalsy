@@ -42,13 +42,16 @@ const styles = (color: colors) =>
     },
     exc: {alignSelf: 'center', marginTop: -15},
     toolTip: {
-      height: Width * 0.47,
-      width: Width * 0.8,
+      height: Width * 0.42,
+      width: Width * 0.75,
       marginTop: 10,
+      position:'relative',
     },
     text: {
-      marginTop: 50,
-      paddingHorizontal: 30,
+      position:'absolute',
+      top:38,
+      left:10,
+      paddingHorizontal:20
     },
   });
 export default styles;

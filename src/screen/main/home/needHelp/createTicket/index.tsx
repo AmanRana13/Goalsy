@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, {useRef} from 'react';
 import {View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
@@ -33,7 +33,6 @@ const CreateTicket = ({navigation}): any => {
       <InputField
         colors={colors}
         label={constants.subject}
-        
         ref={ref => (inputRef[0] = ref)}
         TextInputProps={{
           placeholder: constants.subject,

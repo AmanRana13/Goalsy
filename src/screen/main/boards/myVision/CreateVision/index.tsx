@@ -101,7 +101,7 @@ const CreateVision = ({navigation}) => {
             text={constants.SampleVision}
             buttonStyle={style.buttonStyle}
             color={colors.gray}
-            isShadow={false}
+            showShadow={false}
             type={constants.large}
             onPress={() => goBack()}
           />

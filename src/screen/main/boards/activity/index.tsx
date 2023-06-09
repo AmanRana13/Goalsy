@@ -18,36 +18,38 @@ const Activity = ({navigation}): any => {
   const style = styles(colors);
   return (
     <View style={style.container}>
-      {!showData ? (
-        <>
-          <TextBox
-            text={constants.welcome}
-            size={45}
-            styles={{alignSelf: 'center', marginBottom: 40}}
-            onPress={() => setShowData(true)}
-          />
-          <TextBox
-            text={constants.dummyText}
-            size={16}
-            fontFamily={fonts.regular}
-            styles={{alignSelf: 'center', marginBottom: 90}}
-          />
-        </>
-      ) : (
-        <>
-          <ActivityCard color={colors} navigation={navigation} />
-          <ActivityCard color={colors} navigation={navigation} />
-        </>
-      )}
+      <View style={{flex: 1}}>
+        {!showData ? (
+          <>
+            <TextBox
+              text={constants.welcome}
+              size={45}
+              styles={{alignSelf: 'center', marginBottom: 40}}
+              onPress={() => setShowData(true)}
+            />
+            <TextBox
+              text={constants.dummyText}
+              size={16}
+              fontFamily={fonts.regular}
+              styles={{alignSelf: 'center', marginBottom: 90}}
+            />
+          </>
+        ) : (
+          <>
+            <ActivityCard color={colors} navigation={navigation} />
+            <ActivityCard color={colors} navigation={navigation} />
+          </>
+        )}
+      </View>
       <View>
-      {/* <Spacer height={constants.height30}/> */}
+        {/* <Spacer height={constants.height30}/> */}
         <TextBox
           text={'Note: Maximum 10 activities can be created'}
           size={16}
           styles={{alignSelf: 'center'}}
           fontFamily={fonts.regular}
         />
-        <Spacer height={constants.height20}/>
+        <Spacer height={constants.height20} />
         <CTAButton
           text={constants.addActivity}
           buttonStyle={style.buttonStyle}

@@ -9,19 +9,19 @@ import {DataManager} from 'utils/dataManager';
 import {dispatch} from 'utils/globalFunctions';
 
 // loading function
-function* Loading(loading: boolean) {
+function* Loading(loading: boolean): any {
   yield put({
     type: ApiConstants.UPDATE_LOADING_STATE,
     data: loading,
   });
 }
 // Delete Account
-export function* DeleteAccountSaga() {
+export function* DeleteAccountSaga(): any {
   try {
     // loading set true
     yield call(Loading, true);
     // api call
-    const {data, status, message} = yield call(api.deleteAccount);
+    const response = yield call(api.deleteAccount);
     // loading set false
     yield call(Loading, false);
 
@@ -30,7 +30,7 @@ export function* DeleteAccountSaga() {
     dispatch({
       type: ApiConstants.RESET_AUTH_DATA,
     });
-    if (status === 1) {
+    if (response?.status === 1) {
       yield put({
         type: ApiConstants.ACCOUNT_DELETE_SUCCESS,
         payload: true,
@@ -43,18 +43,18 @@ export function* DeleteAccountSaga() {
   }
 }
 // user profile
-export function* userDetails() {
+export function* userDetails(): any {
   try {
     // loading set true
     yield call(Loading, true);
     // api call
-    const {data, status, message} = yield call(api.userDetail);
+    const response = yield call(api.userDetail);
     // loading set false
     yield call(Loading, false);
-    if (status === 1) {
+    if (response?.status === 1) {
       yield put({
         type: ApiConstants.USER_DETAILS_SUCCESS,
-        payload: data,
+        payload: response?.data,
       });
     }
   } catch (e) {
@@ -64,24 +64,27 @@ export function* userDetails() {
   }
 }
 // Edit user profile
-export function* userEditDetails(action: action) {
+export function* userEditDetails(action: any): any {
   try {
     // loading set true
     yield call(Loading, true);
     // api call
-    const {data, status, message} = yield call(
-      api.userEditDetail,
-      action.payload,
-    );
+    const response = yield call(api.userEditDetail, action.payload);
     // loading set false
     yield call(Loading, false);
-    if (status === 1) {
+    if (response?.status === 1) {
+      (async () => {
+        let userData = await DataManager.getUserData();
+        let parseData=JSON.parse(userData)
+        parseData.name = action?.name;
+        await DataManager.setUserData(JSON.stringify(parseData));
+      })();
       yield put({
         type: ApiConstants.EDIT_PROFILE_SUCCESS,
-        payload: data,
+        payload: response?.data,
       });
       navigate(routesConstants.Profile);
-      ShowAlertMessage(message, popupType.info);
+      ShowAlertMessage(response?.message, popupType.info);
     }
   } catch (e) {
     // loading set false
@@ -90,24 +93,21 @@ export function* userEditDetails(action: action) {
   }
 }
 // change password
-export function* changePassword(action: action) {
+export function* changePassword(action: action): any {
   try {
     // loading set true
     yield call(Loading, true);
     // api call
-    const {data, status, message} = yield call(
-      api.changePassword,
-      action.payload,
-    );
+    const response = yield call(api.changePassword, action.payload);
     // loading set false
     yield call(Loading, false);
-    if (status === 1) {
+    if (response?.status === 1) {
       reset(routesConstants.login, 0);
       DataManager.removeData();
       dispatch({
         type: ApiConstants.RESET_AUTH_DATA,
       });
-      ShowAlertMessage(message, popupType.info);
+      ShowAlertMessage(response?.message, popupType.info);
     }
   } catch (e) {
     // loading set false
@@ -116,18 +116,18 @@ export function* changePassword(action: action) {
   }
 }
 // quiz
-export function* userQuiz() {
+export function* userQuiz(): any {
   try {
     // loading set true
     yield call(Loading, true);
     // api call
-    const {data, status, message} = yield call(api.userQuiz);
+    const response = yield call(api.userQuiz);
     // loading set false
     yield call(Loading, false);
-    if (status === 1) {
+    if (response?.status === 1) {
       yield put({
         type: ApiConstants.USER_QUIZ_SUCCESS,
-        payload: data,
+        payload: response?.data,
       });
     }
   } catch (e) {
@@ -137,17 +137,17 @@ export function* userQuiz() {
   }
 }
 // Quiz Answer
-export function* QuizAnswer(action: action) {
+export function* QuizAnswer(action: action): any {
   try {
     // loading set true
     yield call(Loading, true);
     // api call
-    const {data, status, message} = yield call(api.QuizAnswer, action.payload);
+    const response = yield call(api.QuizAnswer, action.payload);
     // loading set false
     yield call(Loading, false);
-    if (status === 1) {
+    if (response?.status === 1) {
       navigate(routesConstants.boards);
-      ShowAlertMessage(message, popupType.info);
+      ShowAlertMessage(response?.message, popupType.info);
     }
   } catch (e) {
     // loading set false
@@ -157,17 +157,11 @@ export function* QuizAnswer(action: action) {
 }
 
 // NotificationSound (Goal sound social sound )
-export function* NotificationSound(action: action) {
+export function* NotificationSound(action: action): any {
   try {
-    // loading set true
-    yield call(Loading, true);
     // api call
-    const {status, message} = yield call(api.notificationSound, action.payload);
-    // loading set false
-    yield call(Loading, false);
-    console.log(':::::::::::');
-
-    if (status === 1) {
+    const response = yield call(api.notificationSound, action.payload);
+    if (response?.status === 1) {
       (async () => {
         if (action.payload?.type === 'goal') {
           const goalSound = await DataManager.getGoalSound();
@@ -177,11 +171,9 @@ export function* NotificationSound(action: action) {
           DataManager.setSocialSound(JSON.stringify(!JSON.parse(socialSound)));
         }
       })();
-      ShowAlertMessage(message, popupType.info);
     }
   } catch (e) {
     // loading set false
-    yield call(Loading, false);
     ShowAlertMessage(constants.someThingWentWrong, popupType.error);
   }
 }

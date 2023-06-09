@@ -49,7 +49,7 @@ const Chat = ({navigation}: any) => {
         }
       />
       <Spacer />
-      <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
+
         <FlatList
           data={Data}
           style={{height: height * 0.745}}
@@ -79,9 +79,12 @@ const Chat = ({navigation}: any) => {
               borderWidth: 3,
               backgroundColor: 'transparent',
             },
+            textInput:{
+              color:colors.black
+            }
           }}
         />
-      </ScrollView>
+
       <ConfirmModal
         source={[appImages.warring, appImages.warringDark]}
         visible={modal}

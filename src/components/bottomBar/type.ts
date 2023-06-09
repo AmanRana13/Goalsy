@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface props {
     item: BottomBarItem;
     index: number;
@@ -6,7 +8,7 @@ export interface props {
 
 export interface BottomBarItem {
     id: number,
-    name?: string,
+    name?: React.ReactNode,
     default?: number,
     darkMode?: number,
     selected?: number,

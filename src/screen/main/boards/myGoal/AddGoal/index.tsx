@@ -117,7 +117,7 @@ const AddGoal = () => {
             text={constants.SampleGoal}
             buttonStyle={style.buttonStyle}
             color={colors.gray}
-            isShadow={false}
+            showShadow={false}
             type={constants.large}
             onPress={() => goBack()}
           />

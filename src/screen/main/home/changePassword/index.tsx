@@ -1,6 +1,6 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
-import {Dimensions, KeyboardAvoidingView, ScrollView, View} from 'react-native';
+import {Dimensions, KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 
 // navigation
 import {useTheme} from '@react-navigation/native';
@@ -26,6 +26,7 @@ import {changePasswordCheck} from 'utils/validator';
 import {ShowAlertMessage} from 'utils/showAlertMessage';
 import {dispatch} from 'utils/globalFunctions';
 import {changePasswordAction} from 'redux/actions/home';
+import KeyboardManager from 'react-native-keyboard-manager';
 
 const ChangePassword = ({navigation}: any): JSX.Element => {
   const {colors}: any = useTheme();
@@ -53,18 +54,23 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
     }
   };
 
+  useEffect(()=>{
+    Platform.OS==="ios"&&KeyboardManager.setEnable(false)
+  },[])
   return (
     <View style={style.container}>
       <StatusHeader />
       <Header title={constants.changePassword} LeftIcon={<BackButton />} />
       <Spacer height={constants.height30} />
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         behavior="height"
         keyboardVerticalOffset={80}
         contentContainerStyle={{
           height: Dimensions.get('window').height * 2.25,
           width: '100%',
-        }}>
+          flexGrow: 1,
+        }}
+        style={{flex: 1}}> */}
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
@@ -151,7 +157,7 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
           />
           <Spacer flex={1} />
         </ScrollView>
-      </KeyboardAvoidingView>
+      {/* </KeyboardAvoidingView> */}
     </View>
   );
 };

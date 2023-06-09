@@ -107,13 +107,14 @@ const OtherUserProfile = ({navigation}: any) => {
           color={colors.themeColor}
           textColor={colors.commonBlack}
           buttonStyle={{width: widthButton}}
-          isShadow={false}
+          showShadow={false}
         />
       </View>
       <Spacer height={constants.height30} />
+      
       <View
         style={{
-          backgroundColor: '#000',
+          backgroundColor: colors.countCard,
           flexDirection: 'row',
           marginBottom: 10,
           paddingVertical: 10,

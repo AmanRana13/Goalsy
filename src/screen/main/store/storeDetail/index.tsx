@@ -6,8 +6,6 @@ import constants from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
 import TextBox from 'components/textBox';
 import {fonts} from 'theme/fonts';
-import Icons from 'components/icons';
-import appImages from 'theme/images';
 import Video from 'components/Video';
 
 const StoreDetail = () => {
@@ -19,7 +17,7 @@ const StoreDetail = () => {
       <Header title={'Item Name'} LeftIcon={<BackButton />} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
-        <Video />
+        <Video videoLink={require('../../../../assets/videos/1.mp4')} />
         <Spacer height={constants.height20} />
         <TextBox size={22} fontFamily={fonts.medium} text={'Item Name'} />
         <TextBox size={18} fontFamily={fonts.medium} text={'Sub title'} />

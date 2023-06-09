@@ -58,6 +58,7 @@ enum appImages {
   broad = require('../assets/Images/Icons/broad.png'),
   progress = require('../assets/Images/Icons/progress.png'),
   cross = require('../assets/Images/Icons/cross.png'),
+  blur = require('../assets/Images/Icons/blur.png'),
 
   //video player
   sound = require('../assets/Images/Icons/sound.png'),
@@ -130,5 +131,7 @@ enum appImages {
   exclamationDark = require('../assets/Images/Dark/exclamation.png'),
   deleteDark = require('../assets/Images/Dark/delete.png'),
   crossDark = require('../assets/Images/Dark/cross.png'),
+  chartDark = require('../assets/Images/Dark/chart.png'),
+  userDark = require('../assets/Images/Dark/user.png'),
 }
 export default appImages;

@@ -64,7 +64,7 @@ const Login = ({navigation}: any): JSX.Element => {
         email: email,
         password: password,
         deviceType: Platform.OS,
-        deviceToken: '123456',
+        // deviceToken: '123456',
       };
 
       dispatch(loginAction(body));
@@ -91,11 +91,11 @@ const Login = ({navigation}: any): JSX.Element => {
             autoCapitalize: 'none',
             nextField: () => inputRef[1].focus(),
             onChangeText: (data: string) => {
-              let value = data.trim().toLowerCase();
+              let value = data.trim();
               setEmail(value);
             },
-            value: email,
-            keyboardType: Platform.OS == 'ios' ? 'ascii-capable' : 'default',
+            value: email.toLowerCase(),
+            // keyboardType: Platform.OS == 'ios' ? 'ascii-capable' : 'default',
           }}
           label={constants.email}
         />

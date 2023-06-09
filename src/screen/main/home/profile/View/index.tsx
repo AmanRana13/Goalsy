@@ -12,6 +12,7 @@ import {
   BackButton,
   TextBox,
   CountsCard,
+  FullScreenImage
 } from 'components';
 
 // theme
@@ -24,7 +25,6 @@ import {userProfile} from 'redux/actions/home';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 import {url} from 'redux/axios/apikit';
-import FullScreenImage from 'components/FullScreenImage';
 
 const Profile = ({navigation}: any) => {
   const {colors, dark}: any = useTheme();
@@ -154,7 +154,7 @@ const Profile = ({navigation}: any) => {
             <ImageBackground
               source={dark ? appImages.tooltipDark : appImages.tooltip}
               style={style.toolTip}
-              resizeMode="cover">
+              resizeMode="stretch">
               <TextBox styles={style.text} text={constants.tellUsMore} />
             </ImageBackground>
           )}

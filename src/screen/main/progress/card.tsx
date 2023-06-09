@@ -52,21 +52,23 @@ const Card = ({color, navigation}) => {
       </View>
       <View style={{gap: 10, justifyContent: 'space-evenly'}}>
         <CTAButton
-          isShadow={false}
+          showShadow={false}
           text={'Edit'}
           color={color.themeColor}
           type={constants.small}
           buttonStyle={style.buttonStyle}
           onPress={() => navigation.navigate(routesConstants.editActivity)}
           fontFamily={fonts.semiBold}
+          hideShadow={true}
         />
         <CTAButton
-          isShadow={false}
+          showShadow={false}
           text={'Complete'}
           color={color.themeColor}
           type={constants.small}
           buttonStyle={style.buttonStyle}
           fontFamily={fonts.semiBold}
+          hideShadow={true}
         />
       </View>
     </View>
@@ -84,7 +86,7 @@ const styles = color =>
       width: Width - 40,
       marginTop: 20,
       flexDirection: 'row',
-      backgroundColor: color.white,
+      backgroundColor: color.darkGray,
       justifyContent: 'space-between',
     },
     innerContainer: {maxWidth: Width * 0.58, gap: 4, flex: 8},

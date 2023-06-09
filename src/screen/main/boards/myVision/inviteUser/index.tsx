@@ -1,13 +1,6 @@
 import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {
-  BackButton,
-  Header,
-  Icons,
-  InputField,
-  Spacer,
-  StatusHeader,
-} from 'components';
+import {BackButton, Header, InputField, Spacer, StatusHeader} from 'components';
 import appImages from 'theme/images';
 import constants from 'theme/constants';
 import InviteUserCard from 'components/InviteUserCard';
@@ -34,8 +27,11 @@ const InviteUser = () => {
         TextInputProps={{
           placeholder: constants.searchUser,
           returnKeyType: 'done',
-          inputStyle: {borderRadius: 30, paddingHorizontal: 16},
-          textInput: {fontSize: Width * 0.058},
+          inputStyle: {borderRadius: Width * 0.05},
+          textInput: {fontSize: Width * 0.048},
+          inputContainerStyle: {
+            borderRadius: Width * 0.09,
+          },
         }}
       />
       <Spacer height={constants.height20} />

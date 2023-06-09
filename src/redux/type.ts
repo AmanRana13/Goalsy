@@ -1,6 +1,6 @@
 export type action = {
   type: string;
-  payload: object | boolean | string;
+  payload: any;
 };
 
 export type login = {

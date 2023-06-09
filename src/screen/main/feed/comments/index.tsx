@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {
   Dimensions,
   FlatList,
   KeyboardAvoidingView,
+  Platform,
   ScrollView,
   View,
 } from 'react-native';
@@ -25,7 +26,8 @@ import constants from 'theme/constants';
 import styles from './styles';
 import InputField from 'components/inputField';
 import Icons from 'components/icons';
-import {height} from 'utils/globalFunctions';
+import {Width} from 'hook/DevicePixel';
+import KeyboardManager from 'react-native-keyboard-manager';
 
 const Data = [
   {
@@ -94,18 +96,23 @@ const Data = [
 const Comments = ({navigation}: any) => {
   const {colors}: any = useTheme();
   const style = styles(colors);
+  useLayoutEffect(() => {
+    Platform.OS === 'ios' && KeyboardManager.setEnable(false);
+    return () => Platform.OS === 'ios' && KeyboardManager.setEnable(true);
+  }, []);
   return (
     <View style={style.container}>
       <StatusHeader />
       <Header title={constants.comments} LeftIcon={<BackButton />} />
       <Spacer />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior="height">
         <FlatList
           data={Data}
-          style={{height: height * 0.745}}
           renderItem={({item}) => <CommentCard item={item} color={colors} />}
-          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{flexGrow: 1}}
+          bounces={false}
         />
+
         <InputField
           colors={colors}
           RightCompo={
@@ -115,14 +122,19 @@ const Comments = ({navigation}: any) => {
             placeholder: constants.writeYourComment,
             returnKeyType: 'done',
             inputContainerStyle: {
-              borderRadius: 16,
+              borderRadius: 18,
               borderColor: colors.black,
               borderWidth: 3,
               backgroundColor: 'transparent',
             },
+            textInput: {
+              fontSize: Width * 0.04,
+              color: colors.black,
+            },
           }}
         />
-      </ScrollView>
+      </KeyboardAvoidingView>
+      <Spacer />
     </View>
   );
 };

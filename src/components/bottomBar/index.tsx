@@ -83,13 +83,7 @@ const BottomBar = ({navigation}: any) => {
                 setSelectedIndex(index);
                 navigation.navigate(item.route);
               }}
-              style={[
-                style.icons,
-                {
-                  marginLeft: item.id === 5 ? 10 : 0,
-                  width: Width * 0.15,
-                },
-              ]}>
+              style={style.icons}>
               <Icons
                 disabled={false}
                 size={item?.id === 3 ? 60 : 30}

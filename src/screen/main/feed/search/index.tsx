@@ -19,6 +19,7 @@ import constants, {routesConstants} from 'theme/constants';
 // style
 import styles from './styles';
 import InputField from 'components/inputField';
+import {Width} from 'hook/DevicePixel';
 
 const Data = [
   {_id: 1, userName: 'Winni', source: appImages.dummyUser},
@@ -46,7 +47,10 @@ const Search = ({navigation}: any) => {
         TextInputProps={{
           placeholder: constants.search + '...',
           returnKeyType: 'done',
-          inputStyle: {borderRadius: 30},
+          inputStyle: {borderRadius:  Width * 0.05},
+          inputContainerStyle: {
+            borderRadius: Width * 0.09,
+          },
         }}
       />
       <Spacer />

@@ -11,10 +11,11 @@ const styles = (color: colors) =>
       position: 'relative',
       bottom: hasNotch() ? 30 : 5,
       width: Width - constants.screenPadding,
-      marginLeft: constants.screenPadding / 2,
-      marginRight: constants.screenPadding / 2,
+      // marginLeft: constants.screenPadding / 2,
+      // marginRight: constants.screenPadding / 2,
       paddingHorizontal: 10,
       borderRadius: 15,
+      alignSelf:"center"
     },
     innerContainer: {
       flexGrow: 1,
@@ -30,6 +31,7 @@ const styles = (color: colors) =>
     icons: {
       justifyContent: 'center',
       alignItems: 'center',
+      width: Width * 0.15,
     },
     empty: {height: 70, width: 70},
     text: {alignSelf: 'center'},

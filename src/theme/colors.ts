@@ -33,6 +33,7 @@ export type colors = {
   textLightGray: string;
   textColor: string;
   countCard: string;
+  textDisable: string;
   
   
 };
@@ -47,7 +48,7 @@ export const commonColor: any = {
     commonWhite: '#FFFFFF',
     commonBlack: '#000000',
     dividerColor: '#C3C2C2',
-    modalBackground: 'rgba(0,0,0,0.7)',
+    modalBackground: 'rgba(0,0,0,0.6)',
     placeholder: 'rgba(200, 200, 200, 1)',
     fadedTextColor: 'rgba(148, 148, 148, 1)',
     
@@ -55,7 +56,8 @@ export const commonColor: any = {
     learnAbout531text: '#CCFF00',
     learnAbout531Background: 'rgba(34, 34, 34, 1)',
     greyDot: '#565659',
-    textLightGray:"rgba(255, 255, 255, 1)"
+    textLightGray:"rgba(255, 255, 255, 1)",
+    textDisable: 'rgba(0,0,0,0.2)',
 
   },
 };
@@ -78,6 +80,7 @@ const light: Theme = {
     navigationBarColor:"#F5F6F0",
     disable: 'rgba(0,0,0,0.2)',
     countCard: '#000000',
+    calenderSunday:"#000000",
 
     ...commonColor.colors,
   },
@@ -94,13 +97,14 @@ const dark: Theme = {
     themeColor: '#CCFF00',
     checkBoxHead: '#ffffff',
     checkBoxBackground: '#CCFF00',
+    calenderSunday: '#CCFF00',
     background: 'rgba(0, 0, 0, 1)',
     questionHeaderText: '#000',
     modalButtonShadow: '#222222',
     boxButtonBorder: '#fff',
     boxButtonSelectBorder: '#222222',
     navigationBarColor:"#000",
-    disable: 'rgba(255,255,255,0.4)',
+    disable: 'rgba(255,255,255,0.7)',
     countCard: '#222222',
     ...commonColor.colors,
   },

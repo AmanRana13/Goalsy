@@ -37,7 +37,8 @@ const FriendsCard = memo(({item, color, button1, button2}: friendCardProps) => {
             color={color.themeColor}
             textColor={color.commonBlack}
             fontFamily={fonts.semiBold}
-            isShadow={false}
+            showShadow={false}
+            hideShadow={true}
           />
         )}
 
@@ -49,7 +50,8 @@ const FriendsCard = memo(({item, color, button1, button2}: friendCardProps) => {
             color={color.gray}
             textColor={color.commonBlack}
             fontFamily={fonts.semiBold}
-            isShadow={false}
+            showShadow={false}
+            hideShadow={true}
           />
         )}
       </View>

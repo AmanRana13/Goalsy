@@ -1,7 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 // lib
-import {ActionSheetIOS, Platform, ScrollView, View} from 'react-native';
+import {
+  ActionSheetIOS,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 import {useTheme} from '@react-navigation/native';
@@ -52,12 +58,12 @@ const ProfileEdit = ({navigation}: any) => {
   const style = styles(colors);
   const {userDetails} = useSelector((state: any) => state.homeReducer);
 
-  useEffect(() => {
-    Platform.OS === 'ios' && KeyboardManager.setEnable(false);
-    return () => {
-      Platform.OS === 'ios' && KeyboardManager.setEnable(true);
-    };
-  }, []);
+  // useEffect(() => {
+  //   Platform.OS === 'ios' && KeyboardManager.setEnable(false);
+  //   return () => {
+  //     Platform.OS === 'ios' && KeyboardManager.setEnable(true);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (userDetails) {
@@ -110,105 +116,108 @@ const ProfileEdit = ({navigation}: any) => {
             name: 'image.jpg',
           });
       }
-      dispatch(editProfileAction(formData));
+      dispatch(editProfileAction(formData, name));
     }
   };
   return (
     <View style={style.container}>
       <StatusHeader />
       <Header title={constants.EditProfile} LeftIcon={<BackButton />} />
-      <ScrollView
-        style={style.innerContainer}
-        contentContainerStyle={{flexGrow: 1}}
-        showsVerticalScrollIndicator={false}>
-        <Spacer height={constants.height20} />
-        <Icons
-          size={120}
-          source={
-            image ? {uri: image?.path} : {uri: url + userDetails?.profileImage}
-          }
-          styles={style.logo}
-          imageStyle={{borderRadius: 150}}
-          resize="cover"
-          onPress={() => openImagePicker(true, false, setImage)}
-        />
+      <KeyboardAvoidingView style={{flex: 1}}>
+        <ScrollView
+          style={style.innerContainer}
+          contentContainerStyle={{flexGrow: 1}}
+          showsVerticalScrollIndicator={false}
+          bounces={false}>
+          <Spacer height={constants.height20} />
+          <Icons
+            size={120}
+            source={
+              image
+                ? {uri: image?.path}
+                : {uri: url + userDetails?.profileImage}
+            }
+            styles={style.logo}
+            imageStyle={{borderRadius: 150}}
+            resize="cover"
+            onPress={() => openImagePicker(true, false, setImage)}
+          />
 
-        <InputField
-          ref={ref => (inputRef[0] = ref)}
-          colors={colors}
-          TextInputProps={{
-            required: true,
-            placeholder: constants.name,
-            nextField: () => inputRef[1].focus(),
-            value: name,
-            onChangeText: (data: string) => {
-              setName(data);
-            },
-          }}
-          label={constants.name}
-        />
-        <InputField
-          ref={ref => (inputRef[1] = ref)}
-          colors={colors}
-          TextInputProps={{
-            required: true,
-            placeholder: constants.email,
-            returnKeyType: 'done',
-            value: userDetails?.email,
-            editable: false,
-          }}
-          disableColor={false}
-          label={constants.email}
-        />
-        <DateInputField
-          colors={colors}
-          TextInputProps={{
-            placeholder: constants.DOB,
-            value: dob,
-          }}
-          label={constants.DOB}
-          onPress={() => {
-            setDatePicker(true);
-          }}
-          RightCompo={
-            <Icons
-              source={appImages.calendar}
-              size={30}
-              onPress={() => {
-                setDatePicker(true);
-              }}
-            />
-          }
-        />
-        <InputField
-          colors={colors}
-          TextInputProps={{
-            placeholder: constants.location,
-            returnKeyType: constants.done,
-            value: location,
-            onChangeText: (data: string) => {
-              setLocation(data);
-            },
-          }}
-          label={constants.location}
-        />
-        <DropDown
-          list={genderList}
-          onPress={(item: any) => setGender(item.value)}
-          color={colors}
-          label={constants.gender}
-          defaultValue={gender}
-        />
-        <Spacer height={constants.height50} />
-        <CTAButton
-          text={constants.update}
-          color={colors.themeColor}
-          type={constants.medium}
-          buttonStyle={{alignSelf: 'center'}}
-          onPress={onSubmit}
-        />
-        <Spacer height={constants.height50} />
-      </ScrollView>
+          <InputField
+            ref={ref => (inputRef[0] = ref)}
+            colors={colors}
+            TextInputProps={{
+              required: true,
+              placeholder: constants.name,
+              nextField: () => inputRef[1].focus(),
+              value: name,
+              onChangeText: (data: string) => {
+                setName(data.trimStart());
+              },
+            }}
+            label={constants.name}
+          />
+          <InputField
+            ref={ref => (inputRef[1] = ref)}
+            colors={colors}
+            TextInputProps={{
+              placeholder: constants.email,
+              returnKeyType: 'done',
+              value: userDetails?.email,
+              editable: false,
+            }}
+            label={constants.email}
+          />
+          <DateInputField
+            colors={colors}
+            TextInputProps={{
+              placeholder: constants.DOB,
+              value: dob,
+            }}
+            label={constants.DOB}
+            onPress={() => {
+              setDatePicker(true);
+            }}
+            RightCompo={
+              <Icons
+                source={appImages.calendar}
+                size={30}
+                onPress={() => {
+                  setDatePicker(true);
+                }}
+              />
+            }
+          />
+          <InputField
+            colors={colors}
+            TextInputProps={{
+              placeholder: constants.location,
+              returnKeyType: constants.done,
+              value: location,
+              onChangeText: (data: string) => {
+                setLocation(data.trimStart());
+              },
+            }}
+            label={constants.location}
+          />
+          <DropDown
+            list={genderList}
+            onPress={(item: any) => setGender(item.value)}
+            color={colors}
+            label={constants.gender}
+            defaultValue={gender}
+          />
+          <Spacer height={constants.height50} />
+          <CTAButton
+            text={constants.update}
+            color={colors.themeColor}
+            type={constants.medium}
+            buttonStyle={{alignSelf: 'center'}}
+            onPress={onSubmit}
+          />
+          <Spacer height={constants.height50} />
+        </ScrollView>
+      </KeyboardAvoidingView>
       <ActionSheet
         ref={actionSheet}
         title={'Select Image'}

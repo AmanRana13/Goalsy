@@ -78,7 +78,7 @@ const GoalCard = ({
           />
           {showButton ? (
             <CTAButton
-              isShadow={false}
+              showShadow={false}
               text={constants.complete}
               buttonStyle={style.buttonStyle}
               color={color?.themeColor}

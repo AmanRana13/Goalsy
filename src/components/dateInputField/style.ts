@@ -34,7 +34,8 @@ const styles = (colors: colors) =>
     input: {
       flex: 8,
       paddingHorizontal: 6,
-      paddingTop:20,
+      textAlignVertical:"center",
+      justifyContent:"center",
       height: '100%',
       color: colors.commonBlack,
       fontFamily:fonts.medium

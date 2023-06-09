@@ -43,8 +43,8 @@ const CheckBox = ({
             height: sizes,
             width: sizes,
             borderRadius: circle ? 30 : 7,
-            backgroundColor: state ? color?.themeColor : color?.commonWhite,
-            borderColor: borderColor,
+            backgroundColor: state ? color?.themeColor : 'transparent',
+            borderColor: color?.themeColor,
           },
           styles,
         ]}

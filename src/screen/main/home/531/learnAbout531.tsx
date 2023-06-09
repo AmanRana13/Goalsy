@@ -18,7 +18,7 @@ import constants, {routesConstants} from 'theme/constants';
 import styles from './styles';
 import usePixel, {Width} from 'hook/DevicePixel';
 import LearnAboutHeader from './learnAboutHeader';
-import Video from 'components/Video';
+import VideoPlayer from 'components/Video';
 
 const LearnAbout531 = ({navigation}): any => {
   const scrollRef = useRef();
@@ -32,7 +32,6 @@ const LearnAbout531 = ({navigation}): any => {
       y: 0,
       animated: true,
     });
-    
   }, [selectedIcon]);
 
   const onHeaderClick = (value: number) => {
@@ -83,13 +82,13 @@ const LearnAbout531 = ({navigation}): any => {
   const videoLink = (value: number) => {
     switch (value) {
       case 4:
-        return "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+        return require('../../../../assets/videos/1.mp4');
       case 0:
-        return "http://192.168.3.174:5000/public/1.mp4";
+        return require('../../../../assets/videos/2.mp4');
       case 1:
-        return "http://192.168.3.174:5000/public/2.mp4";
+        return require('../../../../assets/videos/3.mp4');
       case 2:
-        return "http://192.168.3.174:5000/public/1.mp4";
+        return require('../../../../assets/videos/4.mp4');
       default:
         return setSelectedIcon(4);
     }
@@ -133,7 +132,7 @@ const LearnAbout531 = ({navigation}): any => {
         />
         <TextBox text={constants.dummyText} />
         <Spacer />
-        <Video videoLink={videoLink(selectedIcon)}/>
+        <VideoPlayer videoLink={videoLink(selectedIcon)} />
         <Spacer height={constants.height50} />
 
         <CTAButton

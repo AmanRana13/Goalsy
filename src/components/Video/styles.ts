@@ -1,20 +1,17 @@
-import { Width } from 'hook/DevicePixel';
+import usePixel from 'hook/DevicePixel';
 import { StyleSheet } from 'react-native';
-import { responsiveWidth } from 'utils/responsiveSize';
 
 const styles = StyleSheet.create({
   mediaPlayer: {
-    width: '100%',
-    // alignSelf: 'center',
+    // width: '100%',
     aspectRatio: 16/9,
     backgroundColor: 'black',
-    // justifyContent: 'center',
     overflow: 'hidden',
-    borderRadius: responsiveWidth(5)
+    borderRadius: usePixel(15)
   },
   progressSlider: {
     alignSelf: "center",
-    width: '68%',
+    width: usePixel(230),
     marginHorizontal: 10,
   },
   thumb: {

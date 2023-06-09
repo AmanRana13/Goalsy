@@ -20,7 +20,7 @@ const AboutUs = () => {
       <Header title={constants.aboutUs} LeftIcon={<BackButton />} />
       <ScrollView contentContainerStyle={{flexGrow:1}} showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
-        <Video />
+        <Video videoLink={require('../../../../assets/videos/1.mp4')}/>
         <Spacer height={constants.height20} />
         <TextBox
           size={15}

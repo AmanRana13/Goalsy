@@ -54,7 +54,7 @@ const VisionCard = ({
             flex: 1,
           }}>
           <CTAButton
-            isShadow={false}
+            showShadow={false}
             text={constants.edit}
             buttonStyle={style.buttonStyle}
             color={color?.themeColor}
@@ -66,7 +66,7 @@ const VisionCard = ({
             hideShadow
           />
           <CTAButton
-            isShadow={false}
+            showShadow={false}
             text={constants.invite}
             buttonStyle={style.buttonStyle}
             color={color?.themeColor}

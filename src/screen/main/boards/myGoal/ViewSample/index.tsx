@@ -43,7 +43,7 @@ const ViewSample = ({navigation}) => {
           style={{
             width: sizes,
             height: sizes / 2,
-            backgroundColor: colors.commonWhite,
+            backgroundColor: colors.darkGray,
             justifyContent: 'space-evenly',
             alignItems: 'center',
             borderRadius: 23,
@@ -60,7 +60,7 @@ const ViewSample = ({navigation}) => {
             flexDirection: 'row',
             width: sizes,
             height: sizes / 2,
-            backgroundColor: colors.commonWhite,
+            backgroundColor: colors.darkGray,
             justifyContent: 'space-between',
             alignItems: 'center',
             borderRadius: 23,
@@ -73,7 +73,6 @@ const ViewSample = ({navigation}) => {
           <TextBox
             styles={{
               textAlign: 'right',
-              textAlignVertical: 'flex-start',
               height: '100%',
             }}
             text={'Hello'}
@@ -87,7 +86,7 @@ const ViewSample = ({navigation}) => {
           style={{
             width: sizes,
             height: sizes / 2,
-            backgroundColor: colors.commonWhite,
+            backgroundColor: colors.darkGray,
             justifyContent: 'space-evenly',
             alignItems: 'center',
             borderRadius: 23,

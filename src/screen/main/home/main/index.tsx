@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Alert, Dimensions, ScrollView, Share, View} from 'react-native';
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 
 // components
 import {Icons, Spacer, TextBox, StatusHeader} from 'components';
@@ -21,9 +21,10 @@ const Home = ({navigation}): any => {
   const sizes = usePixel(constants.progressIconSize);
   const style = styles(colors);
   const [name, setName] = useState('');
+  let isFocused = useIsFocused();
   useLayoutEffect(() => {
-    getName();
-  }, []);
+    isFocused && getName();
+  }, [isFocused]);
   const getName = async () => {
     const tempData = await DataManager.getUserData();
     const tempName = JSON.parse(tempData).name.toString();
@@ -53,17 +54,19 @@ const Home = ({navigation}): any => {
       <StatusHeader />
       <Spacer />
       <TextBox text={constants.hello} size={16} />
-      <TextBox text={name} size={34} textProps={
-        {
-          numberOfLines:1
-        }
-      }/>
+      <TextBox
+        text={name}
+        size={34}
+        textProps={{
+          numberOfLines: 1,
+        }}
+      />
       <Spacer />
       <Icons
         size={constants.progressIconSize + (hasNotch() ? 0 : -25)}
         disabled={true}
         styles={style.center}
-        source={[appImages.progressLogo, appImages.progressLogo]}
+        source={[appImages.progressLogo, appImages.progressLogoDark]}
       />
       <Spacer height={constants.height30} />
       <View style={style.iconsOuterContainer}>

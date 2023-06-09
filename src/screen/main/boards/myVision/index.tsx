@@ -23,6 +23,7 @@ const MyVision = ({navigation}): any => {
   const sizes = usePixel(360);
   return (
     <View style={style.container}>
+       
       {!showData ? (
         <>
           <TextBox
@@ -67,8 +68,9 @@ const MyVision = ({navigation}): any => {
         </>
       ) : (
         <View style={{flex: 1}}>
+          <View style={{flex: 1}}>
           <VisionCard color={colors} navigation={navigation} />
-          <Spacer flex={1} />
+          </View>
           <CTAButton
             text={constants.ViewBoard}
             buttonStyle={style.buttonStyle}
@@ -80,7 +82,6 @@ const MyVision = ({navigation}): any => {
             }}
             onPress={() => navigation.navigate(routesConstants.myBoard, false)}
           />
-          <Spacer flex={1} />
         </View>
       )}
     </View>

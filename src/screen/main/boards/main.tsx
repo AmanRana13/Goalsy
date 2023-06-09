@@ -18,7 +18,7 @@ import constants, {routesConstants} from 'theme/constants';
 import usePixel, {Height} from 'hook/DevicePixel';
 import BoxButtons from 'components/boxButtons';
 import MyVision from './myVision';
-import Board from './myGoal';
+import MyGoal from './myGoal';
 import styles from './style';
 import Activity from './activity';
 
@@ -76,7 +76,7 @@ const Boards = ({navigation}): any => {
         {iconPress === 0 ? (
           <MyVision navigation={navigation} />
         ) : iconPress === 1 ? (
-          <Board navigation={navigation} />
+          <MyGoal navigation={navigation} />
         ) : iconPress === 2 ? (
           <Activity navigation={navigation} />
         ) : null}

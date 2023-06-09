@@ -65,9 +65,9 @@ const Progress = ({navigation}): any => {
             gap: 10,
             justifyContent: 'space-evenly',
           }}>
-          <Icons source={appImages.chart} size={30} />
+          <Icons source={[appImages.chart,appImages.chartDark]} size={25} />
           <Icons source={appImages.progressWheel} size={250} disabled={true} />
-          <Icons source={appImages.edit} size={34} />
+          <Icons source={[appImages.edit,appImages.editDark]} size={28} />
         </View>
         <View style={style.quote}>
           <TextBox

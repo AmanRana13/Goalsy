@@ -5,13 +5,13 @@ import VideoPlayer from 'react-native-video';
 import appImages from 'theme/images';
 import RNSlider from '../Slider';
 import styles from './styles';
-import {responsiveWidth} from 'utils/responsiveSize';
 import {useTheme} from '@react-navigation/native';
+import usePixel from 'hook/DevicePixel';
 
-const PLAYER_STATES = {
-  PLAYING: 0,
-  PAUSED: 1,
-  ENDED: 2,
+const VIDEO_STATE = {
+  PLAY: 0,
+  PAUSE: 1,
+  END: 2,
 };
 
 const Video = props => {
@@ -23,7 +23,7 @@ const Video = props => {
   const [isLoading, setIsLoading] = useState(true);
   const [paused, setPaused] = useState(true);
   const [mute, setMute] = useState(false);
-  const [playerState, setPlayerState] = useState(1);
+  const [playerState, setPlayerState] = useState(0);
   const [videoDetails, setVideoDetails] = useState(null);
 
   const onSeek = seek => {
@@ -31,7 +31,7 @@ const Video = props => {
   };
   const onPaused = () => {
     setPaused(!paused);
-    setPlayerState(paused ? 0 : 1);
+    setPlayerState(paused ? VIDEO_STATE.PAUSE : VIDEO_STATE.PLAY);
   };
 
   const onMuted = () => {
@@ -39,28 +39,34 @@ const Video = props => {
   };
 
   const onReplay = () => {
-    setPlayerState(PLAYER_STATES.PLAYING);
-    videoPlayer.current.seek(0);
     setPlayerState(0);
+    videoPlayer.current.seek(0);
+    onPaused();
+    setCurrentTime(0);
   };
 
   const onProgress = data => {
-    if (!isLoading && playerState !== PLAYER_STATES.ENDED) {
+    if (!isLoading && playerState !== VIDEO_STATE.END) {
       setCurrentTime(data.currentTime);
+    } else if (playerState == VIDEO_STATE.END) {
+      setCurrentTime(0);
     }
   };
 
   const onLoad = data => {
     setVideoDetails(data);
     setDuration(data.duration);
+    setIsLoading(false);
   };
 
   const onLoadStart = () => setIsLoading(true);
 
-  const onEnd = () => setPlayerState(PLAYER_STATES.ENDED);
+  const onEnd = () => {
+    setPlayerState(VIDEO_STATE.END);
+  };
 
   const onPlayPauseIconClick = () => {
-    if (playerState === 2) {
+    if (playerState === VIDEO_STATE.END) {
       onReplay();
     } else {
       onPaused();
@@ -69,7 +75,7 @@ const Video = props => {
 
   const dragging = value => {
     setCurrentTime(value);
-    if (playerState === 1) {
+    if (playerState === VIDEO_STATE.PAUSE) {
       return;
     }
     onPaused();
@@ -97,16 +103,16 @@ const Video = props => {
         muted={mute}
         ref={videoPlayer}
         resizeMode={'contain'}
-        source={{
-          uri: props.videoLink,
-        }}
+        source={props.videoLink}
         style={[styles.mediaPlayer, customVideoHeight]}
         volume={10}
         fullscreenOrientation={'landscape'}
         fullscreen={isFullScreen}
-        onFullscreenPlayerDidDismiss={() => setIsFullScreen(false)}
+        onFullscreenPlayerDidDismiss={() => (
+          setIsFullScreen(false), onPaused()
+        )}
         fullscreenAutorotate={false}
-        poster={'https://camendesign.com/code/video_for_everybody/poster.jpg'}
+        // poster={'https://camendesign.com/code/video_for_everybody/poster.jpg'}
         posterResizeMode={'cover'}
       />
       <BlurView
@@ -114,37 +120,43 @@ const Video = props => {
           position: 'absolute',
           bottom: 0,
           width: '100%',
-
+          height: usePixel(50),
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
         }}
+        enabled={false}
         blurType="light"
-        blurAmount={2}>
-        <View style={{flexDirection: 'row',justifyContent: 'center',
-          alignItems: 'center',width:"100%"}}>
+        blurAmount={5}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+          }}>
           <TouchableOpacity
             onPress={onPlayPauseIconClick}
             style={{
               alignItems: 'center',
               backgroundColor: colors.themeColor,
-              borderRadius: responsiveWidth(3.5),
-              height: responsiveWidth(7),
+              borderRadius: usePixel(30),
+              height: usePixel(25),
               justifyContent: 'center',
-              width: responsiveWidth(7),
+              width: usePixel(25),
             }}>
             <Image
               style={{
-                width: responsiveWidth(3),
-                height: responsiveWidth(3),
-                marginStart: playerState === 0 ? 0 : 2,
+                width: usePixel(10),
+                height: usePixel(10),
+                marginStart: playerState === VIDEO_STATE.PLAY ? 2 : 0,
                 tintColor: colors.commonBlack,
               }}
               resizeMode="contain"
               source={
-                playerState === 0
+                playerState === VIDEO_STATE.PAUSE
                   ? appImages.onlyPause
-                  : playerState === 2
+                  : playerState === VIDEO_STATE.END
                   ? appImages.onlyReplay
                   : appImages.onlyPlay
               }
@@ -172,8 +184,8 @@ const Video = props => {
           <TouchableOpacity activeOpacity={1} onPress={onMuted}>
             <Image
               style={{
-                width: responsiveWidth(6),
-                height: responsiveWidth(6),
+                width: usePixel(25),
+                height: usePixel(25),
                 marginBottom: 1,
                 marginLeft: -2,
                 tintColor: colors.themeColor,
@@ -184,15 +196,15 @@ const Video = props => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={1}
-            style={{marginStart: responsiveWidth(2)}}
+            style={{marginStart: usePixel(10)}}
             onPress={() => {
               onReplay();
               setIsFullScreen(true);
             }}>
             <Image
               style={{
-                width: responsiveWidth(5),
-                height: responsiveWidth(5),
+                width: usePixel(25),
+                height: usePixel(25),
                 tintColor: colors.themeColor,
               }}
               resizeMode="contain"

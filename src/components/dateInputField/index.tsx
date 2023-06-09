@@ -3,7 +3,6 @@ import {Keyboard, Text, TouchableOpacity, View} from 'react-native';
 
 //Component
 import TextBox from 'components/textBox';
-import Icons from 'components/icons';
 
 //Hook
 import usePixel from 'hook/DevicePixel';
@@ -35,7 +34,7 @@ const DateInputField = forwardRef(
 
     const style = styles(colors);
     return (
-      <TouchableOpacity onPress={onPress} style={style.container}>
+      <TouchableOpacity onPress={onPress} style={style.container} activeOpacity={0.9}>
         {/* Input Label */}
         <View style={style.labelStyle}>
           {LabelCompo
@@ -63,7 +62,7 @@ const DateInputField = forwardRef(
               style.input,
               {
                 fontSize: inputFont,
-                color: value ? colors.commonBlack : colors.disable,
+                color: value ? colors.commonBlack : colors.placeholder,
               },
             ]}
             {...TextInputProps}>

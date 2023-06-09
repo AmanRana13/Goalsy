@@ -31,6 +31,7 @@ const FullScreenImage = ({
           source={appImages.cross}
           onPress={closeImage}
           styles={{alignSelf: 'flex-end', marginHorizontal: 20}}
+          size={30}
         />
         <Spacer flex={1} />
         <Icons

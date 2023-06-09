@@ -51,7 +51,7 @@ const CountsCard = ({
       <Spacer styles={style.spacer} />
       <Card
         count={friendRequestCount}
-        title={'Friend Requests '}
+        title={'Friend Requests'}
         onPress={() =>
           navigation.navigate(routesConstants.Friend, {
             screen: routesConstants.friendRequest,

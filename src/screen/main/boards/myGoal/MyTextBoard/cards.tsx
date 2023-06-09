@@ -51,7 +51,7 @@ export const ActivityCards = ({color}) => {
           </View>
           <Icons
             source={[appImages.shareIcon, appImages.shareIconDark]}
-            size={30}
+            size={20}
             onPress={() => onShare()}
           />
           {/* <CTAButton

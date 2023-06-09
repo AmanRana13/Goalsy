@@ -14,30 +14,33 @@ import GoalCard from 'components/GoalCard';
 import Spacer from 'components/spacer';
 
 const boxButtonName = [5, 3, 1];
-const Board = ({navigation}): any => {
+
+const MyGoal = ({navigation}): any => {
   const {colors}: any = useTheme();
   const style = styles(colors);
   const [data, showData] = useState(false);
   return (
     <View style={style.container}>
-      {!data ? (
-        <>
-          <TextBox
-            text={constants.welcome}
-            size={45}
-            styles={{alignSelf: 'center', marginBottom: 40}}
-            onPress={() => showData(true)}
-          />
-          <TextBox
-            text={constants.dummyText}
-            size={16}
-            fontFamily={fonts.regular}
-            styles={{alignSelf: 'center', marginBottom: 90}}
-          />
-        </>
-      ) : (
-        <GoalCard color={colors} />
-      )}
+      <View style={{flex: 1}}>
+        {!data ? (
+          <>
+            <TextBox
+              text={constants.welcome}
+              size={45}
+              styles={{alignSelf: 'center', marginBottom: 40}}
+              onPress={() => showData(true)}
+            />
+            <TextBox
+              text={constants.dummyText}
+              size={16}
+              fontFamily={fonts.regular}
+              styles={{alignSelf: 'center', marginBottom: 90}}
+            />
+          </>
+        ) : (
+          <GoalCard color={colors} />
+        )}
+      </View>
       <View style={{alignSelf: 'center'}}>
         <TextBox
           text={'Note: Maximum 5 goals can be created'}
@@ -45,7 +48,7 @@ const Board = ({navigation}): any => {
           styles={{alignSelf: 'center'}}
           fontFamily={fonts.regular}
         />
-        <Spacer height={constants.height20}/>
+        <Spacer height={constants.height20} />
         <CTAButton
           text={constants.addGoal}
           buttonStyle={style.buttonStyle}
@@ -58,4 +61,4 @@ const Board = ({navigation}): any => {
   );
 };
 
-export default Board;
+export default MyGoal;
