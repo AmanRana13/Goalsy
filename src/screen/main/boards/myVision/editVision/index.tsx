@@ -42,6 +42,7 @@ const EditVision = ({navigation}) => {
       <StatusHeader />
       <Header LeftIcon={<BackButton />} title={constants.editVision} />
       <ScrollView
+      nestedScrollEnabled = {true} 
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
@@ -56,7 +57,7 @@ const EditVision = ({navigation}) => {
           TextInputProps={{
             placeholder: constants.visionName,
             returnKeyType: 'done',
-            value: 'Hello',
+            defaultValue: 'Hello',
           }}
           label={constants.visionName}
         />

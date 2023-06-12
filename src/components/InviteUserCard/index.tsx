@@ -41,9 +41,8 @@ const InviteUserCard = ({
           <TextBox
             text={item.userName ?? 'Evelyn'}
             size={26}
-            styles={{paddingTop: 25}}
+            styles={{paddingTop: 25, paddingBottom: 10}}
           />
-          {/* <Spacer height={constants.height30} /> */}
           <CheckBoxContainer type={'Invite'} />
           <CheckBoxContainer type={'View'} />
           <CheckBoxContainer type={'Edit'} />

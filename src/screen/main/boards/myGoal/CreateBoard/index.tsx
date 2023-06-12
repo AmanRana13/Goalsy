@@ -27,8 +27,8 @@ const colorList = [
   {id: 1, colorCode: 'Red', color: 'red'},
   {id: 2, colorCode: 'Green', color: 'green'},
   {id: 3, colorCode: 'Yellow', color: 'yellow'},
-  {id: 4, colorCode: 'Yellow', color: 'orange'},
-  {id: 5, colorCode: 'Yellow', color: 'pink'},
+  {id: 4, colorCode: 'orange', color: 'orange'},
+  {id: 5, colorCode: 'pink', color: 'pink'},
 ];
 
 const CreateBoard = ({navigation}) => {
@@ -42,6 +42,7 @@ const CreateBoard = ({navigation}) => {
       <StatusHeader />
       <Header LeftIcon={<BackButton />} title={constants.createBoard} />
       <ScrollView
+      nestedScrollEnabled = {true}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />

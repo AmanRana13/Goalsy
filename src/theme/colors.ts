@@ -81,7 +81,7 @@ const light: Theme = {
     disable: 'rgba(0,0,0,0.2)',
     countCard: '#000000',
     calenderSunday:"#000000",
-
+    calenderDay:"#625F5F",
     ...commonColor.colors,
   },
 };
@@ -106,6 +106,7 @@ const dark: Theme = {
     navigationBarColor:"#000",
     disable: 'rgba(255,255,255,0.7)',
     countCard: '#222222',
+    calenderDay:"#fff",
     ...commonColor.colors,
   },
 };

@@ -54,7 +54,7 @@ const Quiz = ({navigation}: any) => {
     };
 
     return item?.map((text: any, index) => (
-      <View style={style.options}>
+      <View style={style.options} key={Math.random().toString()}>
         <View style={{flex: 9}}>
           <TextBox text={text} size={18} />
         </View>
@@ -98,7 +98,7 @@ const Quiz = ({navigation}: any) => {
             <TextBox
               text={quizData ? `/${quizData.length}` : 0}
               size={20}
-              color={colors.questionHeaderText}
+              // color={colors.questionHeaderText}
             />
           </Text>
 

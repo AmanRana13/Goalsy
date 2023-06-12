@@ -76,7 +76,7 @@ const ForgotPassword = ({navigation}: any): JSX.Element => {
             setEmail(data.trim().toLowerCase());
           },
           value: email,
-          keyboardType: Platform.OS == 'ios' ? 'ascii-capable' : 'default',
+          keyboardType: Platform.OS == 'ios' ? 'ascii-capable' : 'visible-password',
         }}
         label={constants.email}
       />

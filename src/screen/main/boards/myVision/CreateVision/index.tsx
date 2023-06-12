@@ -39,6 +39,7 @@ const CreateVision = ({navigation}) => {
       <StatusHeader />
       <Header LeftIcon={<BackButton />} title={constants.createVision} />
       <ScrollView
+      nestedScrollEnabled = {true}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />

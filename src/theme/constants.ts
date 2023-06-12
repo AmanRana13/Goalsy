@@ -1,5 +1,6 @@
 import {Height} from 'hook/DevicePixel';
 import {fonts} from './fonts';
+import moment from 'moment';
 
 export enum routesConstants {
   login = 'login',
@@ -218,7 +219,7 @@ enum constants {
   shortPassword = 'Password should be at least 8 characters long.',
   emptyConfirm = 'Please enter confirm password.',
   invalidConfirmPassword = 'Password and confirm password should be same.',
-  acceptTermCondition = 'Please agree with terms & condition and privacy policy.',
+  acceptTermCondition = 'Please agree with terms & conditions and privacy policy.',
   invalidPasswordNew = 'Password must include 1 upper case letter, 1 lower case letter, 1 numeric value, 1 special character and no spaces.',
   emptyLoc = 'Please enter location.',
   emptyDob = 'Please select date of birth.',
@@ -241,5 +242,8 @@ export const genderList = [
   {id: 3, value: 'Others'},
   {id: 4, value: 'Wish not to disclose'},
 ];
+
+
+export const MAX_DOB= new Date(moment().subtract(12, 'year').toString());
 
 export default constants;

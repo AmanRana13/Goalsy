@@ -85,7 +85,7 @@ const AccountSetting = ({navigation}: any): JSX.Element => {
 
   const SettingIcon = () => {
     return data?.map(item => {
-      return <Icons source={item.source} size={170} onPress={item.onPress} />;
+      return <Icons key ={item.source}source={item.source} size={170} onPress={item.onPress} />;
     });
   };
   useEffect(() => {

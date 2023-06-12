@@ -103,19 +103,18 @@ const InputField = forwardRef(
               autoCorrect={false}
               blurOnSubmit={false}
               allowFontScaling={false}
-              maxLength={maxLength ?? 100}
+              maxLength={maxLength ?? 80}
               onSubmitEditing={onSubmitEditing}
               onChangeText={onChangeText}
               placeholder={placeholder ?? label}
               selectionColor={colors.TextSelection}
               returnKeyType={returnKeyType ?? 'next'}
-              keyboardType={
-                keyboardType ?? Platform.OS === 'ios'
-                  ? 'default'
-                  : 'visible-password'
-              }
+              keyboardType={keyboardType ?? 'default'}
               placeholderTextColor={colors.placeholder}
               autoCapitalize={autoCapitalize ?? 'none'}
+              nativeID="hideDoneButton"
+              inputAccessoryViewID="hideDoneButton"
+              hidePlaceholder={true}
               style={[
                 style.input,
                 {

@@ -1,10 +1,8 @@
 import React, {useEffect, useLayoutEffect} from 'react';
 import {
-  Dimensions,
   FlatList,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   View,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
@@ -16,7 +14,7 @@ import {
   Header,
   BackButton,
   CommentCard,
-} from 'components';
+} from 'components'; 
 
 // theme
 import appImages from 'theme/images';

@@ -19,7 +19,7 @@ const DropDown = ({list, label, onPress, color, defaultValue}: dropdown) => {
   }, [item]);
 
   return (
-    <View style={style.outerContainer}>
+    <View>
       <TextBox text={label} size={16} fontFamily={fonts.regular} />
       <View style={[style.container]}>
         <TouchableOpacity
@@ -48,7 +48,7 @@ const DropDown = ({list, label, onPress, color, defaultValue}: dropdown) => {
           </View>
         </TouchableOpacity>
         <View style={{maxHeight: Width * 0.5}}>
-          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <ScrollView nestedScrollEnabled = {true} style={{zIndex:9999}}contentContainerStyle={{flexGrow: 1}}>
             {showList
               ? list?.map((item, index) => {
                   return (

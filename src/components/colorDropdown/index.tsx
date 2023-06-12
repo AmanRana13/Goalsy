@@ -64,7 +64,7 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
           </View>
         </TouchableOpacity>
         <View style={{maxHeight: Width * 0.5}}>
-          <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <ScrollView nestedScrollEnabled = {true} style={{zIndex:9999}} contentContainerStyle={{flexGrow: 1}}>
             {showList
               ? list?.map((item: any, index: number) => {
                   return (

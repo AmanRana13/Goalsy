@@ -50,7 +50,6 @@ const Boards = ({navigation}): any => {
   useEffect(() => {
     scrollRef && scrollRef.current.scrollTo({y: 0, animation: true});
   }, [iconPress]);
-
   return (
     <View style={style.container}>
       <StatusHeader />

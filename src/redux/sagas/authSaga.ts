@@ -71,7 +71,6 @@ export function* loginApiSaga(action: action): any {
       reset('BottomTab', 0);
     }
   } catch (e) {
-    console.log(e);
     yield call(Loading, false);
     ShowAlertMessage(constants.someThingWentWrong, popupType.error);
   }

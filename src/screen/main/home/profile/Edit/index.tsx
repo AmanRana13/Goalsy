@@ -34,7 +34,7 @@ import {url} from 'redux/axios/apikit';
 
 // theme
 import appImages from 'theme/images';
-import constants, {genderList, popupType} from 'theme/constants';
+import constants, {MAX_DOB, genderList, popupType} from 'theme/constants';
 
 // utils
 import {ShowAlertMessage} from 'utils/showAlertMessage';
@@ -57,7 +57,6 @@ const ProfileEdit = ({navigation}: any) => {
   const [datePicker, setDatePicker] = React.useState(false);
   const style = styles(colors);
   const {userDetails} = useSelector((state: any) => state.homeReducer);
-
   // useEffect(() => {
   //   Platform.OS === 'ios' && KeyboardManager.setEnable(false);
   //   return () => {
@@ -125,6 +124,7 @@ const ProfileEdit = ({navigation}: any) => {
       <Header title={constants.EditProfile} LeftIcon={<BackButton />} />
       <KeyboardAvoidingView style={{flex: 1}}>
         <ScrollView
+          nestedScrollEnabled={true}
           style={style.innerContainer}
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}
@@ -148,8 +148,8 @@ const ProfileEdit = ({navigation}: any) => {
             colors={colors}
             TextInputProps={{
               required: true,
+              returnKeyType: constants.done,
               placeholder: constants.name,
-              nextField: () => inputRef[1].focus(),
               value: name,
               onChangeText: (data: string) => {
                 setName(data.trimStart());
@@ -235,7 +235,7 @@ const ProfileEdit = ({navigation}: any) => {
 
       <DatePickerModal
         minimumDate={new Date(1920, 0, 1)}
-        maximumDate={new Date()}
+        maximumDate={MAX_DOB}
         onCancel={() => {
           setDatePicker(false);
         }}

@@ -111,7 +111,7 @@ const OtherUserProfile = ({navigation}: any) => {
         />
       </View>
       <Spacer height={constants.height30} />
-      
+
       <View
         style={{
           backgroundColor: colors.countCard,

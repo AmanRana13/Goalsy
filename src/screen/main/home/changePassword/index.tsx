@@ -1,6 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import {Dimensions, KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+} from 'react-native';
 
 // navigation
 import {useTheme} from '@react-navigation/native';
@@ -35,6 +41,7 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
 
   const [oldShowPassword, setOldShowPassword] = useState(true);
   const [newShowPassword, setNewShowPassword] = useState(true);
+  const [keyboardOpen, setKeyBoardOpen] = useState(true);
   const [confirmNewShowPassword, setConfirmNewShowPassword] = useState(true);
 
   const [newPassword, setNewPassword] = useState<String>();
@@ -54,25 +61,35 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
     }
   };
 
-  useEffect(()=>{
-    Platform.OS==="ios"&&KeyboardManager.setEnable(false)
-  },[])
+  useEffect(() => {
+    Platform.OS === 'ios' && KeyboardManager.setEnable(false);
+    return () => Platform.OS === 'ios' && KeyboardManager.setEnable(true);
+  }, []);
+
+  useEffect(async () => {
+    if (Platform.OS === 'ios') {
+      let isKeyboardOpen = await KeyboardManager.isKeyboardShowing();
+      setKeyBoardOpen(isKeyboardOpen);
+    }
+  }, []);
+
   return (
     <View style={style.container}>
       <StatusHeader />
       <Header title={constants.changePassword} LeftIcon={<BackButton />} />
       <Spacer height={constants.height30} />
-      {/* <KeyboardAvoidingView
+      <KeyboardAvoidingView
         behavior="height"
-        keyboardVerticalOffset={80}
+        keyboardVerticalOffset={Platform.OS === 'ios' && keyboardOpen ? 50 : 0}
         contentContainerStyle={{
           height: Dimensions.get('window').height * 2.25,
           width: '100%',
           flexGrow: 1,
         }}
-        style={{flex: 1}}> */}
+        style={{flex: 1}}>
         <ScrollView
           contentContainerStyle={{flexGrow: 1}}
+          style={{flex: 1}}
           showsVerticalScrollIndicator={false}>
           <Icons
             size={140}
@@ -157,7 +174,7 @@ const ChangePassword = ({navigation}: any): JSX.Element => {
           />
           <Spacer flex={1} />
         </ScrollView>
-      {/* </KeyboardAvoidingView> */}
+      </KeyboardAvoidingView>
     </View>
   );
 };

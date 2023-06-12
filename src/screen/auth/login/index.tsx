@@ -74,6 +74,7 @@ const Login = ({navigation}: any): JSX.Element => {
     <View style={style.container}>
       <StatusHeader />
       <ScrollView
+        bounces={false}
         ref={scrollRef}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
@@ -95,7 +96,8 @@ const Login = ({navigation}: any): JSX.Element => {
               setEmail(value);
             },
             value: email.toLowerCase(),
-            // keyboardType: Platform.OS == 'ios' ? 'ascii-capable' : 'default',
+            keyboardType:
+              Platform.OS == 'ios' ? 'ascii-capable' : 'visible-password',
           }}
           label={constants.email}
         />
@@ -117,7 +119,7 @@ const Login = ({navigation}: any): JSX.Element => {
             <Icons
               source={showPassword ? appImages.eyeHide : appImages.eye}
               size={30}
-              onPress={() => setShowPassword(data => !data)}
+              onPress={() => setShowPassword(!showPassword)}
             />
           }
         />

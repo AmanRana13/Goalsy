@@ -3,7 +3,6 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {PERMISSIONS, request, check, RESULTS} from 'react-native-permissions';
 import {ShowAlertMessage} from './showAlertMessage';
 import constants, {popupType} from 'theme/constants';
-
 export const pickSingleImage = (
   cropit: boolean,
   circular = false,
@@ -25,8 +24,6 @@ export const pickSingleImage = (
         }
       })
       .catch(e => {
-       
-        
         if (
           e.code == 'E_PERMISSION_MISSING' ||
           e.code == 'E_NO_LIBRARY_PERMISSION'
@@ -48,16 +45,21 @@ export const pickSingleImage = (
         }
       });
   } else {
-    check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE).then(result => {
-      console.log(result);
-      
+    // according to the android version
+
+    const checkPermission =
+      Platform.Version < 33
+        ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE
+        : PERMISSIONS.ANDROID.READ_MEDIA_IMAGES;
+
+    check(checkPermission).then(result => {
       switch (result) {
         case RESULTS.UNAVAILABLE: {
           permissionAlert(true);
           break;
         }
         case RESULTS.DENIED: {
-          request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
+          request(checkPermission)
             .then(data => {
               if (data == RESULTS.GRANTED) {
                 androidImagePicker(cropit, circular, setPic);
@@ -199,7 +201,6 @@ const androidImagePicker = (
       }
     })
     .catch(e => {
-      console.log(":::::::::::",e.code);
       if (
         e.code == 'E_PERMISSION_MISSING' ||
         e.code == 'E_NO_LIBRARY_PERMISSION'

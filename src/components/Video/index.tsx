@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {ActivityIndicator, Image, TouchableOpacity, View} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import VideoPlayer from 'react-native-video';
@@ -25,6 +25,24 @@ const Video = props => {
   const [mute, setMute] = useState(false);
   const [playerState, setPlayerState] = useState(0);
   const [videoDetails, setVideoDetails] = useState(null);
+  const [videoSource, setVideoSource] = useState(null);
+  useEffect(() => {
+    setCurrentTime(0);
+    setDuration(0);
+    setIsLoading(true);
+    setPaused(true);
+    setMute(false);
+    setPlayerState(0);
+    setVideoDetails(null);
+    setVideoSource(props.videoLink);
+  }, [props.changeVideo]);
+
+  function handleOrientation(orientation: string) {
+    orientation === 'LANDSCAPE-LEFT' || orientation === 'LANDSCAPE-RIGHT'
+      ? (setState(s => ({...s, fullscreen: true})), StatusBar.setHidden(true))
+      : (setState(s => ({...s, fullscreen: false})),
+        StatusBar.setHidden(false));
+  }
 
   const onSeek = seek => {
     videoPlayer.current.seek(seek);
@@ -35,7 +53,7 @@ const Video = props => {
   };
 
   const onMuted = () => {
-    setMute(!mute);
+    setMute(mute => !mute);
   };
 
   const onReplay = () => {
@@ -103,7 +121,7 @@ const Video = props => {
         muted={mute}
         ref={videoPlayer}
         resizeMode={'contain'}
-        source={props.videoLink}
+        source={videoSource}
         style={[styles.mediaPlayer, customVideoHeight]}
         volume={10}
         fullscreenOrientation={'landscape'}
@@ -198,7 +216,6 @@ const Video = props => {
             activeOpacity={1}
             style={{marginStart: usePixel(10)}}
             onPress={() => {
-              onReplay();
               setIsFullScreen(true);
             }}>
             <Image

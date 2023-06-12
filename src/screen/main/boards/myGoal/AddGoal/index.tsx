@@ -27,6 +27,10 @@ const categoryList = [
   {id: 1, value: 'category 1'},
   {id: 2, value: 'category 2'},
   {id: 3, value: 'category 3'},
+  {id: 4, value: 'category 3'},
+  {id: 5, value: 'category 3'},
+  {id: 6, value: 'category 3'},
+  {id: 7, value: 'category 3'},
 ];
 const colorList = [
   {id: 1, colorCode: 'Red', color: 'red'},
@@ -47,7 +51,7 @@ const AddGoal = () => {
     <View style={style.container}>
       <StatusHeader />
       <Header LeftIcon={<BackButton />} title={constants.AddGoal} />
-      <ScrollView
+      <ScrollView  nestedScrollEnabled = {true}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />

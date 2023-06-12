@@ -8,13 +8,13 @@ const styles = (color: colors) =>
       margin: 10,
       flexDirection: 'row',
       alignItems: 'center',
-      
     },
     // Dropdown
     container: {
       borderRadius: 15,
       backgroundColor: color.commonWhite,
       marginTop: 10,
+      // flex: 1,
     },
     innerContainer: {
       flexDirection: 'row',

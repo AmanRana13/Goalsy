@@ -11,7 +11,6 @@ const DatePickerModal = props => {
   return Platform.OS == 'ios' ? (
     <Modal
       statusBarTranslucent={true}
-      animated
       transparent
       visible={props.isDropdownVisible}
       animationType="fade">

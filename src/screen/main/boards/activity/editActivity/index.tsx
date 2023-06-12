@@ -53,6 +53,7 @@ const EditActivity = () => {
       <StatusHeader />
       <Header LeftIcon={<BackButton />} title={constants.editActivity} />
       <ScrollView
+      nestedScrollEnabled = {true}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
@@ -92,7 +93,7 @@ const EditActivity = () => {
             paddingVertical: 20,
             borderRadius: 20,
           }}>
-          <View style={{flexDirection: 'row', gap: 15}}>
+          <View style={{flexDirection: 'row',gap:12}}>
             <View
               style={{
                 borderRadius: 8,

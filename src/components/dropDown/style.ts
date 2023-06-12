@@ -1,4 +1,4 @@
-import {Width} from 'hook/DevicePixel';
+
 import {StyleSheet} from 'react-native';
 import { colors } from 'theme/colors';
 const styles = (color: colors) =>

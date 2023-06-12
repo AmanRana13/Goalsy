@@ -41,13 +41,13 @@ const Progress = ({navigation}): any => {
   const {colors}: any = useTheme();
   const sizes = usePixel(constants.progressIconSize);
   const style = styles(colors);
-  const onDropDownPress = item => {
-  };
+  const onDropDownPress = item => {};
   return (
     <View style={style.container}>
       <StatusHeader />
       <Header title={constants.trackProgress} />
       <ScrollView
+        nestedScrollEnabled={true}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer />
@@ -65,9 +65,9 @@ const Progress = ({navigation}): any => {
             gap: 10,
             justifyContent: 'space-evenly',
           }}>
-          <Icons source={[appImages.chart,appImages.chartDark]} size={25} />
+          <Icons source={[appImages.chart, appImages.chartDark]} size={23} />
           <Icons source={appImages.progressWheel} size={250} disabled={true} />
-          <Icons source={[appImages.edit,appImages.editDark]} size={28} />
+          <Icons source={[appImages.edit, appImages.editDark]} size={28} />
         </View>
         <View style={style.quote}>
           <TextBox

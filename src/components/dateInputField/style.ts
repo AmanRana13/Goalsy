@@ -17,6 +17,7 @@ const styles = (colors: colors) =>
       flexDirection: 'row',
       width: '100%',
       backgroundColor: colors.commonWhite,
+      alignItems:"center",
     },
     LeftCompo: {
       flex: 1,
@@ -36,7 +37,6 @@ const styles = (colors: colors) =>
       paddingHorizontal: 6,
       textAlignVertical:"center",
       justifyContent:"center",
-      height: '100%',
       color: colors.commonBlack,
       fontFamily:fonts.medium
     },

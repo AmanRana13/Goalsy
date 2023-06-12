@@ -60,7 +60,7 @@ const MyBoard = ({navigation, route}) => {
           style={{
             width: sizes,
             height: sizes / 2,
-            backgroundColor: colors.commonWhite,
+            backgroundColor: route.params?colors.darkGray:colors.commonWhite,
             justifyContent: 'space-evenly',
             alignItems: 'center',
             borderRadius: 23,

@@ -22,7 +22,7 @@ const InviteUserModal = memo(
         <BlurView
           style={{flex: 1}}
           blurType="dark"
-          blurAmount={2}>
+          blurAmount={1}>
           <View style={style.container}>
             <View style={style.modalView}>
               <InviteUserCard
