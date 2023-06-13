@@ -108,7 +108,7 @@ const Video = (props: any) => {
   };
 
   const onPlayPauseIconClick = () => {
-    if (playerState === VIDEO_STATE.END) {
+    if (videoSates.pause && videoSates.end) {
       onReplay();
     } else {
       videoSates.pause ? play() : pause();

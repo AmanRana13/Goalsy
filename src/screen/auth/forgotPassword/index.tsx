@@ -62,6 +62,7 @@ const ForgotPassword = ({navigation}: any): JSX.Element => {
       <Header title={constants.ForgotPassword} LeftIcon={<BackButton />} />
       <Spacer height={constants.height30} />
       <Icons
+        disabled
         size={140}
         source={[appImages.forgotPassword, appImages.forgotPasswordDark]}
         styles={style.logo}
@@ -76,7 +77,8 @@ const ForgotPassword = ({navigation}: any): JSX.Element => {
             setEmail(data.trim().toLowerCase());
           },
           value: email,
-          keyboardType: Platform.OS == 'ios' ? 'ascii-capable' : 'visible-password',
+          keyboardType:
+            Platform.OS == 'ios' ? 'ascii-capable' : 'visible-password',
         }}
         label={constants.email}
       />

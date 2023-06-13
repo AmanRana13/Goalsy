@@ -139,5 +139,7 @@ enum appImages {
   circleDark = require('../assets/Images/Dark/circle.png'),
   triangleDark = require('../assets/Images/Dark/triangle.png'),
   squareDark = require('../assets/Images/Dark/square.png'),
+  calRightDark = require('../assets/Images/Dark/calRight.png'),
+  calLeftDark = require('../assets/Images/Dark/calLeft.png'),
 }
 export default appImages;

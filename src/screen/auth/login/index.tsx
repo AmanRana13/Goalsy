@@ -83,6 +83,7 @@ const Login = ({navigation}: any): JSX.Element => {
           size={140}
           source={[appImages.logo, appImages.logoDark]}
           styles={style.logo}
+          disabled
         />
         <InputField
           ref={ref => (inputRef[0] = ref)}

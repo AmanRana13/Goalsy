@@ -74,7 +74,7 @@ const CategoryContainer = ({navigation, title}): any => {
                       width: 11,
                       height: 11,
                       borderRadius: 6,
-                      backgroundColor: colors.commonBlack,
+                      backgroundColor: colors.black,
                       marginEnd: 4,
                     }
                   : {

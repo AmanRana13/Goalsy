@@ -6,9 +6,10 @@ import {fonts} from 'theme/fonts';
 import appImages from 'theme/images';
 import moment from 'moment';
 import {useTheme} from '@react-navigation/native';
+import { Icons } from 'components';
 
 const CustomCalender = () => {
-  const {colors} = useTheme();
+  const {colors,dark} = useTheme();
   const INITIAL_DATE = Date();
   const appColors = {background: 'transparent'};
   const textColor = {primary: colors.calenderSunday, secondary: '#625F5F'};
@@ -79,7 +80,7 @@ const CustomCalender = () => {
       currentDate.setDate(currentDate.getDate() + 1);
     }
     return sundays;
-  }, []);
+  });
   const markedDates = {
     ...sundays,
     [`${moment().format('YYYY-MM-DD')}`]: {
@@ -141,7 +142,7 @@ const CustomCalender = () => {
             fontSize: 18,
             fontFamily: fonts.bold,
             fontWeight: '600',
-            color: '#fff',
+            color:colors.black,
           },
         },
         'stylesheet.calendar.main': {
@@ -193,16 +194,16 @@ const CustomCalender = () => {
       disableAllTouchEventsForDisabledDays={true}
       renderArrow={direction =>
         direction === 'left' ? (
-          <Image
-            resizeMode={'contain'}
-            source={appImages.calLeft}
-            style={{marginLeft: -8, width: 16, height: 16}}
+          <Icons
+          disabled
+            source={[appImages.calLeft,appImages.calLeftDark]}
+            styles={{marginLeft: -8, width: 16, height: 16}}
           />
         ) : (
-          <Image
-            resizeMode={'contain'}
-            source={appImages.calRight}
-            style={{marginRight: -1, width: 16, height: 16}}
+          <Icons
+          disabled
+            source={[appImages.calRight,appImages.calRightDark]}
+            styles={{marginRight: -1, width: 16, height: 16}}
           />
         )
       }

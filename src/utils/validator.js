@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import constants from 'theme/constants';
 
 export const validateEmail = email => {

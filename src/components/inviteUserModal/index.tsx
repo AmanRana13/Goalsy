@@ -25,10 +25,11 @@ const InviteUserModal = memo(
         visible={visible}
         onRequestClose={() => {}}>
         <BlurView style={{flex: 1}} blurType="dark" blurAmount={1}>
-          <TouchableWithoutFeedback
-            onPress={() => onClose()}
+          <TouchableOpacity
+            activeOpacity={1}
+            onPressOut={() => onClose()}
             style={style.container}>
-            <View style={style.container}>
+            <TouchableWithoutFeedback>
               <View style={style.modalView}>
                 <InviteUserCard
                   color={color}
@@ -37,8 +38,8 @@ const InviteUserModal = memo(
                   showShadow={false}
                 />
               </View>
-            </View>
-          </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+          </TouchableOpacity>
         </BlurView>
       </Modal>
     );

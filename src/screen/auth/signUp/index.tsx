@@ -151,12 +151,12 @@ const SignUp = ({navigation}: any) => {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
         style={{flex: 1}}>
         <ScrollView
-        nestedScrollEnabled = {true}
+          nestedScrollEnabled={true}
           style={style.innerContainer}
           contentContainerStyle={{flexGrow: 1}}
-          showsVerticalScrollIndicator={false}
-        >
+          showsVerticalScrollIndicator={false}>
           <Icons
+            disabled
             size={140}
             source={
               image ? {uri: image.path} : [appImages.user, appImages.userDark]
@@ -200,8 +200,9 @@ const SignUp = ({navigation}: any) => {
                 setEmail(value);
               },
               value: email,
-              
-              keyboardType:   Platform.OS == 'ios' ? 'ascii-capable' : 'visible-password',
+
+              keyboardType:
+                Platform.OS == 'ios' ? 'ascii-capable' : 'visible-password',
             }}
             label={constants.email}
           />
