@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   Dimensions,
   FlatList,
   KeyboardAvoidingView,
+  Platform,
   ScrollView,
   View,
 } from 'react-native';
@@ -28,6 +29,7 @@ import InputField from 'components/inputField';
 import Icons from 'components/icons';
 import {height} from 'utils/globalFunctions';
 import ChatCard from 'components/chatCart';
+import KeyboardManager from 'react-native-keyboard-manager';
 
 const Data = [1, 2, 3, 4, 5];
 
@@ -35,6 +37,10 @@ const Chat = ({navigation}: any) => {
   const {colors}: any = useTheme();
   const style = styles(colors);
   const [modal, showModal] = useState(false);
+  useLayoutEffect(() => {
+    Platform.OS === 'ios' && KeyboardManager.setEnable(false);
+    return () => Platform.OS === 'ios' && KeyboardManager.setEnable(true);
+  }, []);
   return (
     <View style={style.container}>
       <StatusHeader />
@@ -43,28 +49,31 @@ const Chat = ({navigation}: any) => {
         LeftIcon={<BackButton />}
         RightIcon={
           <Icons
-            source={[appImages.closeTicket,appImages.closeTicketDark]}
+            source={[appImages.closeTicket, appImages.closeTicketDark]}
             onPress={() => showModal(true)}
           />
         }
       />
       <Spacer />
 
-        <FlatList
-          data={Data}
-          style={{height: height * 0.745}}
-          renderItem={({item, index}) => (
-            <ChatCard
-              text={
-                'Lorem ipsum is a dummy text. It has survived not only five centuries.'
-              }
-              time={'02:45 AM'}
-              color={colors}
-              ownChat={index % 2 === 0}
-            />
-          )}
-          showsVerticalScrollIndicator={false}
-        />
+      <FlatList
+        data={Data}
+        contentContainerStyle={{flexGrow: 1}}
+        // style={{height: height * 0.745}}
+        renderItem={({item, index}) => (
+          <ChatCard
+            text={
+              'Lorem ipsum is a dummy text. It has survived not only five centuries.'
+            }
+            time={'02:45 AM'}
+            color={colors}
+            ownChat={index % 2 === 0}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <InputField
           colors={colors}
           RightCompo={
@@ -79,12 +88,12 @@ const Chat = ({navigation}: any) => {
               borderWidth: 3,
               backgroundColor: 'transparent',
             },
-            textInput:{
-              color:colors.black
-            }
+            textInput: {
+              color: colors.black,
+            },
           }}
         />
-
+      </KeyboardAvoidingView>
       <ConfirmModal
         source={[appImages.warring, appImages.warringDark]}
         visible={modal}

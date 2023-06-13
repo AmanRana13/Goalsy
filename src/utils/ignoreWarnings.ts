@@ -11,7 +11,7 @@ const ignoreWarns = [
   'RCTBridge required dispatch_sync to load REAModule. This may lead to deadlocks',
 ];
 
-// console.warn = () => {};rr
+console.warn = () => {};
 // console.log = () => {};
 // console.error = () => {};
 

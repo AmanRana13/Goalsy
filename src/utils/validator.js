@@ -1,4 +1,3 @@
-import { Alert } from 'react-native/types';
 import constants from 'theme/constants';
 
 export const validateEmail = email => {
@@ -142,15 +141,15 @@ export const forgotPasswordCheck = email => {
 export const changePasswordCheck = (oPass, nPass, cNewPass) => {
   // email, password, confirmPassword, isChecked
   let showErrorMessage = '';
-  if (oPass?.trim()?.length == 0) {
+  if (!oPass || oPass?.trim()?.length == 0) {
     showErrorMessage = constants.emptyOldPassword;
-  } else if (nPass == '' || nPass?.trim().length == 0) {
+  } else if (!nPass || nPass?.trim().length == 0) {
     showErrorMessage = constants.emptyNewPassword;
   } else if (nPass?.length < 8) {
     showErrorMessage = constants.nShortPassword;
   } else if (!validatePassword(nPass?.trim())) {
     showErrorMessage = constants.invalidPasswordNew;
-  } else if (cNewPass == '' || cNewPass?.trim()?.length == 0) {
+  } else if (!cNewPass || cNewPass?.trim()?.length == 0) {
     showErrorMessage = constants.emptyConfirmPassword;
   } else if (nPass !== cNewPass) {
     showErrorMessage = constants.notSamePassword;
@@ -166,7 +165,7 @@ export const removeEmojis = string => {
 };
 
 // userEdit Profile
-export const userEditProfileCheck = (name) => {
+export const userEditProfileCheck = name => {
   let showErrorMessage = '';
   if (name == '' || name?.trim()?.length == 0) {
     showErrorMessage = constants.emptyFirstName;

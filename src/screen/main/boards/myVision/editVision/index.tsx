@@ -105,6 +105,7 @@ const EditVision = ({navigation}) => {
         onUpdatePress={() => setOpenModal(false)}
         color={colors}
         item={data}
+        onClose={()=>setOpenModal(false)}
       />
     </View>
   );

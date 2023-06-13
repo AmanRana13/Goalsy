@@ -23,6 +23,7 @@ const BoxButtons = ({
   noOfItem,
   size = 30,
 }: props) => {
+
   const width = (Width - (constants.screenPadding +15) * 2) / noOfItem;
   const style = styles(color);
   return arr.map((item: any, index: number) => (

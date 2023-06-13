@@ -85,7 +85,8 @@ const AddActivity = () => {
           style={{
             backgroundColor: colors.commonWhite,
             paddingHorizontal: 15,
-            paddingVertical: 15,
+            paddingTop: 15,
+            paddingBottom: 10,
             borderRadius: 20,
           }}>
           <View style={{flexDirection: 'row', gap: 12}}>
@@ -197,7 +198,7 @@ const AddActivity = () => {
           </View>
           <TextBox
             text={'12:00 PM'}
-            styles={{alignSelf: 'flex-end', paddingTop: 15}}
+            styles={{alignSelf: 'flex-end', paddingTop: 10}}
             color={colors.commonBlack}
           />
         </View>

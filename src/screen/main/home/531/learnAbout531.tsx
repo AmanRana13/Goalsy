@@ -10,6 +10,7 @@ import {
   BackButton,
   CTAButton,
   Spacer,
+  Video
 } from 'components';
 
 import constants, {routesConstants} from 'theme/constants';
@@ -18,7 +19,6 @@ import constants, {routesConstants} from 'theme/constants';
 import styles from './styles';
 import usePixel, {Width} from 'hook/DevicePixel';
 import LearnAboutHeader from './learnAboutHeader';
-import VideoPlayer from 'components/Video';
 
 const LearnAbout531 = ({navigation}): any => {
   const scrollRef = useRef();
@@ -132,7 +132,7 @@ const LearnAbout531 = ({navigation}): any => {
         />
         <TextBox text={constants.dummyText} />
         <Spacer />
-        <VideoPlayer videoLink={videoLink(selectedIcon)} changeVideo={selectedIcon}/>
+        <Video videoLink={videoLink(selectedIcon)} changeVideo={selectedIcon}/>
         <Spacer height={constants.height50} />
 
         <CTAButton

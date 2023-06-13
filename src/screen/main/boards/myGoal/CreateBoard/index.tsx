@@ -8,15 +8,15 @@ import {
   Spacer,
   StatusHeader,
   TextBox,
+  ShapeDropdown,
+  ColorDropdown,
 } from 'components';
 import constants, {routesConstants} from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
 import appImages from 'theme/images';
 import {colors} from 'theme/colors';
 import styles from './styles';
-import {fonts} from 'theme/fonts';
 import usePixel from 'hook/DevicePixel';
-import ColorDropdown from 'components/colorDropdown';
 
 const categoryList = [
   {id: 1, value: 'category 1'},
@@ -30,6 +30,15 @@ const colorList = [
   {id: 4, colorCode: 'orange', color: 'orange'},
   {id: 5, colorCode: 'pink', color: 'pink'},
 ];
+const shapeList = [
+  {id: 1, shape: [appImages.square, appImages.squareDark], name: 'square'},
+  {id: 2, shape: [appImages.circle, appImages.circleDark], name: 'circle'},
+  {
+    id: 3,
+    shape: [appImages.triangle, appImages.triangleDark],
+    name: 'triangle',
+  },
+];
 
 const CreateBoard = ({navigation}) => {
   const {colors}: colors | any = useTheme();
@@ -42,7 +51,7 @@ const CreateBoard = ({navigation}) => {
       <StatusHeader />
       <Header LeftIcon={<BackButton />} title={constants.createBoard} />
       <ScrollView
-      nestedScrollEnabled = {true}
+        nestedScrollEnabled={true}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
@@ -59,12 +68,14 @@ const CreateBoard = ({navigation}) => {
           }}>
           <Icons disabled={true} size={180} source={appImages.boardIcons} />
         </View>
-        <TextBox text={constants.selectShape} size={16} />
-        <Spacer height={12} />
-        <Image
-          style={{width: '100%', height: 60}}
-          source={appImages.selectShape}
+
+        <ShapeDropdown
+          list={shapeList}
+          onPress={() => {}}
+          color={colors}
+          label={constants.selectShape}
         />
+
         <Spacer height={12} />
         <ColorDropdown
           list={colorList}
@@ -75,10 +86,7 @@ const CreateBoard = ({navigation}) => {
         <Spacer height={constants.height20} />
         <TextBox text={constants.selectImage} size={16} />
         <Spacer height={12} />
-        <Icons
-          size={60}
-          source={[appImages.plus, appImages.plusDark]}
-        />
+        <Icons size={60} source={[appImages.plus, appImages.plusDark]} />
         <Spacer height={constants.height50} />
         <View style={{alignSelf: 'center'}}>
           <CTAButton

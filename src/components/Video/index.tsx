@@ -1,12 +1,34 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {ActivityIndicator, Image, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  Platform,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
-import VideoPlayer from 'react-native-video';
+import VideoPlayer, {
+  OnSeekData,
+  OnLoadData,
+  OnProgressData,
+} from 'react-native-video';
 import appImages from 'theme/images';
 import RNSlider from '../Slider';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import usePixel from 'hook/DevicePixel';
+import FullScreenVideo from './fullScreenVideo';
+import {videoProps} from './type';
+
+const initialValue = {
+  end: false,
+  pause: true,
+  currentTime: 0,
+  duration: 1,
+  isLoading: false,
+  mute: false,
+  volume: 1.0,
+};
 
 const VIDEO_STATE = {
   PLAY: 0,
@@ -14,101 +36,93 @@ const VIDEO_STATE = {
   END: 2,
 };
 
-const Video = props => {
+let duration = 0;
+const Video = (props: any) => {
   const {colors} = useTheme();
-  const videoPlayer = useRef(null);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const videoPlayer = useRef<VideoPlayer>();
+  const [videoSates, setVideoStates] = useState<videoProps>(initialValue);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [paused, setPaused] = useState(true);
-  const [mute, setMute] = useState(false);
-  const [playerState, setPlayerState] = useState(0);
-  const [videoDetails, setVideoDetails] = useState(null);
-  const [videoSource, setVideoSource] = useState(null);
+  const [playerState, setPlayerState] = useState(1);
+
   useEffect(() => {
-    setCurrentTime(0);
-    setDuration(0);
-    setIsLoading(true);
-    setPaused(true);
-    setMute(false);
-    setPlayerState(0);
-    setVideoDetails(null);
-    setVideoSource(props.videoLink);
+    setVideoStates(initialValue);
+    Platform.OS === 'android' && videoPlayer.current?.seek(0);
   }, [props.changeVideo]);
 
-  function handleOrientation(orientation: string) {
-    orientation === 'LANDSCAPE-LEFT' || orientation === 'LANDSCAPE-RIGHT'
-      ? (setState(s => ({...s, fullscreen: true})), StatusBar.setHidden(true))
-      : (setState(s => ({...s, fullscreen: false})),
-        StatusBar.setHidden(false));
-  }
+  useEffect(() => {
+    if (!isFullScreen) {
+      onReplay();
+      setPlayerState(VIDEO_STATE.PLAY);
+      setVideoStates(obj => ({...obj, duration: duration, pause: false}));
+    }
+  }, [isFullScreen]);
 
-  const onSeek = seek => {
-    videoPlayer.current.seek(seek);
+  const pause = () => {
+    setVideoStates(obj => ({...obj, pause: true}));
   };
-  const onPaused = () => {
-    setPaused(!paused);
-    setPlayerState(paused ? VIDEO_STATE.PAUSE : VIDEO_STATE.PLAY);
+  const play = () => {
+    setVideoStates(obj => ({...obj, pause: false}));
   };
-
   const onMuted = () => {
-    setMute(mute => !mute);
+    setVideoStates(obj => ({
+      ...obj,
+      mute: !obj.mute,
+      volume: !videoSates.mute ? 0 : 1,
+    }));
   };
 
   const onReplay = () => {
-    setPlayerState(0);
-    videoPlayer.current.seek(0);
-    onPaused();
-    setCurrentTime(0);
+    videoPlayer.current?.seek(0);
+    setPlayerState(VIDEO_STATE.PLAY);
+    setVideoStates(obj => ({...obj, currentTime: 0, pause: false, end: false}));
   };
 
-  const onProgress = data => {
-    if (!isLoading && playerState !== VIDEO_STATE.END) {
-      setCurrentTime(data.currentTime);
+  const onProgress = (data: OnProgressData) => {
+    if (!videoSates?.isLoading && playerState !== VIDEO_STATE.END) {
+      setVideoStates(obj => ({...obj, currentTime: data.currentTime}));
     } else if (playerState == VIDEO_STATE.END) {
-      setCurrentTime(0);
+      setVideoStates(obj => ({...obj, currentTime: 0}));
     }
   };
 
-  const onLoad = data => {
-    setVideoDetails(data);
-    setDuration(data.duration);
-    setIsLoading(false);
+  const onLoad = (data: OnLoadData) => {
+    duration = data.duration;
+    setVideoStates(obj => ({
+      ...obj,
+      pause: true,
+      isLoading: false,
+      duration: data.duration,
+      currentTime: 0,
+    }));
   };
 
-  const onLoadStart = () => setIsLoading(true);
+  const onLoadStart = () =>
+    setVideoStates(obj => ({
+      ...obj,
+      isLoading: true,
+    }));
 
   const onEnd = () => {
     setPlayerState(VIDEO_STATE.END);
+    setVideoStates(obj => ({...obj, end: true, pause: true}));
   };
 
   const onPlayPauseIconClick = () => {
     if (playerState === VIDEO_STATE.END) {
       onReplay();
     } else {
-      onPaused();
+      videoSates.pause ? play() : pause();
     }
   };
 
-  const dragging = value => {
-    setCurrentTime(value);
-    if (playerState === VIDEO_STATE.PAUSE) {
-      return;
-    }
-    onPaused();
+  const seekVideo = (value: OnSeekData) => {
+    videoPlayer.current?.seek(+value.toFixed(2));
+    setVideoStates(obj => ({...obj, currentTime: +value.toFixed(2)}));
+    play();
   };
 
-  const seekVideo = value => {
-    onSeek(value);
-    onPaused();
-  };
-  const customVideoHeight = videoDetails
-    ? {
-        aspectRatio:
-          videoDetails.naturalSize.width / videoDetails.naturalSize.height,
-      }
-    : null;
+  console.log(videoSates);
+
   return (
     <View style={[styles.mediaPlayer, props.style]}>
       <VideoPlayer
@@ -116,22 +130,27 @@ const Video = props => {
         onLoad={onLoad}
         onLoadStart={onLoadStart}
         onProgress={onProgress}
-        onReadyForDisplay={() => setTimeout(() => setIsLoading(false), 500)}
-        paused={paused}
-        muted={mute}
+        paused={videoSates.pause}
+        muted={videoSates.mute}
         ref={videoPlayer}
         resizeMode={'contain'}
-        source={videoSource}
-        style={[styles.mediaPlayer, customVideoHeight]}
-        volume={10}
+        source={props.videoLink}
+        style={[styles.mediaPlayer]}
+        volume={videoSates?.volume}
         fullscreenOrientation={'landscape'}
         fullscreen={isFullScreen}
-        onFullscreenPlayerDidDismiss={() => (
-          setIsFullScreen(false), onPaused()
-        )}
+        onFullscreenPlayerDidDismiss={() => {
+          setIsFullScreen(false);
+          // pause()
+          setVideoStates(obj => ({...obj, pause: true}));
+          // setVideoStates(obj => ({
+          //   ...obj,
+          //   currentTime: 0,
+          //   duration: duration,
+          //   pause: true,
+          // }));
+        }}
         fullscreenAutorotate={false}
-        // poster={'https://camendesign.com/code/video_for_everybody/poster.jpg'}
-        posterResizeMode={'cover'}
       />
       <BlurView
         style={{
@@ -154,7 +173,7 @@ const Video = props => {
             width: '100%',
           }}>
           <TouchableOpacity
-            onPress={onPlayPauseIconClick}
+            onPress={() => onPlayPauseIconClick()}
             style={{
               alignItems: 'center',
               backgroundColor: colors.themeColor,
@@ -167,26 +186,28 @@ const Video = props => {
               style={{
                 width: usePixel(10),
                 height: usePixel(10),
-                marginStart: playerState === VIDEO_STATE.PLAY ? 2 : 0,
+                marginStart: videoSates.pause ? 2 : 0,
                 tintColor: colors.commonBlack,
               }}
               resizeMode="contain"
               source={
-                playerState === VIDEO_STATE.PAUSE
+                !videoSates.pause && !videoSates.end
                   ? appImages.onlyPause
-                  : playerState === VIDEO_STATE.END
+                  : videoSates.end
                   ? appImages.onlyReplay
+                  : videoSates.pause
+                  ? appImages.onlyPlay
                   : appImages.onlyPlay
               }
             />
           </TouchableOpacity>
           <RNSlider
             style={styles.progressSlider}
-            onValueChange={dragging}
+            onValueChange={seekVideo}
             onSlidingComplete={seekVideo}
             minimumValue={0}
-            maximumValue={Math.floor(duration)}
-            value={Math.floor(currentTime)}
+            maximumValue={Math.floor(videoSates?.duration)}
+            value={Math.floor(videoSates?.currentTime)}
             trackStyle={styles.track}
             thumbStyle={[
               styles.thumb,
@@ -195,8 +216,10 @@ const Video = props => {
                 borderBottomRightRadius: playerState === 2 ? 5 : 0,
               },
             ]}
-            addExtraWidth={Math.floor(currentTime) > 3 ? 2 : 0}
-            leftPositon={{left: Math.floor(currentTime) > 3 ? -1 : 0}}
+            addExtraWidth={Math.floor(videoSates?.currentTime) > 3 ? 2 : 0}
+            leftPositon={{
+              left: Math.floor(videoSates?.currentTime) > 3 ? -1 : 0,
+            }}
             minimumTrackTintColor={colors.themeColor}
           />
           <TouchableOpacity activeOpacity={1} onPress={onMuted}>
@@ -209,7 +232,7 @@ const Video = props => {
                 tintColor: colors.themeColor,
               }}
               resizeMode="contain"
-              source={mute ? appImages.mute : appImages.sound}
+              source={videoSates?.mute ? appImages.mute : appImages.sound}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -230,7 +253,7 @@ const Video = props => {
           </TouchableOpacity>
         </View>
       </BlurView>
-      {isLoading && (
+      {videoSates?.isLoading && (
         <View
           style={{
             width: '100%',
@@ -242,6 +265,13 @@ const Video = props => {
           <ActivityIndicator size={'large'} color={colors.themeColor} />
         </View>
       )}
+      {Platform.OS === 'android' ? (
+        <FullScreenVideo
+          visible={isFullScreen}
+          onClose={() => setIsFullScreen(false)}
+          source={props.videoLink}
+        />
+      ) : null}
     </View>
   );
 };

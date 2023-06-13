@@ -1,10 +1,5 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import {
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
-  View,
-} from 'react-native';
+import {FlatList, KeyboardAvoidingView, Platform, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 // components
@@ -14,8 +9,7 @@ import {
   Header,
   BackButton,
   CommentCard,
-} from 'components'; 
-
+} from 'components';
 // theme
 import appImages from 'theme/images';
 import constants from 'theme/constants';
@@ -103,14 +97,14 @@ const Comments = ({navigation}: any) => {
       <StatusHeader />
       <Header title={constants.comments} LeftIcon={<BackButton />} />
       <Spacer />
-      <KeyboardAvoidingView style={{flex: 1}} behavior="height">
-        <FlatList
-          data={Data}
-          renderItem={({item}) => <CommentCard item={item} color={colors} />}
-          contentContainerStyle={{flexGrow: 1}}
-          bounces={false}
-        />
 
+      <FlatList
+        data={Data}
+        renderItem={({item}) => <CommentCard item={item} color={colors} />}
+        contentContainerStyle={{flexGrow: 1}}
+      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <InputField
           colors={colors}
           RightCompo={
@@ -132,6 +126,7 @@ const Comments = ({navigation}: any) => {
           }}
         />
       </KeyboardAvoidingView>
+
       <Spacer />
     </View>
   );

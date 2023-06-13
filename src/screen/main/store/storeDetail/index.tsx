@@ -1,12 +1,10 @@
 import {ScrollView, Text, View} from 'react-native';
 import React from 'react';
 import styles from './style';
-import {BackButton, CTAButton, Header, Spacer, StatusHeader} from 'components';
+import {BackButton, CTAButton, Header, Spacer, StatusHeader,TextBox,Video} from 'components';
 import constants from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
-import TextBox from 'components/textBox';
 import {fonts} from 'theme/fonts';
-import Video from 'components/Video';
 
 const StoreDetail = () => {
   const {colors}: any = useTheme();

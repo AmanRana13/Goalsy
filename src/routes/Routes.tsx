@@ -24,7 +24,7 @@ const Routes = () => {
     (async () => {
       try {
         const response = changeNavigationBarColor(
-          isDarkMode ? '#000000' : '#F5F6F0',
+          isDarkMode ? '#000000' : '#0000001a',
         );
       } catch (e) {
       }

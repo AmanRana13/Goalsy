@@ -17,7 +17,7 @@ const style = (color: colors) => StyleSheet.create({
     },
     text: { 
         marginTop: 6,
-        flex: 6 
+        flex: 6 ,paddingRight:10
     },
     button:{
         flex: 3,

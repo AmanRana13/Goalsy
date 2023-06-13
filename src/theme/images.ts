@@ -59,6 +59,9 @@ enum appImages {
   progress = require('../assets/Images/Icons/progress.png'),
   cross = require('../assets/Images/Icons/cross.png'),
   blur = require('../assets/Images/Icons/blur.png'),
+  circle = require('../assets/Images/Icons/circle.png'),
+  triangle = require('../assets/Images/Icons/triangle.png'),
+  square = require('../assets/Images/Icons/square.png'),
 
   //video player
   sound = require('../assets/Images/Icons/sound.png'),
@@ -133,5 +136,8 @@ enum appImages {
   crossDark = require('../assets/Images/Dark/cross.png'),
   chartDark = require('../assets/Images/Dark/chart.png'),
   userDark = require('../assets/Images/Dark/user.png'),
+  circleDark = require('../assets/Images/Dark/circle.png'),
+  triangleDark = require('../assets/Images/Dark/triangle.png'),
+  squareDark = require('../assets/Images/Dark/square.png'),
 }
 export default appImages;

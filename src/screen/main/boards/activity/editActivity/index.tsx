@@ -90,7 +90,8 @@ const EditActivity = () => {
           style={{
             backgroundColor: colors.commonWhite,
             paddingHorizontal: 15,
-            paddingVertical: 20,
+            paddingTop: 15,
+            paddingBottom: 10,
             borderRadius: 20,
           }}>
           <View style={{flexDirection: 'row',gap:12}}>

@@ -1,14 +1,20 @@
 import {ScrollView, Text, View} from 'react-native';
 import React from 'react';
 import styles from './style';
-import {BackButton, CTAButton, Header, Spacer, StatusHeader} from 'components';
+import {
+  BackButton,
+  CTAButton,
+  Header,
+  Spacer,
+  StatusHeader,
+  Video,
+  Icons,
+  TextBox,
+} from 'components';
 import constants from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
-import TextBox from 'components/textBox';
 import {fonts} from 'theme/fonts';
-import Icons from 'components/icons';
 import appImages from 'theme/images';
-import Video from 'components/Video';
 import {openLinks} from 'utils/globalFunctions';
 
 const AboutUs = () => {
@@ -18,9 +24,11 @@ const AboutUs = () => {
     <View style={style.container}>
       <StatusHeader />
       <Header title={constants.aboutUs} LeftIcon={<BackButton />} />
-      <ScrollView contentContainerStyle={{flexGrow:1}} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
-        <Video videoLink={require('../../../../assets/videos/1.mp4')}/>
+        <Video videoLink={require('../../../../assets/videos/1.mp4')} />
         <Spacer height={constants.height20} />
         <TextBox
           size={15}

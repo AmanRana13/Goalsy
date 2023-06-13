@@ -49,7 +49,7 @@ const Login = ({navigation}: any): JSX.Element => {
     (async () => {
       try {
         const response = await changeNavigationBarColor(
-          dark ? '#000000' : '#F5F6F0',
+          dark ? '#000000' : '#0000001a',
         );
       } catch (e) {}
     })();

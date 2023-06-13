@@ -15,10 +15,15 @@ const styles = (Color: colors) =>
       backgroundColor: Color.modalBackground,
       paddingHorizontal: constants.modalOuterPadding,
     },
+    innerContainer: {
+      flex: 1,
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     modalView: {
       width: '100%',
       borderRadius: 20,
-      paddingVertical: 25,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: Color.darkGray,

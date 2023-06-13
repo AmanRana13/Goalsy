@@ -18,4 +18,7 @@ export {default as DateInputField} from './dateInputField';
 export {default as DatePickerModal} from './datePickerModal';
 export {default as ColorDropdown} from './colorDropdown';
 export {default as FullScreenImage} from './FullScreenImage';
+export {default as ShapeDropdown} from './shapeDropdown';
+export {default as Video} from './Video';
+
 

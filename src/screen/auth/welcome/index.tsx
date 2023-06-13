@@ -37,7 +37,7 @@ const Welcome = ({navigation}: any) => {
       </View>
       <TouchableOpacity
         style={style.group}
-        onPress={() => navigation.navigate(routesConstants.login)}>
+        onPress={() => navigation.replace(routesConstants.login)}>
         <View style={style.button}>
           <View style={style.innerButtonContainer}>
             <TextBox
