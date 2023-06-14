@@ -93,6 +93,7 @@ const Chat = ({navigation}: any) => {
             },
           }}
         />
+        <Spacer height={Platform.OS === 'ios' ? constants.height20 : 10} />
       </KeyboardAvoidingView>
       <ConfirmModal
         source={[appImages.warring, appImages.warringDark]}

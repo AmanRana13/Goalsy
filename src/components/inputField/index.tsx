@@ -70,7 +70,6 @@ const InputField = forwardRef(
               : label && (
                   <TextBox
                     size={16}
-                    fontFamily={fonts.regular}
                     text={`${label}${required ? '*' : ''}`}
                   />
                 )}

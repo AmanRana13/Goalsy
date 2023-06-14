@@ -20,7 +20,7 @@ const ColorDropDown = ({list, label, onPress, color}: dropdown) => {
   }, [item]);
   return (
     <View>
-      <TextBox text={label} size={16} fontFamily={fonts.regular} />
+      <TextBox text={label} size={16} />
       <View style={[style.container]}>
         <TouchableOpacity
           onPress={() => setShowList(!showList)}

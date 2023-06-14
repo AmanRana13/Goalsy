@@ -77,7 +77,7 @@ const AddActivity = () => {
         />
         <Spacer height={constants.height20} />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <TextBox text={'Reminder'} size={16} fontFamily={fonts.regular} />
+          <TextBox text={'Reminders'} size={16} />
           <RoundCheckBox color={colors} value={CheckBoxValue} />
         </View>
         <Spacer />

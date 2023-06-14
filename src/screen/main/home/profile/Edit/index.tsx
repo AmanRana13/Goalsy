@@ -52,7 +52,7 @@ const ProfileEdit = ({navigation}: any) => {
   const [image, setImage] = useState<any>(null);
   const [gender, setGender] = useState<Object>();
   const [name, setName] = useState<string>('');
-  const [dob, setDob] = useState<string>('');
+  const [dob, setDob] = useState<string>(null);
   const [location, setLocation] = useState<string>('');
   const [datePicker, setDatePicker] = React.useState(false);
   const style = styles(colors);
@@ -66,8 +66,10 @@ const ProfileEdit = ({navigation}: any) => {
 
   useEffect(() => {
     if (userDetails) {
-      let DOB = moment(userDetails?.dob).format('MMM DD, YYYY');
-      setDob(DOB);
+      if(userDetails.dob){
+        let DOB = moment(userDetails?.dob).format('MMM DD, YYYY');
+        setDob(DOB);
+      }
       setName(userDetails?.name);
       setGender(userDetails?.gender);
       setLocation(userDetails?.location);

@@ -53,7 +53,7 @@ const EditActivity = () => {
       <StatusHeader />
       <Header LeftIcon={<BackButton />} title={constants.editActivity} />
       <ScrollView
-      nestedScrollEnabled = {true}
+        nestedScrollEnabled={true}
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Spacer height={constants.height20} />
@@ -82,7 +82,7 @@ const EditActivity = () => {
         />
         <Spacer height={constants.height20} />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <TextBox text={'Reminder'} size={16} fontFamily={fonts.regular} />
+          <TextBox text={'Reminders'} size={16} />
           <RoundCheckBox color={colors} value={CheckBoxValue} />
         </View>
         <Spacer />
@@ -94,7 +94,7 @@ const EditActivity = () => {
             paddingBottom: 10,
             borderRadius: 20,
           }}>
-          <View style={{flexDirection: 'row',gap:12}}>
+          <View style={{flexDirection: 'row', gap: 12}}>
             <View
               style={{
                 borderRadius: 8,
@@ -103,7 +103,12 @@ const EditActivity = () => {
                 alignItems: 'center',
                 width: width,
               }}>
-              <TextBox text={'S'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
+              <TextBox
+                text={'S'}
+                size={22}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
             <View
               style={{
@@ -113,7 +118,12 @@ const EditActivity = () => {
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'M'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
+              <TextBox
+                text={'M'}
+                size={22}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
             <View
               style={{
@@ -123,7 +133,12 @@ const EditActivity = () => {
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'T'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
+              <TextBox
+                text={'T'}
+                size={22}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
             <View
               style={{
@@ -133,7 +148,12 @@ const EditActivity = () => {
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'W'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
+              <TextBox
+                text={'W'}
+                size={22}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
             <View
               style={{
@@ -143,7 +163,12 @@ const EditActivity = () => {
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'T'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
+              <TextBox
+                text={'T'}
+                size={22}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
             <View
               style={{
@@ -153,7 +178,12 @@ const EditActivity = () => {
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'F'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
+              <TextBox
+                text={'F'}
+                size={22}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
             <View
               style={{
@@ -163,7 +193,12 @@ const EditActivity = () => {
                 width: width,
                 alignItems: 'center',
               }}>
-              <TextBox text={'S'} size={22} fontFamily={fonts.regular} color={colors.commonBlack} />
+              <TextBox
+                text={'S'}
+                size={22}
+                fontFamily={fonts.regular}
+                color={colors.commonBlack}
+              />
             </View>
           </View>
           <TextBox

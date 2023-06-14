@@ -41,8 +41,8 @@ const DateInputField = forwardRef(
             ? LabelCompo
             : label && (
                 <TextBox
-                  size={16}
-                  fontFamily={fonts.regular}
+                  size={17}
+                  fontFamily={fonts.medium}
                   text={`${label}${required ? '*' : ''}`}
                 />
               )}
@@ -63,6 +63,7 @@ const DateInputField = forwardRef(
               {
                 fontSize: inputFont,
                 color: value ? colors.commonBlack : colors.placeholder,
+                
               },
             ]}
             {...TextInputProps}>

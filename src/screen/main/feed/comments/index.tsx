@@ -103,6 +103,7 @@ const Comments = ({navigation}: any) => {
         renderItem={({item}) => <CommentCard item={item} color={colors} />}
         contentContainerStyle={{flexGrow: 1}}
       />
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <InputField
@@ -125,9 +126,8 @@ const Comments = ({navigation}: any) => {
             },
           }}
         />
+        <Spacer height={constants.height20} />
       </KeyboardAvoidingView>
-
-      <Spacer />
     </View>
   );
 };

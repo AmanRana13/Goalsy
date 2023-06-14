@@ -39,7 +39,7 @@ const Card = ({color, navigation}) => {
         />
         <InnerRow
           fontFamily={fonts.medium}
-          header={'Reminder:'}
+          header={'Reminders:'}
           description={'M,T,W: 12:00 PM'}
           size={13}
         />

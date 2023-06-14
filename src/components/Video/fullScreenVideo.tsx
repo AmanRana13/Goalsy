@@ -16,12 +16,13 @@ import VideoPlayer, {
 import appImages from 'theme/images';
 import RNSlider from '../Slider';
 import {useTheme} from '@react-navigation/native';
-import usePixel from 'hook/DevicePixel';
-import {Icons} from 'components';
+import usePixel, {Height, Width} from 'hook/DevicePixel';
+import {Icons, StatusHeader} from 'components';
 
 import Orientation from 'react-native-orientation-locker';
 
 import {fullScreenProps, videoProps} from './type';
+import {getStatusBarHeight} from 'utils/getStatusBarHeight';
 const initialValue = {
   play: false,
   end: false,
@@ -128,7 +129,9 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
       visible={visible}
       style={{flex: 1}}
       onRequestClose={onClose}
-      transparent={true}>
+      transparent={true}
+      statusBarTranslucent={true}>
+      {/* <StatusHeader backgroundColor={"#000000"}/> */}
       <View style={[styles.mediaPlayer]}>
         <VideoPlayer
           onEnd={onEnd}
@@ -228,7 +231,11 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
         </BlurView>
         <Icons
           source={appImages.backArrowDark}
-          styles={{zIndex: 999999999, position: 'absolute'}}
+          styles={{
+            zIndex: 999999999,
+            position: 'absolute',
+            top: getStatusBarHeight(false),
+          }}
           onPress={onClose}
         />
         {videoSates?.isLoading && (
@@ -252,11 +259,10 @@ export default FullScreenVideo;
 
 const styles = StyleSheet.create({
   mediaPlayer: {
-    height: '100%',
+    height: "100%",
     width: '100%',
     backgroundColor: 'black',
     overflow: 'hidden',
-    borderRadius: usePixel(15),
   },
   progressSlider: {
     alignSelf: 'center',

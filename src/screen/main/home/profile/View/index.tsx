@@ -12,7 +12,7 @@ import {
   BackButton,
   TextBox,
   CountsCard,
-  FullScreenImage
+  FullScreenImage,
 } from 'components';
 
 // theme
@@ -109,7 +109,9 @@ const Profile = ({navigation}: any) => {
           TextInputProps={{
             editable: false,
             placeholder: constants.DOB,
-            value: moment(userDetails?.dob).format('MMM DD, YYYY'),
+            value: userDetails?.dob
+              ? moment(userDetails?.dob).format('MMM DD, YYYY')
+              : null,
           }}
           label={constants.DOB}
           RightCompo={<Icons source={appImages.calendar} size={30} />}

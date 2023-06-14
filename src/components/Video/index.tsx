@@ -15,7 +15,7 @@ import VideoPlayer, {
 import appImages from 'theme/images';
 import RNSlider from '../Slider';
 import styles from './styles';
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 import usePixel from 'hook/DevicePixel';
 import FullScreenVideo from './fullScreenVideo';
 import {videoProps} from './type';
@@ -47,15 +47,19 @@ const Video = (props: any) => {
   useEffect(() => {
     setVideoStates(initialValue);
     Platform.OS === 'android' && videoPlayer.current?.seek(0);
-  }, [props.changeVideo]);
+  }, [props.videoLink]);
+
+  const isFocus = useIsFocused();
 
   useEffect(() => {
+    onReplay();
+    setPlayerState(VIDEO_STATE.PLAY);
     if (!isFullScreen) {
-      onReplay();
-      setPlayerState(VIDEO_STATE.PLAY);
       setVideoStates(obj => ({...obj, duration: duration, pause: false}));
+    } else {
+      setVideoStates(obj => ({...obj, duration: 0, pause: true, end: false}));
     }
-  }, [isFullScreen]);
+  }, [isFullScreen, isFocus]);
 
   const pause = () => {
     setVideoStates(obj => ({...obj, pause: true}));
@@ -116,12 +120,12 @@ const Video = (props: any) => {
   };
 
   const seekVideo = (value: OnSeekData) => {
-    videoPlayer.current?.seek(+value.toFixed(2));
-    setVideoStates(obj => ({...obj, currentTime: +value.toFixed(2)}));
-    play();
+    if (!videoSates.end) {
+      videoPlayer.current?.seek(+value.toFixed(2));
+      setVideoStates(obj => ({...obj, currentTime: +value.toFixed(2)}));
+      play();
+    }
   };
-
-  console.log(videoSates);
 
   return (
     <View style={[styles.mediaPlayer, props.style]}>
@@ -141,37 +145,37 @@ const Video = (props: any) => {
         fullscreen={isFullScreen}
         onFullscreenPlayerDidDismiss={() => {
           setIsFullScreen(false);
-          // pause()
           setVideoStates(obj => ({...obj, pause: true}));
-          // setVideoStates(obj => ({
-          //   ...obj,
-          //   currentTime: 0,
-          //   duration: duration,
-          //   pause: true,
-          // }));
         }}
         fullscreenAutorotate={false}
+        allowsExternalPlayback={false}
+        posterResizeMode={'cover'}
       />
       <BlurView
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          width: '100%',
-          height: usePixel(50),
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        enabled={false}
-        blurType="light"
-        blurAmount={5}>
-        <View
-          style={{
+        style={[
+          {
+            position: 'absolute',
+            bottom: 0,
+            width: '100%',
+            height: usePixel(50),
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
-          }}>
+          },
+          Platform.OS === 'android' && {backgroundColor: '#000000b0'},
+        ]}
+        blurType="light"
+        blurAmount={5}>
+        <View
+          style={[
+            {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              height: '100%',
+            },
+          ]}>
           <TouchableOpacity
             onPress={() => onPlayPauseIconClick()}
             style={{
@@ -202,9 +206,10 @@ const Video = (props: any) => {
             />
           </TouchableOpacity>
           <RNSlider
+            disabled={videoSates.end}
             style={styles.progressSlider}
             onValueChange={seekVideo}
-            onSlidingComplete={seekVideo}
+            // onSlidingComplete={seekVideo}
             minimumValue={0}
             maximumValue={Math.floor(videoSates?.duration)}
             value={Math.floor(videoSates?.currentTime)}

@@ -156,7 +156,6 @@ const SignUp = ({navigation}: any) => {
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
           <Icons
-            disabled
             size={140}
             source={
               image ? {uri: image.path} : [appImages.user, appImages.userDark]

@@ -10,5 +10,7 @@ export interface videoProps {
 export interface fullScreenProps {
   visible: boolean;
   onClose: () => void;
+  muteCallback: (e:boolean) => void;
   source: number;
+  isMute:boolean
 }

@@ -132,7 +132,7 @@ const LearnAbout531 = ({navigation}): any => {
         />
         <TextBox text={constants.dummyText} />
         <Spacer />
-        <Video videoLink={videoLink(selectedIcon)} changeVideo={selectedIcon}/>
+        <Video videoLink={videoLink(selectedIcon)}/>
         <Spacer height={constants.height50} />
 
         <CTAButton

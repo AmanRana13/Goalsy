@@ -39,7 +39,7 @@ const ActivityCard = ({
             gap: 10,
           }}>
           <View style={{rowGap:3}}>
-            <TextBox text={"Reminder: M,T,W: 12:00 PM"} size={14} />
+            <TextBox text={"Reminders: M,T,W: 12:00 PM"} size={14} />
             <TextBox text={'Due Date: May 05, 2023'} size={14} />
           </View>
           <CTAButton
