@@ -11,7 +11,7 @@ import {userInviteModal} from './type';
 
 //style
 import styles from './style';
-import InviteUserCard from 'components/InviteUserCard';
+import InviteUserCard from 'components/inviteUserCard';
 import {BlurView} from '@react-native-community/blur';
 
 const InviteUserModal = memo(

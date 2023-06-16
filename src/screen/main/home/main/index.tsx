@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {Alert, Dimensions, ScrollView, Share, View} from 'react-native';
+import {Alert, Share, View} from 'react-native';
 import {useIsFocused, useTheme} from '@react-navigation/native';
 
 // components
@@ -15,20 +15,38 @@ import styles from './styles';
 import usePixel, {Width} from 'hook/DevicePixel';
 import {hasNotch} from 'react-native-device-info';
 import {openLinks} from 'utils/globalFunctions';
+import { socket } from 'utils/socket';
 
-const Home = ({navigation}): any => {
+const Home = ({navigation}: any) => {
   const {colors}: any = useTheme();
   const sizes = usePixel(constants.progressIconSize);
   const style = styles(colors);
   const [name, setName] = useState('');
   let isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (!socket.connected) {
+      socket.on('connect', () => {});
+      (async () => {
+        let userData = await DataManager.getUserData();
+        if (userData) {
+          let parseData = JSON.parse(userData);
+          socket.emit('login', parseData.userId);
+        }
+      })();
+    }
+  }, []);
+
   useLayoutEffect(() => {
     isFocused && getName();
   }, [isFocused]);
+
   const getName = async () => {
     const tempData = await DataManager.getUserData();
-    const tempName = JSON.parse(tempData).name.toString();
-    setName(tempName);
+    if (tempData) {
+      const tempName = JSON.parse(tempData).name;
+      setName(tempName);
+    }
   };
   const onShare = async () => {
     try {

@@ -33,52 +33,50 @@ const ConfirmModal = memo(
           animationType="fade"
           transparent={true}
           visible={visible}
-          onRequestClose={() => {}}
-        >
+          onRequestClose={() => {}}>
           <BlurView
             style={{
-              flex:1
+              flex: 1,
             }}
             blurType="dark"
-            blurAmount={2}
-            >
-          <View style={style.container}>
-            <View style={style.modalView}>
-              <Icons source={source} size={40} />
-              <View style={style.textContainer}>
-                <TextBox
-                  text={description}
-                  styles={style.text}
-                  size={textSize}
-                  fontFamily={fonts.regular}
-                />
-              </View>
-              <View style={style.buttonContainer}>
-                {leftButton && (
-                  <CTAButton
-                    type={constants.small}
-                    text={leftButton?.text}
-                    color={Colors?.themeColor}
-                    buttonStyle={leftButton?.style}
-                    onPress={leftButton.onPress}
-                    showShadow={false}
-                    hideShadow
+            blurAmount={2}>
+            <View style={style.container}>
+              <View style={style.modalView}>
+                <Icons source={source} size={40} />
+                <View style={style.textContainer}>
+                  <TextBox
+                    text={description}
+                    styles={style.text}
+                    size={textSize}
+                    fontFamily={fonts.regular}
                   />
-                )}
-                {rightButton && (
-                  <CTAButton
-                    type={constants.small}
-                    text={rightButton?.text}
-                    color={Colors?.themeColor}
-                    buttonStyle={rightButton.style}
-                    onPress={rightButton.onPress}
-                    showShadow={false}
-                    hideShadow
-                  />
-                )}
+                </View>
+                <View style={style.buttonContainer}>
+                  {leftButton && (
+                    <CTAButton
+                      type={constants.small}
+                      text={leftButton?.text ?? constants.Yes}
+                      color={Colors?.themeColor}
+                      buttonStyle={leftButton?.style}
+                      onPress={leftButton.onPress}
+                      showShadow={false}
+                      hideShadow
+                    />
+                  )}
+                  {rightButton && (
+                    <CTAButton
+                      type={constants.small}
+                      text={rightButton?.text ?? constants.NO}
+                      color={Colors?.themeColor}
+                      buttonStyle={rightButton.style}
+                      onPress={rightButton.onPress}
+                      showShadow={false}
+                      hideShadow
+                    />
+                  )}
+                </View>
               </View>
             </View>
-          </View>
           </BlurView>
         </Modal>
       </>

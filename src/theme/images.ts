@@ -74,6 +74,7 @@ enum appImages {
   checkImage = require('../assets/Images/Icons/checkImage.png'),
   chart = require('../assets/Images/Icons/chart.png'),
   closeTicket = require('../assets/Images/Icons/closeTicket.png'),
+  emptyScreen = require('../assets/Images/Icons/emptyScreen.png'),
 
   // DUMMY
   progressWheel = require('../assets/Images/Icons/progressWheel.png'),
@@ -141,5 +142,6 @@ enum appImages {
   squareDark = require('../assets/Images/Dark/square.png'),
   calRightDark = require('../assets/Images/Dark/calRight.png'),
   calLeftDark = require('../assets/Images/Dark/calLeft.png'),
+  emptyScreenDark = require('../assets/Images/Dark/emptyScreen.png'),
 }
 export default appImages;

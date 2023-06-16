@@ -10,6 +10,7 @@ import {
   Header,
   Icons,
   DropDown,
+  CustomCalender
 } from 'components';
 
 import constants from 'theme/constants';
@@ -19,7 +20,6 @@ import styles from './styles';
 import usePixel, {Width} from 'hook/DevicePixel';
 import appImages from 'theme/images';
 import Card from './card';
-import CustomCalender from 'components/customCalandar';
 import {fonts} from 'theme/fonts';
 
 let list = [

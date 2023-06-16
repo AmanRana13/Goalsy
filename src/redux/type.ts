@@ -13,3 +13,11 @@ export type HeaderType = {
   'Content-Type': string,
   Accept: string,
 };
+
+export type createListPayload = {
+  offset: number;
+  limit: number;
+};
+export type closeChatPayload = {
+  id: number;
+};

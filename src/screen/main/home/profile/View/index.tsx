@@ -17,7 +17,7 @@ import {
 
 // theme
 import appImages from 'theme/images';
-import constants, {routesConstants} from 'theme/constants';
+import constants, {dateFormat, routesConstants} from 'theme/constants';
 
 // style
 import styles from './styles';
@@ -110,7 +110,7 @@ const Profile = ({navigation}: any) => {
             editable: false,
             placeholder: constants.DOB,
             value: userDetails?.dob
-              ? moment(userDetails?.dob).format('MMM DD, YYYY')
+              ? moment(userDetails?.dob).format(dateFormat)
               : null,
           }}
           label={constants.DOB}

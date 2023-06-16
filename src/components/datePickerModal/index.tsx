@@ -7,7 +7,7 @@ import {fonts} from 'theme/fonts';
 import {width} from 'utils/globalFunctions';
 
 const DatePickerModal = props => {
-  const [selectedItem, setSeletcedItem] = useState(new Date());
+  const [selectedItem, setSeletcedItem] = useState(new Date(1970, 1, 1));
   return Platform.OS == 'ios' ? (
     <Modal
       statusBarTranslucent={true}

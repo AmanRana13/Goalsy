@@ -1,15 +1,15 @@
 import React, {useMemo} from 'react';
-import {Image} from 'react-native';
 import styles from './styles';
 import {Calendar, LocaleConfig} from 'react-native-calendars';
 import {fonts} from 'theme/fonts';
 import appImages from 'theme/images';
 import moment from 'moment';
 import {useTheme} from '@react-navigation/native';
-import { Icons } from 'components';
+import {Icons} from 'components';
+import {dateFormat} from 'theme/constants';
 
 const CustomCalender = () => {
-  const {colors,dark} = useTheme();
+  const {colors, dark} = useTheme();
   const INITIAL_DATE = Date();
   const appColors = {background: 'transparent'};
   const textColor = {primary: colors.calenderSunday, secondary: '#625F5F'};
@@ -75,15 +75,15 @@ const CustomCalender = () => {
     const currentDate = new Date(startDate);
     while (currentDate <= endDate) {
       if (currentDate.getDay() === 0) {
-        sundays[moment(currentDate).format('YYYY-MM-DD')] = {customStyles};
+        sundays[moment(currentDate).format(dateFormat)] = {customStyles};
       }
       currentDate.setDate(currentDate.getDate() + 1);
     }
     return sundays;
-  });
+  }, []);
   const markedDates = {
     ...sundays,
-    [`${moment().format('YYYY-MM-DD')}`]: {
+    [`${moment().format(dateFormat)}`]: {
       marked: true,
       dotColor: textColor.primary,
       customStyles: {
@@ -142,7 +142,7 @@ const CustomCalender = () => {
             fontSize: 18,
             fontFamily: fonts.bold,
             fontWeight: '600',
-            color:colors.black,
+            color: colors.black,
           },
         },
         'stylesheet.calendar.main': {
@@ -181,7 +181,7 @@ const CustomCalender = () => {
         indicatorColor: textColor.primary,
         textDayFontSize: 16,
       }}
-      initialDate={moment().format('YYYY-MM-DD')}
+      initialDate={moment().format(dateFormat)}
       minDate={'2012-05-10'}
       maxDate={'2050-05-30'}
       markingType={'custom'}
@@ -195,14 +195,14 @@ const CustomCalender = () => {
       renderArrow={direction =>
         direction === 'left' ? (
           <Icons
-          disabled
-            source={[appImages.calLeft,appImages.calLeftDark]}
+            disabled
+            source={[appImages.calLeft, appImages.calLeftDark]}
             styles={{marginLeft: -8, width: 16, height: 16}}
           />
         ) : (
           <Icons
-          disabled
-            source={[appImages.calRight,appImages.calRightDark]}
+            disabled
+            source={[appImages.calRight, appImages.calRightDark]}
             styles={{marginRight: -1, width: 16, height: 16}}
           />
         )

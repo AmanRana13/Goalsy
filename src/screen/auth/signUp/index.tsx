@@ -43,6 +43,7 @@ import {signUpModalAction, signUpAction} from 'redux/actions/authActions';
 import appImages from 'theme/images';
 import constants, {
   MAX_DOB,
+  dateFormat,
   genderList,
   popupType,
   routesConstants,
@@ -126,7 +127,7 @@ const SignUp = ({navigation}: any) => {
       dob &&
         formData.append(
           'dob',
-          moment(dob, 'MMM DD, YYYY').format('YYYY-MM-DD'),
+          moment(dob, dateFormat).format('YYYY-MM-DD'),
         );
       formData.append('password', password);
       formData.append('email', email);
@@ -350,7 +351,7 @@ const SignUp = ({navigation}: any) => {
         isDropdownVisible={datePicker}
         onClose={date => {
           setDatePicker(false);
-          setDob(`${moment(date).format('MMM DD, YYYY')}`);
+          setDob(`${moment(date).format(dateFormat)}`);
         }}
       />
 

@@ -3,31 +3,43 @@ import React from 'react';
 import {Icons, TextBox} from 'components';
 import style from './styles';
 import {simpleCardProps} from './type';
-import {routesConstants} from 'theme/constants';
+import {dateTimeFormat, routesConstants} from 'theme/constants';
+import {navigate} from 'routes/navigationServices';
+import moment from 'moment';
+import {fonts} from 'theme/fonts';
 
 const SimpleCard = ({
-  item,
+  header,
+  description,
+  time,
+  close,
   source,
   color,
   onPress,
-  isRed,
   disabled = true,
-  navigation,
+  ticketId,
+  id,
+  isTicketClose
 }: simpleCardProps) => {
   const styles = style(color);
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(routesConstants.chat)}
+      onPress={() =>
+        navigate(routesConstants.chat, {id, ticketId, isTicketClose})
+      }
       disabled={disabled}
       style={styles.container}>
       <View style={styles.header}>
         <View style={styles.InnerHeader}>
-          {item?.header && <TextBox text={item?.header} size={16} />}
-          {item?.description && (
+          {header && (
+            <TextBox text={header} size={17} fontFamily={fonts.bold} />
+          )}
+          {description && (
             <TextBox
-              text={item?.description}
+              text={close ? 'close' : description}
               size={13}
-              color={isRed ? color.red : color.black}
+              color={close ? color.red : color.black}
+              fontFamily={fonts.bold}
             />
           )}
         </View>
@@ -37,8 +49,12 @@ const SimpleCard = ({
           </View>
         )}
       </View>
-      {item?.time && (
-        <TextBox text={item?.time} size={10} styles={styles.time} />
+      {time && (
+        <TextBox
+          text={moment(time).format(dateTimeFormat)}
+          size={10}
+          styles={styles.time}
+        />
       )}
     </TouchableOpacity>
   );

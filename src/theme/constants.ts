@@ -2,7 +2,10 @@ import {Height} from 'hook/DevicePixel';
 import {fonts} from './fonts';
 import moment from 'moment';
 
-export enum routesConstants {
+const dateFormat = 'MMM DD, YYYY';
+const dateTimeFormat = 'MMM DD, YYYY A';
+
+enum routesConstants {
   login = 'login',
   signUp = 'signup',
   Profile = 'Profile',
@@ -50,7 +53,7 @@ export enum routesConstants {
   chat = 'chat',
 }
 
-export const popupType: any = {
+const popupType: any = {
   error: 'error',
   info: 'info',
 };
@@ -82,6 +85,8 @@ enum constants {
   home = 'Home',
 
   // button
+  NO="No",
+  Yes="Yes",
   submit = 'Submit',
   update = 'Update',
   start = 'Get Started',
@@ -108,7 +113,7 @@ enum constants {
   invite = 'Invite',
   ViewBoard = 'View your board',
   updateInviteAccess = 'Update Invite Access',
-  next="Next",
+  next = 'Next',
 
   // button Size
   large = 'large',
@@ -191,6 +196,7 @@ enum constants {
   cancel = 'Cancel',
   gallery = 'Gallery',
   camera = 'Camera',
+  noDataFound = 'No Data Found.',
   openSettings = 'Open Settings',
   signUpSuccess = 'A verification link has been sent successfully to your registered email address.',
   removeFriend = 'Are you sure, you want to remove this friend?',
@@ -234,16 +240,26 @@ enum constants {
   notSamePassword = 'New password and confirm new password should be same.',
   internetCheck = 'Please check your internet connection.',
   someThingWentWrong = 'Something went wrong. Please try again.',
+  emptySubject = 'Please enter subject.',
+  sortDescription = 'The minimum description length should be  at least  3 characters.',
 }
 
-export const genderList = [
+const genderList = [
   {id: 1, value: 'Male'},
   {id: 2, value: 'Female'},
   {id: 3, value: 'Others'},
   {id: 4, value: 'Wish not to disclose'},
 ];
 
-
-export const MAX_DOB= new Date(moment().subtract(12, 'year').toString());
+const MAX_DOB = new Date(moment().subtract(12, 'year').toString());
 
 export default constants;
+
+export {
+  MAX_DOB,
+  genderList,
+  popupType,
+  routesConstants,
+  dateFormat,
+  dateTimeFormat,
+};

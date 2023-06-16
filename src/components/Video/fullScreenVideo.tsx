@@ -6,6 +6,7 @@ import {
   View,
   Modal,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import VideoPlayer, {
@@ -40,7 +41,13 @@ const VIDEO_STATE = {
   END: 2,
 };
 
-const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
+const FullScreenVideo = ({
+  visible,
+  onClose,
+  source,
+  isMute,
+  muteCallback,
+}: fullScreenProps) => {
   const {colors} = useTheme();
   const videoPlayer = useRef<VideoPlayer>();
   const [videoSates, setVideoStates] = useState<videoProps>(initialValue);
@@ -48,6 +55,7 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
   const [videoDetails, setVideoDetails] = useState(null);
   useEffect(() => {
     visible && Orientation.lockToLandscapeLeft();
+    setVideoStates(obj => ({...obj, mute: !!isMute, volume: isMute ? 0 : 1}));
     return () => visible && Orientation.lockToPortrait();
   }, [visible]);
 
@@ -63,8 +71,9 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
     setVideoStates(obj => ({
       ...obj,
       mute: !obj.mute,
-      volume: !videoSates.mute ? 0 : 1,
+      volume: !obj.mute ? 0 : 1,
     }));
+    muteCallback(!videoSates.mute);
   };
 
   const onReplay = () => {
@@ -83,11 +92,11 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
 
   const onLoad = (data: OnLoadData) => {
     setVideoDetails(data);
-    setPlayerState(VIDEO_STATE.PAUSE);
+    setPlayerState(VIDEO_STATE.PLAY);
     setVideoStates(obj => ({
       ...obj,
       play: true,
-      pause: false,
+      pause: true,
       isLoading: false,
       duration: data.duration,
     }));
@@ -101,6 +110,7 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
 
   const onEnd = () => {
     setPlayerState(VIDEO_STATE.END);
+    setVideoStates(obj => ({...obj, end: true, pause: true}));
   };
 
   const onPlayPauseIconClick = () => {
@@ -147,16 +157,18 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
           volume={videoSates?.volume}
         />
         <BlurView
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            width: '100%',
-            height: usePixel(50),
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          enabled={false}
+          style={[
+            {
+              position: 'absolute',
+              bottom: 0,
+              width: '100%',
+              height: usePixel(50),
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+            Platform.OS === 'android' && {backgroundColor: '#000000b0'},
+          ]}
           blurType="light"
           blurAmount={5}>
           <View
@@ -165,6 +177,8 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
               justifyContent: 'center',
               alignItems: 'center',
               width: '100%',
+              height: '100%',
+              paddingTop: 3,
             }}>
             <TouchableOpacity
               onPress={onPlayPauseIconClick}
@@ -180,23 +194,26 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
                 style={{
                   width: usePixel(10),
                   height: usePixel(10),
-                  marginStart: playerState === VIDEO_STATE.PLAY ? 2 : 0,
+                  marginStart: videoSates.pause ? 2 : 0,
                   tintColor: colors.commonBlack,
                 }}
                 resizeMode="contain"
                 source={
-                  playerState === VIDEO_STATE.PAUSE
+                  !videoSates.pause && !videoSates.end
                     ? appImages.onlyPause
-                    : playerState === VIDEO_STATE.END
+                    : videoSates.end
                     ? appImages.onlyReplay
-                    : appImages.onlyPlay
+                    : videoSates.pause
+                    ? appImages.onlyPlay
+                    : null
                 }
               />
             </TouchableOpacity>
             <RNSlider
+              disabled={videoSates.end}
               style={styles.progressSlider}
-              onValueChange={dragging}
-              onSlidingComplete={seekVideo}
+              onValueChange={seekVideo}
+              // onSlidingComplete={seekVideo}
               minimumValue={0}
               maximumValue={Math.floor(videoSates?.duration)}
               value={Math.floor(videoSates?.currentTime)}
@@ -234,7 +251,7 @@ const FullScreenVideo = ({visible, onClose, source}: fullScreenProps) => {
           styles={{
             zIndex: 999999999,
             position: 'absolute',
-            top: getStatusBarHeight(false),
+            top: getStatusBarHeight(false) - 20,
           }}
           onPress={onClose}
         />
@@ -259,7 +276,7 @@ export default FullScreenVideo;
 
 const styles = StyleSheet.create({
   mediaPlayer: {
-    height: "100%",
+    height: '100%',
     width: '100%',
     backgroundColor: 'black',
     overflow: 'hidden',

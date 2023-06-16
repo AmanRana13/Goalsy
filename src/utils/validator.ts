@@ -175,3 +175,16 @@ export const userEditProfileCheck = name => {
   }
   return showErrorMessage;
 };
+
+// create ticket
+export const createTicket = value => {
+  let showErrorMessage = '';
+  if (!value?.subject) {
+    showErrorMessage = constants.emptySubject;
+  } else if (!value?.description) {
+    showErrorMessage = constants.emptyDescription;
+  } else if (value?.description?.length < 3) {
+    showErrorMessage = constants.sortDescription;
+  }
+  return showErrorMessage;
+};

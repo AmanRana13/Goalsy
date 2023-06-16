@@ -8,16 +8,16 @@ import {
   InputField,
   Spacer,
   StatusHeader,
+  EditUserCard,
   DropDown,
+  InviteUserModal,
+  TextBox
 } from 'components';
 import constants, {routesConstants} from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
-import TextBox from 'components/textBox';
 import appImages from 'theme/images';
 import styles from './styles';
 import {fonts} from 'theme/fonts';
-import EditUserCard from 'components/EditUserCard';
-import InviteUserModal from 'components/inviteUserModal';
 import { goBack } from 'routes/navigationServices';
 
 const categoryList = [

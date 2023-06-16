@@ -15,4 +15,7 @@ export const api = {
   userQuiz: () => Method.get('user/quiz'),
   QuizAnswer: (data: any) => Method.post('user/quizAnswer', data),
   notificationSound: (data: any) => Method.put('user/preferences', data),
+  createTicket: (data: any) => Method.post('ticket/create', data),
+  CreateTicketList: (data: any) => Method.post('ticket/list', data),
+  closeChat: (data: any) => Method.get(`ticket/close/${data}`),
 };

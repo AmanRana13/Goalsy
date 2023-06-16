@@ -1,3 +1,5 @@
+import { closeChatPayload, createListPayload } from 'redux/type';
+import {createTicket} from 'screen/main/home/needHelp/createTicket';
 import ApiConstants from 'theme/apiConstants';
 
 export const userProfile = () => {
@@ -10,11 +12,11 @@ export const deleteAccount = () => {
     type: ApiConstants.ACCOUNT_DELETE_LOAD,
   };
 };
-export const editProfileAction = (payload: any,name:string) => {
+export const editProfileAction = (payload: any, name: string) => {
   return {
     type: ApiConstants.EDIT_PROFILE_LOAD,
     payload,
-    name
+    name,
   };
 };
 export const changePasswordAction = (payload: any) => {
@@ -37,6 +39,24 @@ export const QuizAnswerAction = (payload: any) => {
 export const NotificationSoundAction = (payload: any) => {
   return {
     type: ApiConstants.NOTIFICATION_SOUND_LOAD,
+    payload,
+  };
+};
+export const createTicketAction = (payload: createTicket) => {
+  return {
+    type: ApiConstants.CREATE_TICKET_LOAD,
+    payload,
+  };
+};
+export const createTicketListAction = (payload: createListPayload) => {
+  return {
+    type: ApiConstants.CREATE_TICKET_LIST_LOAD,
+    payload,
+  };
+};
+export const closeChat = (payload: closeChatPayload) => {
+  return {
+    type: ApiConstants.CLOSE_TICKET_LOAD,
     payload,
   };
 };

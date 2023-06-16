@@ -6,7 +6,7 @@ export interface button {
   opacity?: number;
   disabled?: boolean;
   type?: React.ReactNode;
-  text: any;
+  text?: any;
   textColor?: string;
   fontSize?: number;
   color?: string | undefined;

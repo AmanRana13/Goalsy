@@ -15,7 +15,7 @@ import {
   DateInputField,
   ColorDropdown,
 } from 'components';
-import constants from 'theme/constants';
+import constants, { dateFormat } from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
 import appImages from 'theme/images';
 import {colors} from 'theme/colors';
@@ -259,7 +259,7 @@ const EditActivity = () => {
           isDropdownVisible={datePicker}
           onClose={date => {
             setDatePicker(false);
-            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+            setDob(`${moment(date).format(dateFormat)}`);
           }}
         />
       </ScrollView>

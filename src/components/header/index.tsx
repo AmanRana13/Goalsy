@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {View} from 'react-native';
 
-import {TextBox,Spacer} from 'components';
+import {TextBox, Spacer} from 'components';
 
 import {fonts} from 'theme/fonts';
 
@@ -41,6 +41,7 @@ const Header = memo(
                 text={title}
                 size={23}
                 styles={{fontFamily: fonts.medium}}
+                textProps={{numberOfLines: 1}}
               />
             )}
           </View>

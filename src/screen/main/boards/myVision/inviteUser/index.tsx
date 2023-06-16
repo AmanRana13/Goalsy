@@ -3,7 +3,7 @@ import React from 'react';
 import {BackButton, Header, InputField, Spacer, StatusHeader} from 'components';
 import appImages from 'theme/images';
 import constants from 'theme/constants';
-import InviteUserCard from 'components/InviteUserCard';
+import InviteUserCard from 'components/inviteUserCard';
 import {useTheme} from '@react-navigation/native';
 import {Width} from 'hook/DevicePixel';
 

@@ -18,7 +18,6 @@ const ShapeDropDown = ({list, label, onPress, color}: dropdown) => {
   useEffect(() => {
     onPress(item);
   }, [item]);
-  console.log(item);
   
   return (
     <View>

@@ -34,7 +34,7 @@ import {url} from 'redux/axios/apikit';
 
 // theme
 import appImages from 'theme/images';
-import constants, {MAX_DOB, genderList, popupType} from 'theme/constants';
+import constants, {MAX_DOB, dateFormat, genderList, popupType} from 'theme/constants';
 
 // utils
 import {ShowAlertMessage} from 'utils/showAlertMessage';
@@ -105,7 +105,7 @@ const ProfileEdit = ({navigation}: any) => {
       dob &&
         formData.append(
           'dob',
-          moment(dob, 'MMM DD, YYYY').format('YYYY-MM-DD'),
+          moment(dob, 'MMM DD, YYYY').format(dateFormat),
         );
       formData.append('name', name);
       location && formData.append('location', location);
@@ -244,7 +244,7 @@ const ProfileEdit = ({navigation}: any) => {
         isDropdownVisible={datePicker}
         onClose={(date: any) => {
           setDatePicker(false);
-          setDob(`${moment(date).format('MMM DD, YYYY')}`);
+          setDob(`${moment(date).format(dateFormat)}`);
         }}
       />
     </View>

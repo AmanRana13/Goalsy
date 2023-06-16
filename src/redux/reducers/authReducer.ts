@@ -1,3 +1,4 @@
+import {action} from 'redux/type';
 import ApiConstants from 'theme/apiConstants';
 
 const initialState = {
@@ -6,7 +7,7 @@ const initialState = {
   openForgotPasswordModal: false,
 };
 
-function authenticationReducer(state = initialState, action) {
+function authenticationReducer(state = initialState, action: action) {
   switch (action.type) {
     case ApiConstants.API_LOGIN_SUCCESS:
       return {

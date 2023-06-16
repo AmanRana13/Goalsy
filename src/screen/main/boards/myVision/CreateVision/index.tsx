@@ -13,7 +13,7 @@ import {
   TextBox,
   DateInputField
 } from 'components';
-import constants, {routesConstants} from 'theme/constants';
+import constants, {dateFormat, routesConstants} from 'theme/constants';
 import {useTheme} from '@react-navigation/native';
 import appImages from 'theme/images';
 import styles from './styles';
@@ -117,7 +117,7 @@ const CreateVision = ({navigation}) => {
           isDropdownVisible={datePicker}
           onClose={date => {
             setDatePicker(false);
-            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+            setDob(`${moment(date).format(dateFormat)}`);
           }}
         />
       </ScrollView>

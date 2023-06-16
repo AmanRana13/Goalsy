@@ -1,14 +1,15 @@
 import {colors} from 'theme/colors';
 
 export interface simpleCardProps {
-  item: {
-    header: string;
-    description: string;
-    time: string;
-  };
-  source?: any
+  header: string;
+  description: string;
+  time: object;
+  close?: boolean;
+  source?: any;
   color: colors;
-  isRed?:boolean;
-  disabled?:boolean
+  disabled?: boolean;
   onPress?: () => {} | void;
+  id?: number;
+  ticketId?: number;
+  isTicketClose?: boolean;
 }

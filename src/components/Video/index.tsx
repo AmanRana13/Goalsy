@@ -61,11 +61,8 @@ const Video = (props: any) => {
     }
   }, [isFullScreen, isFocus]);
 
-  const pause = () => {
-    setVideoStates(obj => ({...obj, pause: true}));
-  };
-  const play = () => {
-    setVideoStates(obj => ({...obj, pause: false}));
+  const playPause = () => {
+    setVideoStates(obj => ({...obj, pause: !obj.pause}));
   };
   const onMuted = () => {
     setVideoStates(obj => ({
@@ -115,7 +112,7 @@ const Video = (props: any) => {
     if (videoSates.pause && videoSates.end) {
       onReplay();
     } else {
-      videoSates.pause ? play() : pause();
+      playPause();
     }
   };
 
@@ -123,10 +120,12 @@ const Video = (props: any) => {
     if (!videoSates.end) {
       videoPlayer.current?.seek(+value.toFixed(2));
       setVideoStates(obj => ({...obj, currentTime: +value.toFixed(2)}));
-      play();
     }
   };
 
+  const muteCallback = (e: boolean) => {
+    setVideoStates(obj => ({...obj, mute: e, volume: e ? 0 : 1}));
+  };
   return (
     <View style={[styles.mediaPlayer, props.style]}>
       <VideoPlayer
@@ -201,7 +200,7 @@ const Video = (props: any) => {
                   ? appImages.onlyReplay
                   : videoSates.pause
                   ? appImages.onlyPlay
-                  : appImages.onlyPlay
+                  : null
               }
             />
           </TouchableOpacity>
@@ -270,11 +269,13 @@ const Video = (props: any) => {
           <ActivityIndicator size={'large'} color={colors.themeColor} />
         </View>
       )}
-      {Platform.OS === 'android' ? (
+      {Platform.OS === 'android' && isFullScreen ? (
         <FullScreenVideo
           visible={isFullScreen}
           onClose={() => setIsFullScreen(false)}
           source={props.videoLink}
+          isMute={videoSates.mute}
+          muteCallback={muteCallback}
         />
       ) : null}
     </View>

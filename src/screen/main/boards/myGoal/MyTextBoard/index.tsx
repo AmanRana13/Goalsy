@@ -5,7 +5,7 @@ import constants from 'theme/constants';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import BoxButtons from 'components/boxButtons';
-import GoalCard from 'components/GoalCard';
+import GoalCard from 'components/goalCard';
 import {ActivityCards, VisionCards} from './cards';
 
 const MyTextBoard = () => {

@@ -20,5 +20,15 @@ export {default as ColorDropdown} from './colorDropdown';
 export {default as FullScreenImage} from './FullScreenImage';
 export {default as ShapeDropdown} from './shapeDropdown';
 export {default as Video} from './Video';
+export {default as ActivityCard} from './activityCard';
+export {default as BottomBar} from './bottomBar';
+export {default as BoxButtons} from './boxButtons';
+export {default as ChatCard} from './chatCard';
+export {default as CustomCalender} from './CustomCalender';
+export {default as EditUserCard} from './editUserCard';
+export {default as InviteUserModal} from './inviteUserModal';
+export {default as GoalCard} from './goalCard';
+export {default as InviteUserCard} from './inviteUserCard';
+export {default as VisionCard} from './visionCard';
 
 

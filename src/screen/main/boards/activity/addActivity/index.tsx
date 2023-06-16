@@ -262,7 +262,7 @@ const AddActivity = () => {
           isDropdownVisible={datePicker}
           onClose={date => {
             setDatePicker(false);
-            setDob(`${moment(date).format('MMM DD, YYYY')}`);
+            setDob(`${moment(date).format(dateFormat)}`);
           }}
         />
       </ScrollView>

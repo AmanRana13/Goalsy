@@ -27,6 +27,7 @@ const style = StyleSheet.create({
     flex: 7,
     alignItems: 'center',
     justifyContent:"center",
+    paddingHorizontal:10
     // backgroundColor:"red"
   },
   rightIcons: {flexDirection: 'row', gap: 20},

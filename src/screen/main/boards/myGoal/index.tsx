@@ -3,15 +3,13 @@ import {View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 // components
-import {TextBox, CTAButton} from 'components';
+import {TextBox, CTAButton,GoalCard,Spacer} from 'components';
 
 import constants, {routesConstants} from 'theme/constants';
 
 // style
 import styles from './styles';
 import {fonts} from 'theme/fonts';
-import GoalCard from 'components/GoalCard';
-import Spacer from 'components/spacer';
 
 const boxButtonName = [5, 3, 1];
 

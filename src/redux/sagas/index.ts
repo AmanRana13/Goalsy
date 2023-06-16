@@ -8,7 +8,10 @@ import {
   userDetails,
   userEditDetails,
   userQuiz,
-  NotificationSound
+  NotificationSound,
+  CreateTicket,
+  CreateTicketList,
+  CloseChat
 } from './home';
 
 export function* rootSaga() {
@@ -24,4 +27,7 @@ export function* rootSaga() {
   yield takeLatest(ApiConstants.USER_QUIZ_LOAD, userQuiz);
   yield takeLatest(ApiConstants.QUIZ_ANSWER_LOAD, QuizAnswer);
   yield takeLatest(ApiConstants.NOTIFICATION_SOUND_LOAD, NotificationSound);
+  yield takeLatest(ApiConstants.CREATE_TICKET_LOAD, CreateTicket);
+  yield takeLatest(ApiConstants.CREATE_TICKET_LIST_LOAD, CreateTicketList);
+  yield takeLatest(ApiConstants.CLOSE_TICKET_LOAD, CloseChat);
 }

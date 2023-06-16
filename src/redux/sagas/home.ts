@@ -4,7 +4,7 @@ import {ShowAlertMessage} from 'utils/showAlertMessage';
 import ApiConstants from 'theme/apiConstants';
 import constants, {popupType, routesConstants} from 'theme/constants';
 import {action} from 'redux/type';
-import {navigate, reset} from 'routes/navigationServices';
+import {goBack, navigate, reset} from 'routes/navigationServices';
 import {DataManager} from 'utils/dataManager';
 import {dispatch} from 'utils/globalFunctions';
 
@@ -75,7 +75,7 @@ export function* userEditDetails(action: any): any {
     if (response?.status === 1) {
       (async () => {
         let userData = await DataManager.getUserData();
-        let parseData=JSON.parse(userData)
+        let parseData = JSON.parse(userData);
         parseData.name = action?.name;
         await DataManager.setUserData(JSON.stringify(parseData));
       })();
@@ -174,6 +174,64 @@ export function* NotificationSound(action: action): any {
     }
   } catch (e) {
     // loading set false
+    ShowAlertMessage(constants.someThingWentWrong, popupType.error);
+  }
+}
+
+// Create ticket
+export function* CreateTicket(action: action): any {
+  try {
+    // loading set true
+    yield call(Loading, true);
+    // api call
+    const response = yield call(api.createTicket, action.payload);
+    // loading set false
+    if (response?.status === 1) {
+      goBack();
+    }
+    yield call(Loading, false);
+  } catch (e) {
+    // loading set false
+    yield call(Loading, false);
+    ShowAlertMessage(constants.someThingWentWrong, popupType.error);
+  }
+}
+// chat ticket list
+export function* CreateTicketList(action: action): any {
+  try {
+    // loading set true
+    yield call(Loading, true);
+    // api call
+    const response = yield call(api.CreateTicketList, action.payload);
+    // loading set false
+    if (response?.status === 1) {
+      yield put({
+        type: ApiConstants.CREATE_TICKET_LIST_SUCCESS,
+        payload: response.data,
+      });
+    }
+    yield call(Loading, false);
+  } catch (e) {
+    // loading set false
+    yield call(Loading, false);
+    ShowAlertMessage(constants.someThingWentWrong, popupType.error);
+  }
+}
+// close the chat with admin
+export function* CloseChat(action: action): any {
+  try {
+    // loading set true
+    yield call(Loading, true);
+    // api call
+    const response = yield call(api.closeChat, action.payload);
+    // loading set false
+    if (response?.status === 1) {
+      goBack();
+    }
+    yield call(Loading, false);
+  } catch (e) {
+    // loading set false
+    yield call(Loading, false);
     ShowAlertMessage(constants.someThingWentWrong, popupType.error);
   }
 }

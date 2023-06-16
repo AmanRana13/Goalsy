@@ -1,12 +1,5 @@
-import React, {useLayoutEffect, useState} from 'react';
-import {
-  Dimensions,
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  View,
-} from 'react-native';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {FlatList, KeyboardAvoidingView, Platform, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 // components
@@ -15,8 +8,8 @@ import {
   StatusHeader,
   Header,
   BackButton,
-  CommentCard,
   ConfirmModal,
+  ChatCard,
 } from 'components';
 
 // theme
@@ -27,39 +20,57 @@ import constants from 'theme/constants';
 import styles from './styles';
 import InputField from 'components/inputField';
 import Icons from 'components/icons';
-import {height} from 'utils/globalFunctions';
-import ChatCard from 'components/chatCart';
 import KeyboardManager from 'react-native-keyboard-manager';
-
+import {dispatch} from 'utils/globalFunctions';
+import {closeChat} from 'redux/actions/home';
+import {socket} from 'utils/socket';
 const Data = [1, 2, 3, 4, 5];
 
-const Chat = ({navigation}: any) => {
+const Chat = ({navigation, route}: any) => {
   const {colors}: any = useTheme();
   const style = styles(colors);
+  const {id, ticketId, isTicketClose} = route.params;
   const [modal, showModal] = useState(false);
+  const [input, setInput] = useState<string>('');
+
   useLayoutEffect(() => {
     Platform.OS === 'ios' && KeyboardManager.setEnable(false);
     return () => Platform.OS === 'ios' && KeyboardManager.setEnable(true);
   }, []);
+
+  useEffect(() => {
+    socket.on('message', e => {
+      console.log(e);
+    });
+    return () => {
+      socket.off('message');
+    };
+  });
+
+  const onSend = () => {
+    if (input) {
+      socket.emit('message', input);
+    }
+  };
+
   return (
     <View style={style.container}>
       <StatusHeader />
       <Header
-        title={'Ticket ID'}
+        title={ticketId}
         LeftIcon={<BackButton />}
         RightIcon={
           <Icons
             source={[appImages.closeTicket, appImages.closeTicketDark]}
             onPress={() => showModal(true)}
+            disabled={isTicketClose}
           />
         }
       />
       <Spacer />
-
       <FlatList
         data={Data}
         contentContainerStyle={{flexGrow: 1}}
-        // style={{height: height * 0.745}}
         renderItem={({item, index}) => (
           <ChatCard
             text={
@@ -77,7 +88,11 @@ const Chat = ({navigation}: any) => {
         <InputField
           colors={colors}
           RightCompo={
-            <Icons size={30} source={[appImages.send, appImages.sendDark]} />
+            <Icons
+              size={30}
+              source={[appImages.send, appImages.sendDark]}
+              onPress={onSend}
+            />
           }
           TextInputProps={{
             placeholder: constants.writeYourMsg,
@@ -88,6 +103,8 @@ const Chat = ({navigation}: any) => {
               borderWidth: 3,
               backgroundColor: 'transparent',
             },
+            onChangeText: (e: string) => setInput(e.trimStart()),
+            value: input,
             textInput: {
               color: colors.black,
             },
@@ -101,16 +118,10 @@ const Chat = ({navigation}: any) => {
         Colors={colors}
         description={constants.closeTicket}
         leftButton={{
-          text: 'Yes',
-          onPress: () => {
-            navigation.goBack();
-          },
+          onPress: () => dispatch(closeChat(id)),
         }}
         rightButton={{
-          text: 'No',
-          onPress: () => {
-            showModal(false);
-          },
+          onPress: () => showModal(false),
         }}
       />
     </View>
